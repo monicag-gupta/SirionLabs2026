@@ -170,5 +170,50 @@ public class Hi {
 
 
 
+package pkg1;
+
+class Empl<T>{
+	T empId;
+	String empName;
+	public Empl(T empId, String empName) {
+		this.empId = empId;
+		this.empName = empName;
+	}
+	public Empl() {}
+	public T getEmpId() {
+		return empId;
+	}
+	public void setEmpId(T empId) {
+		this.empId = empId;
+	}
+	public String getEmpName() {
+		return empName;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	@Override
+	public String toString() {
+		return "Empl [empId=" + empId + ", empName=" + empName + "]";
+	}
+	
+	
+}
+
+
+public class GenericEg {
+
+	public static void main(String[] args) {
+		Empl<Integer> emp1=new Empl<>(101,"John");
+		System.out.println("Empl1<int> : " + emp1);
+		Empl<String> emp2=new Empl<>("E101","John");
+		System.out.println("Empl1<String> : " + emp2);
+	}
+
+}
+
+
+
+
 
 
