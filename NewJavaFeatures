@@ -44,3 +44,85 @@ public class SealedEg {
 	}
 
 }
+
+
+
+
+
+
+package pkg1;
+
+import java.time.LocalDate;
+
+final class A{
+	
+}
+
+class B{
+	public final void fnB() {
+		
+	}
+}
+class CB extends B{
+//	@Override
+//	public void fnB() {
+//		
+//	}
+}
+
+sealed class C permits CA, CC{
+	
+}
+
+final class CA extends C{}
+sealed class CC extends C permits CCA{}
+
+final class CCA extends CC{}
+
+
+//class AC extends A{}
+
+public class SealedEg {
+	
+	
+
+	@Override
+	public String toString() {
+		return "SealedEg []";
+	}
+
+	public static void main(String[] args) {
+		String language="नमस्ते";
+		System.out.println(language);
+		
+		LocalDate today = LocalDate.now();
+		System.out.println(today);
+		
+		Object obj = new SealedEg();
+		switch(obj)
+		{
+		    case Integer i ->
+		        System.out.println("Integer = " + i);
+
+		    case String s ->
+		        System.out.println("String = " + s);
+		        
+		    case SealedEg ss->
+		    		System.out.println("SealedEg = " + ss);
+
+		    default ->
+		        System.out.println("Unknown");
+		}	
+
+
+
+
+	}
+
+}
+
+
+
+
+
+
