@@ -72,6 +72,59 @@ Fills the stack trace of this Throwable object with the current stack trace, add
 
 
 
+package pkg1;
+
+import java.io.IOException;
+
+class V1{
+	public void m1() throws IOException {
+		if(1==1)
+			throw new IOException();
+		System.out.println("V1  m1");
+	}
+}
+class V2 extends V1{
+	@Override
+	public void m1() throws ArithmeticException{
+		System.out.println("V2  m1");
+	}
+}
+class V3{
+	public void m2() throws IOException{
+		new V1().m1();
+	}
+}
+
+public class ExceptEg {
+	
+
+	public static void main(String[] args) throws IOException{
+		
+		new V3().m2();
+		System.out.println("Prog continues...");
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
