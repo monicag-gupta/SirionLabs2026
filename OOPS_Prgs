@@ -1,0 +1,84 @@
+package pkg1;
+interface Person{
+	void travel();
+	default void talk() {
+		System.out.println("Person Talking");
+	}
+}
+interface Human{
+	default void talk() {
+		System.out.println("Person Talking");
+	}
+}
+class Emp{
+	public void work() {
+		System.out.println("Emp working here");
+	}
+	
+}
+class SalEmp extends Emp implements Person, Human{  //talk, travel, print
+	public void work() {
+		System.out.println("Weekdays - Monthly Basis");
+	}
+	public void travel() {
+		System.out.println("Sal Emp Travelling");
+	}
+	public void talk() {
+		System.out.println("Sal Emp Talking");
+	}
+	public void takeSal() {
+		System.out.println("Sal Emp taking salary");
+	}
+}
+class ContractEmp extends Emp implements Person, Human{  //talk, travel, print
+	public void work() {
+		System.out.println("Project Basis");
+	}
+	public void travel() {
+		System.out.println("Contract Emp Travelling");
+	}
+	public void talk() {
+		System.out.println("Contract Emp Talking");
+	}
+	public void takeMoney() {
+		System.out.println("Contract Emp taking Money");
+	}
+}
+
+public class OOPs1 {
+	
+	public static void hire(Emp e) {
+		e.work();
+		if(e instanceof ContractEmp) {
+			ContractEmp e2=(ContractEmp)e;
+			e2.takeMoney();
+			
+		}
+		if(e instanceof SalEmp) {
+			SalEmp e2=(SalEmp)e;
+			e2.takeSal();
+			
+		}
+	}
+
+	public static void main(String[] args) {
+		Emp e=new ContractEmp();
+		hire(e);
+		hire(new Emp());
+		hire(new SalEmp());
+		
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
