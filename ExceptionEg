@@ -122,6 +122,46 @@ public class ExceptEg {
 
 
 
+package pkg1;
+class Res implements AutoCloseable{
+	public void work() {
+		System.out.println("Res: Do work");
+	}
+	public void close() {
+		System.out.println("Res closed");
+	}
+}
+
+public class ExceptEg2 {
+	static int fn(Res s, int x) {
+		s.work();
+		try {
+			if(x==0)
+				throw new ArithmeticException("Divide by zero not possible!");
+			return 10;
+		}
+		catch(ArrayIndexOutOfBoundsException e) {
+			System.out.println("Caught: " + e.getMessage());
+			return 20;
+		}
+		catch(Exception e) {
+			System.out.println("Caught: " + e.getMessage());
+			return 20;
+		}
+		finally {
+			s.close();
+			return 30;
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		System.out.println(fn(new Res(),0));
+	}
+
+}
+
+
 
 
 
