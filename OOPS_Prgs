@@ -80,5 +80,70 @@ public class OOPs1 {
 
 
 
+package pkg1;
+interface iter{
+	boolean hasNext();
+	String next();
+}
+
+class myList{
+	public String ele;
+	class myIter implements iter{
+		public boolean hasNext() {
+			return true;
+		}
+		public String next() {
+			return "MyList object:" + ele;
+		}
+	}
+	public iter retIter() {
+		return new myIter();
+	}
+	public myList(String e) {
+		ele=e;
+	}
+	public myList() {}
+	
+	
+}
+
+class myMap{
+	public String k;
+	public String v;
+	class myIter implements iter{
+		public boolean hasNext() {
+			return true;
+		}
+		public String next() {
+			return "MyMap object:" + k + " : " + v;
+		}
+	}
+	public iter retIter() {
+		return new myIter();
+	}
+	public myMap(String e, String e2) {
+		k=e; v=e2;
+	}
+	public myMap() {}
+	
+	
+}
+
+public class NestedEg {
+
+	public static void main(String[] args) {
+		myList l=new myList("EleOfList");
+		iter i=l.retIter();
+		if(i.hasNext())
+			System.out.println(i.next());
+	}
+
+}
+
+
+
+
+
+
 
 
