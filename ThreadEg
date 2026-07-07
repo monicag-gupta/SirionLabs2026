@@ -300,3 +300,26 @@ public class TestThread {
 
 
 
+
+package pkg2;
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter your name:");
+		String name=sc.nextLine();
+		System.out.println("Enter your sal:");
+		int sal=sc.nextInt();
+		if(sal==0) {
+			System.out.println("System exits...");
+			System.exit(0);
+		}
+		System.out.println("Prg continues..");
+		while(true) {}
+	}
+
+}
+
+
