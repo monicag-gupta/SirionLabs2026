@@ -1,0 +1,20 @@
+package pkg2;
+interface Indraverma{
+	void ChotaBheem();
+	default void Kalia() {
+		System.out.println("Kalia speaks");
+	}
+}
+public class FIEg1 {	
+	class Kirmada implements Indraverma{  // FIEg1$Kirmada.class
+		public void ChotaBheem() {
+			System.out.println("Kalaripayettu");
+		}
+	}
+	public static void main(String[] args) {		
+		Indraverma kirmada = new FIEg1().new Kirmada();
+		kirmada.ChotaBheem();
+		kirmada.Kalia();
+	}
+
+}
