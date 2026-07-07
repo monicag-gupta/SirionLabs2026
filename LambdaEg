@@ -19,3 +19,77 @@ public class FIEg2 {
 	}
 
 }
+
+
+
+
+
+
+package pkg2;
+
+@FunctionalInterface
+interface FI1{
+	void sam1();
+}
+
+@FunctionalInterface
+interface FI2{
+	int sam2();
+}
+
+@FunctionalInterface
+interface FI3{
+	void sam3(int x);
+}
+
+@FunctionalInterface
+interface FI4{
+	void sam4(int x, int y);
+}
+
+@FunctionalInterface
+interface FI5{
+	int sam5(int x);
+}
+
+public class FIEg2 {
+	
+	public static void main(String[] args) {
+		FI1 fi1=() -> System.out.println("Sam1..");
+		fi1.sam1();
+		
+		FI2 fi21=() -> 10;
+		System.out.println(fi21.sam2());
+		
+		FI2 fi22 = () -> { return 20; };
+		System.out.println(fi22.sam2());
+		
+		FI3 fi31 = x -> System.out.println(x);
+		fi31.sam3(30);
+		
+		FI3 fi32 = (int x) -> System.out.println(x);
+		fi32.sam3(40);
+		
+		FI4 fi41 = (int x, int y) -> System.out.println(x+y);
+		fi41.sam4(50,60);
+		
+		FI4 fi42 = (x,y) -> System.out.println(x+y);
+		fi42.sam4(70,80);
+		
+		FI5 fi5 = x -> x*x;
+		System.out.println(fi5.sam5(10));
+		
+		
+		
+		
+		
+	}
+
+}
+
+
+
+
+
+
+
