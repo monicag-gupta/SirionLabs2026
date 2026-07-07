@@ -99,3 +99,85 @@ public class ThreadEg1 {
 }
 
 
+
+
+
+
+
+
+package pkg2;
+
+class Account {
+	String name;
+	int bal;
+	public Account(String name, int bal) {this.name=name;this.bal=bal;System.out.println("Name:"+name+" has bal: "+bal);}
+	public synchronized void withdraw(int amt) throws InterruptedException {
+		if(amt>bal)
+			System.out.println("Insufficient bal");
+		else
+			bal = bal - amt;
+		Thread.sleep(300);
+		System.out.println(amt + " withdrawn, bal remains "+ bal + " from account: "+ name);
+	}
+	public synchronized void deposit(int amt) throws InterruptedException {
+		bal = bal + amt;
+		Thread.sleep(1000);
+		System.out.println(amt + " deposited, bal becomes "+ bal+ " from account: "+ name);
+	}
+}
+
+class WithDrawTh implements Runnable{
+	Account ac;
+	int amt;
+	public WithDrawTh(Account ac, int amt) {this.ac=ac;this.amt=amt;}
+	public void run() {
+		try {
+			ac.withdraw(amt);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+class DepositTh implements Runnable{
+	Account ac;
+	int amt;
+	public DepositTh(Account ac, int amt) {this.ac=ac;this.amt=amt;}
+	public void run() {
+		try {
+			ac.deposit(amt);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
+
+public class SyncEg1 {
+
+	public static void main(String[] args) {
+		Account a1=new Account("John",1000);
+		Account a2=new Account("Jane",10000);
+		Account a3=new Account("Bob",5000);
+		
+		Thread thJohnWith = new Thread(new WithDrawTh(a1,500));
+		Thread thJohnDepo = new Thread(new DepositTh(a1,500));
+		Thread thJaneWith = new Thread(new WithDrawTh(a2,700));
+		Thread thJaneDepo = new Thread(new DepositTh(a2,1000));
+		Thread thBobWith = new Thread(new WithDrawTh(a3,5000));
+		Thread thBobDepo = new Thread(new DepositTh(a3,300));
+		thJohnWith.start();
+		thJohnDepo.start();
+		thJaneWith.start();
+		thJaneDepo.start();
+		thBobWith.start();
+		thBobDepo.start();
+	}
+
+}
+
+
+
+
+
+
