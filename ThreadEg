@@ -70,5 +70,32 @@ public class ThreadEg1 {
 
 
 
+package pkg2;
+
+
+public class ThreadEg1 {
+
+	public static void main(String[] args) throws InterruptedException {
+		Runnable rth1=()->{
+			for(int i=0;i<10;i++) {
+				System.out.println(Thread.currentThread().getName() + ": iteration: " + i);
+				if(i==5) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) { }
+				}
+			}
+			
+		};
+		Thread th1=new Thread(rth1, "Th1");
+		Thread th2=new Thread(rth1, "Th2");
+		th1.start();
+		th2.start();
+		th1.join();
+		System.out.println("Main thread name: "+ Thread.currentThread().getName());
+
+	}
+
+}
 
 
