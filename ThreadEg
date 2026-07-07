@@ -1,3 +1,35 @@
+MultiThreading:
+	Threads:
+		Thread
+		Runnable
+	Timer:
+		TimerTask
+	Concept of Creation, then start()
+Concurrency:
+	ExecutorService:
+		Runnable : executor.execute(runnableObj)
+		Callable : Future<T> o= executor.submit(callableObj)
+			T call(){ return TObj;}
+
+			Future<integer> i=executor.submit(callableObj)
+				int call(){ return 10;}
+				i.get() // gives 10
+	ScheduledExecutorService:
+		Runnable
+		Callable
+	Concept of executor.execute or submit
+
+interface Callable<T>{
+	Future<T> call() throws Exception{ }
+}
+
+
+	
+
+
+
+
+
 package pkg2;
 
 class myThread extends Thread{
