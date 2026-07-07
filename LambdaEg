@@ -1,0 +1,21 @@
+package pkg2;
+
+@FunctionalInterface
+interface FI{
+	void sam();
+}
+
+public class FIEg2 {
+	
+	static void HOF(FI fi) {
+		fi.sam();
+	}
+
+	public static void main(String[] args) {
+		FI fi1=()->System.out.println("Sam1");
+		HOF(fi1);
+		HOF(()->System.out.println("Sam2"));
+
+	}
+
+}
