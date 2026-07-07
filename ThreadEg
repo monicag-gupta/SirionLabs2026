@@ -1,0 +1,32 @@
+package pkg2;
+
+class myThread extends Thread{
+	String name;
+	public myThread(String n) {name=n;}
+	public myThread() {name="myThread";}
+	
+	public void run() {
+		for(int i=0;i<10;i++)
+			System.out.println(name + ": iteration: " + i);
+	}
+}
+
+public class ThreadEg1 {
+
+	public static void main(String[] args) {
+//		Runnable th1=()->{
+//			for(int i=0;i<10;i++)
+//				System.out.println("Th1: iteration: " + i);
+//		};
+//		
+//		th1.run();
+//		th1.run();
+		myThread th1=new myThread("Th1");
+		myThread th2=new myThread("Th2");
+		th1.start();
+		th2.start();
+		System.out.println("Main thread name: "+ Thread.currentThread().getName());
+
+	}
+
+}
