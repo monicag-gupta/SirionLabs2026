@@ -93,3 +93,56 @@ public class FIEg2 {
 
 
 
+
+Predicate<T> -> boolean test(T obj);
+
+Consumer<T> -> void accept(T obj);
+
+Supplier<T> -> T get();
+
+Function<T, R> -> R apply(T obj);
+
+
+
+
+
+
+package pkg2;
+
+import java.util.function.*;
+
+public class BuiltInFI {
+
+	public static void main(String[] args) {
+		Predicate<Integer> oddEvnChk = x -> (x%2==0)?true:false;
+		System.out.println(oddEvnChk.test(56)?"Even":"Odd");
+		
+		Consumer<String> print = x -> System.out.println(x);
+		print.accept("John");
+		
+		Supplier<String> name = () -> "Jane";
+		print.accept(name.get());
+		System.out.println(name.get());
+		
+		
+		Function<Integer,Integer> sq = x -> x*x;
+		System.out.println(sq.apply(10));
+		
+		Function<String, Integer> len = x -> x.length();
+		System.out.println(len.apply("HelloWorld"));
+		
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
