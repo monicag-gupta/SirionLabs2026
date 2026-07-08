@@ -107,3 +107,113 @@ public class CollectionEg {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+package pkg3;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
+class Employee implements Comparable<Employee>{
+	int Eid;
+	String ename;
+	public int getEid() {
+		return Eid;
+	}
+	public void setEid(int eid) {
+		Eid = eid;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Employee(int eid, String ename) {
+		super();
+		Eid = eid;
+		this.ename = ename;
+	}
+	@Override
+	public String toString() {
+		return "("+ Eid + ", " + ename + ")";
+	}
+	@Override
+	public int compareTo(Employee o) {
+		// TODO Auto-generated method stub
+		return this.getEid() - o.getEid();
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(Integer.valueOf(Eid), ename);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Eid == other.Eid && Objects.equals(ename, other.ename);
+	}
+	
+	
+}
+
+public class StreamEg1 {
+	public static void fn(Employee e)
+	{
+		if(e.getEid() == 103)
+			System.out.println();
+		
+	}
+
+	public static void main(String[] args) {
+		List<Employee> emps = Arrays.asList(
+				new Employee(101,"John"),
+				new Employee(108,"Bob"),
+				new Employee(105,"Jane"),
+				new Employee(101,"John"),
+				new Employee(103,"Garg")	
+				
+				);
+		
+		List<Employee> emps22=emps.stream()
+//				.peek(e -> System.out.print(e + ", "))
+//				.peek(StreamEg1::fn)
+				.filter(e->e.getEid() % 2 == 1)
+				.peek(e -> System.out.print(e + ", "))
+				.sorted()
+				.distinct()
+				.collect(Collectors.toList());
+		System.out.println();
+		emps22.forEach(System.out::println);
+
+	}
+
+}
+
+
+
+
+
+
+
+
