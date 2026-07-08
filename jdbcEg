@@ -13,5 +13,17 @@ SQLException class: Provides information about the exceptions that occur while i
 
 
 
+create database javadb;
+
+use javadb;
+
+CREATE TABLE users (
+	user_id int NOT NULL AUTO_INCREMENT,
+	username varchar(45) NOT NULL,
+	password varchar(45) NOT NULL,
+	fullname varchar(45) NOT NULL,
+	email varchar(45) NOT NULL,
+	PRIMARY KEY (user_id)
+);
 
 
