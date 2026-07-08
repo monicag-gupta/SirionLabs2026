@@ -28,5 +28,8 @@ a int Primary key,
 b varchar(200)
 );
 
+insert into t1 values(101,'John Doe');
 
-
+insert into t1 values(102,'John Doe'),
+(103,'Jane'),
+(104,'Bob');
