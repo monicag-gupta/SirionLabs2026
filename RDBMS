@@ -33,3 +33,13 @@ insert into t1 values(101,'John Doe');
 insert into t1 values(102,'John Doe'),
 (103,'Jane'),
 (104,'Bob');
+
+
+
+select * from t1;
+
+Update t1 set b='Mary' where a=102;
+
+
+
+
