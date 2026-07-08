@@ -143,6 +143,122 @@ public class BuiltInFI {
 
 
 
+package pkg3;
+
+import java.util.function.Consumer;
+import java.util.function.Function;
+
+class A {
+	public A() {
+		System.out.println("A() no param");
+	}
+
+	public A(int x, int y) {
+		System.out.println("From A(x,y): " + x + " + " + y + " = " + (x + y));
+	}
+
+	public int sum(int x, int y) {
+		System.out.println("From objA.sum(x,y): " + x + " + " + y + " = " + (x + y));
+		return x + y;
+	}
+	
+	public int sum(int x) {
+		System.out.println("From objA.sum(x,y): " + x + " * " + x  + " = " + (x * x));
+		return x * x;
+	}
+
+	public static int len(String s) {
+		System.out.println("From A.len(s) : "+ s.length());
+		return s.length();
+	}
+}
+
+interface FI1 {
+	void sam1();
+}
+
+interface FI2 {
+	void sam2(int x, int y);
+}
+
+interface FI3 {
+	int sam3(int x, int y);
+}
+
+interface FI4 {
+	int sam4(String s);
+}
+
+public class MethodRef {
+	public static void main(String[] args) {
+		FI1 fi11=()->System.out.println("Hello from lambda1");
+		fi11.sam1();
+		FI1 fi12=()->new A();
+		fi12.sam1();
+		//Method Reference to a constructor
+		FI1 fi13 = A :: new;
+		fi13.sam1();
+		
+		FI2 fi21=(x,y)->System.out.println("From lambda2: "+ x + " + " + y + " = "+ (x+y));
+		fi21.sam2(10,20);
+		FI2 fi22=(x,y)->new A(x,y);
+		fi22.sam2(10,20);
+		//Method Reference to a constructor
+		FI2 fi23 = A :: new;
+		fi23.sam2(10,20);
+		
+		
+		FI3 fi31 = (x,y) -> {System.out.println("From lambda3: "+ x + " + " + y + " = "+ (x+y)); return x+y;};
+		System.out.println(fi31.sam3(10,20));
+		FI3 fi32 = (x,y) -> { return new A().sum(x, y);};
+		System.out.println(fi32.sam3(10,20));
+		//Method Reference to an instance method
+		FI3 fi33 = new A() :: sum;
+		System.out.println(fi33.sam3(10,20));
+		
+		
+		
+		
+		FI4 fi41=s -> {
+			System.out.println("From lambda : "+ s.length());
+			return s.length();
+		};
+		System.out.println(fi41.sam4("HelloWorld"));
+		FI4 fi42 = (s) -> A.len(s);
+		System.out.println(fi42.sam4("HelloWorld"));
+		//Method Ref to a static method
+		FI4 fi43 = A :: len;
+		System.out.println(fi43.sam4("HelloWorld"));
+		
+		//Method Ref to an arbitrary object of JDK
+		FI4 fi44 = String :: length;
+		System.out.println(fi44.sam4("HelloWorld"));
+		
+		
+		
+		//Method Ref
+		Function<Integer,Integer> f11 = new A() :: sum;
+		System.out.println(f11.apply(10));
+		
+		Consumer<String> c11 = System.out :: println;
+		c11.accept("Hello");
+		
+		Function<String, Integer> f12 = String :: length;
+		c11.accept(f12.apply("HelloWorld").toString());
+		
+		
+		
+	}
+}
+
+
+
+
+
+
+
+
+
 
 
 
