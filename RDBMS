@@ -18,7 +18,13 @@ CRUD:
 
 Create Database javadb;
 
+use javadb;
 
+
+create table t1(
+a int Primary key,
+b int
+);
 
 
 
