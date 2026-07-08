@@ -21,9 +21,11 @@ Create Database javadb;
 use javadb;
 
 
+drop table t1;
+
 create table t1(
 a int Primary key,
-b int
+b varchar(200)
 );
 
 
