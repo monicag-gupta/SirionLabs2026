@@ -40,6 +40,8 @@ select * from t1;
 
 Update t1 set b='Mary' where a=102;
 
+delete from t1 where a=102;
+
 
 
 
