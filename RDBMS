@@ -1,0 +1,24 @@
+Table
+
+null: idk
+PK :  unique and not null
+FK : Emp(eid, name, sal, desig), Prj(client, cost, eid)
+   : Prj_Team(desig, eid, pid)
+   : Referral key which is PK in some other table
+   : domain of FK is the content of PK
+   : null is allowed
+UK : unique or null
+CD : All keys unique + not null
+AK : CD which are not PK
+Composite Key: if more than 1 key are PK, then they are CompK
+
+
+
+CRUD:
+
+Create Database javadb;
+
+
+
+
+
