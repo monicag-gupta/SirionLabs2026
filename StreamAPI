@@ -1,0 +1,109 @@
+package pkg3;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Objects;
+
+class Emp // implements Comparable<Emp>
+{
+	int id;
+	String name;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Emp(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+	public Emp() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(Integer.valueOf(id), name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Emp other = (Emp) obj;
+		return id == other.id && Objects.equals(name, other.name);
+	}
+
+	@Override
+	public String toString() {
+		return "Emp [id=" + id + ", name=" + name + "]";
+	}
+
+//	@Override
+	public int compareTo(Emp o) {
+
+//		return this.getId() - o.getId();
+		return this.getName().compareTo(o.getName());
+	}
+}
+
+class EmpComparator implements Comparator<Emp> {
+	public int compare(Emp o, Emp p) {
+
+//		return o.getId() - p.getId();
+		return o.getName().compareTo(p.getName());
+	}
+}
+
+class EmpComparator2 implements Comparator<Emp> {
+	public int compare(Emp o, Emp p) {
+
+		return o.getId() - p.getId();
+//		return o.getName().compareTo(p.getName());
+	}
+}
+
+public class CollectionEg {
+
+	public static void main(String[] args) {
+		Emp e1 = new Emp(102, "Graph");
+		Emp e2 = new Emp(101, "John");
+		System.out.println(e1 == e2);
+		System.out.println(e1.equals(e2));
+		List<Emp> emps = new ArrayList<>();
+		emps.add(e1);
+		emps.add(e2);
+		emps.forEach(System.out::println);
+		Collections.sort(emps,new EmpComparator());
+		emps.forEach(System.out::println);
+		Collections.sort(emps,new EmpComparator2());
+		emps.forEach(System.out::println);
+	}
+
+}
+
+
+
+
+
