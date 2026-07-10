@@ -337,3 +337,36 @@ Delete Data:
 1. Find the entityClass Object to be updated:
 	session.find(entityClass.class,id)
 2. session.remove(entityClass obj)
+
+
+
+
+SQL Show in Console:
+<prop.. show_sql>true</..>
+
+
+4 ways to run DDL:
+<prop.. hbm2ddl.auto>.... </..>
+1) Create -> drop, create
+2) Update -> if not exist then create else just update
+3) validate -> check schema of Entity mapped with table
+4) Create-drop -> drop, create, drop
+
+
+Dialect:
+generates SQL in hbm
+
+JPA Annotations:
+@Entity -> Defines an entity class or interface
+@Table -> if table name is diff then Entity, maps the table
+@id  -> PK
+@GenratedValues -> Auto Increment
+@Column -> if col name is diff then Entity, maps the col
+
+
+
+
+
+
+
+
