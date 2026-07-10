@@ -200,10 +200,10 @@ import org.hibernate.SessionFactory;
 public class CreateStudent {
 	public static void main(String[] args) {
 		// Create student entity object
-		Student student = new Student();
-		student.setStudentName("Ishu2"); // Ishu1, Ishu3
-		student.setRollNumber(02); // 01, 03
-		student.setCourse("MCA"); // BE BTech
+		Student student = new Student("John1",01,"BTech");
+//		Student student = new Student("Jane",02,"MTech");
+//		Student student = new Student("Bob",03,"BE");
+
 		// Create session factory object
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 		// getting session object from session factory
@@ -217,6 +217,7 @@ public class CreateStudent {
 		sessionFactory.close();
 	}
 }
+
 
 
 
