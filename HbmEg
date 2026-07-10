@@ -166,6 +166,12 @@ public class Student implements Serializable {
 		this.rollNumber = rollNumber;
 		this.course = course;
 	}
+	
+	public Student(String studentName, int rollNumber, String course) {
+		this.studentName = studentName;
+		this.rollNumber = rollNumber;
+		this.course = course;
+	}
 	public Student() {}
 
 	@Override
@@ -176,6 +182,7 @@ public class Student implements Serializable {
 	
 	
 }
+
 
 
 
