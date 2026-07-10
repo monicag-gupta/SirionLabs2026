@@ -305,3 +305,35 @@ public class DeleteStudent {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+CRUD:
+
+Insert Data:
+session.save() / session.persist()
+
+Select Data: 
+session.createQuery("From TblName",entityClass.class).list()
+
+Update Data:
+1. Find the entityClass Object to be updated:
+	session.find(entityClass.class,id)
+2. session.update() 
+	or
+	Update entityClass object then commit
+	or
+	session.merge()
+
+Delete Data:
+1. Find the entityClass Object to be updated:
+	session.find(entityClass.class,id)
+2. session.remove(entityClass obj)
