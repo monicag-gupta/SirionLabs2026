@@ -1,0 +1,13 @@
+Consider a table in MySQL employee(eid int Primary Key, ename varchar(200))
+Insert into employee values(101,'John'),(102,'Jane'),(103,'Bob');
+
+WA menu driven program in Hbm to :
+Add a new Employee
+Update an existing employee
+Delete an employee
+List all employees
+Give Details of an Employee
+Exit
+Note that : There is no auto generated value for eid. Use HbmUtil.java for the Project (not .cfg.xml)
+
+
