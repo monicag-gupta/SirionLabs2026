@@ -26,3 +26,26 @@
 
 
 
+
+
+
+Create a package in src/main/java: com.hibernate
+Create a class file inside the package com.hibernate: HibernateUtil
+Create the following classes inside the package com.hibernate:
+Student
+CreateStudent
+ReadStudent
+UpdateStudent
+DeleteStudent
+
+
+Create a file in src/main/resources: hibernate.cfg.xml
+
+
+
+
+
+
+
+
+
