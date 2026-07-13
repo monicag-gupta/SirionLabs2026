@@ -1,3 +1,73 @@
+The Maven directory structure:
+src/main/java: Your Java source code goes here (strangely enough!)
+src/main/resources: Other resources your application needs
+src/main/filters: Resource filters, in the form of properties files, which may be used to define variables only known at runtime
+src/main/config: Configuration files
+src/main/webapp: The Web application directory for a WAR project
+src/test/java: Unit tests
+src/test/resources: Resources to be used for unit tests, but will not be deployed
+src/test/filters: Resources filters to be used for unit tests, but will not be deployed
+src/site: Files used to generate the Maven project Website
+
+
+
+
+Maven lifecycle phases:
+
+generate-sources: Generates any extra source code needed for the application, which is generally accomplished using the appropriate plug-ins
+clean: Deletes the target directory and removes previous build files.
+compile: Compiles the project source code
+test-compile: Compiles the project unit tests
+test: Runs the unit tests (typically using JUnit) in the src/test directory
+package: Packages the compiled code in its distributable format (JAR, WAR, etc.)
+integration-test: Processes and deploys the package if necessary into an environment where integration tests can be run
+install: Installs the package into the local repository for use as a dependency in other projects on your local machine
+deploy: Done in an integration or release environment, copies the final package to the remote repository for sharing with other developers and projects
+
+
+
+
+
+validate: Checks whether the project structure and pom.xml are valid.
+initialize: Initializes the build environment and sets up project properties.
+generate-sources: Generates additional source code required for compilation.
+process-sources: Processes and prepares the source code before compilation.
+generate-resources: Generates resource files required by the application.
+process-resources: Copies and filters resource files into the target directory.
+compile: Compiles the project's main source code into .class files.
+process-classes: Performs post-processing on compiled class files.
+generate-test-sources: Generates source code required for testing.
+process-test-sources: Processes test source files before compilation.
+generate-test-resources: Generates resources needed for test execution.
+process-test-resources: Copies and prepares test resources.
+test-compile: Compiles the test source code.
+process-test-classes: Performs post-processing on compiled test classes.
+test: Runs unit tests using a testing framework such as JUnit.
+prepare-package: Performs tasks required before packaging the application.
+package: Packages the compiled code into a distributable format such as JAR or WAR.
+pre-integration-test: Prepares the environment for integration testing.
+integration-test: Executes integration tests against the packaged application.
+post-integration-test: Cleans up the environment after integration testing.
+verify: Verifies that the project meets quality and validation requirements.
+install: Installs the packaged artifact into the local Maven repository.
+deploy: Uploads the final artifact to a remote Maven repository for sharing.
+
+
+
+
+
+Key Terms: Maven Projects
+
+groupId :This element indicates the unique identifier of the organization or group that created the project. The groupId is one of the key identifiers of a project and is typically based on the fully qualified domain name of your organization.
+artifactId :is the name of the jar without version. If you created it, then you can choose whatever name you want with lowercase letters and no strange symbols.
+POM: A Project Object Model or POM is the fundamental unit of work in Maven. It is an XML file that contains information about the project and configuration details used by Maven to build the project. It contains default values for most projects.
+
+
+
+
+
+
+
 Create a maven project: Create a simple project (skip archetype selection):
 Artifact ID: HelloSpring
 Name: HelloSpring
@@ -341,6 +411,101 @@ public class MainApp {
 		tRest.serve();
 	}
 }
+
+
+
+
+
+
+Annotations:
+
+@Component :       
+It is generic  stereotype for any spring managed component.
+@Repository :
+Specialized form of @Component. This annotation work as marker for any class which fulfills the role of repository or Data Access  Object(Persistent Layer).
+@Controller :
+Specialized form of @Component and applied to Presentation Layer.
+@Service :
+Specialized form of @Component and applied to Service Layer.
+@Configuration :
+@Configuration annotated class is used to define beans.  Have methods with annotation @Bean
+@Bean
+It is a method level annotation which work with @Configuration
+@Scope
+Every bean defined in IoC container needs to have a scope, default scope is Singleton.
+@DependsOn
+@Primary
+@Lazy
+@Import
+@ImportResource
+@Value
+
+
+
+
+Core Framework & Stereotype Annotations:
+
+Stereotype annotations inform Spring that a class is a managed component (Bean) and define its role within the application architecture. [1, 2]
+@Component: Marks a class as a generic Spring-managed component for classpath scanning.
+@Service: Specializes @Component to indicate that a class contains core business logic.
+@Repository: Specializes @Component for data access objects (DAOs) and auto-translates database exceptions.
+@Controller: Marks a class as a traditional web controller that handles HTTP requests and returns views.
+@Configuration: Indicates a class contains source bean definitions using one or more @Bean methods.
+@Bean: Placed on factory methods inside @Configuration classes to register the returned object as a Spring bean.
+@ComponentScan: Configures the base packages where Spring looks for stereotype-annotated classes. [1, 2, 3, 4, 5, 6]
+
+
+Dependency Injection & Configuration:
+
+These annotations control how Spring wires dependencies together and sets configurations. [1]
+@Autowired: Instructs Spring to automatically inject a matching bean dependency into a field, constructor, or setter.
+@Qualifier: Used with @Autowired to specify exactly which bean to inject when multiple beans of the same type exist.
+@Primary: Gives higher preference to a specific bean when multiple candidates are available for injection.
+@Lazy: Delays bean initialization until it is explicitly requested for the first time.
+@Scope: Defines the lifecycle boundary of a bean, such as singleton or prototype.
+@Value: Injects externalized values from application properties files, system environment variables, or SpEL expressions.
+@Profile: Restricts the registration of a bean or configuration class to specific active application profiles.
+@Import: Imports specific additional configuration classes into the current context. [1, 2, 3, 4]
+
+
+Spring Web & REST Annotations:
+
+These annotations handle incoming HTTP requests, route endpoints, and format web responses. [1]
+@RestController: Combines @Controller and @ResponseBody to mark a specialized controller that returns JSON or XML data.
+@RequestMapping: Maps web requests to specific controller paths and can be applied at class or method levels.
+@GetMapping: Shorthand for @RequestMapping(method = RequestMethod.GET) to retrieve data.
+@PostMapping: Shorthand for @RequestMapping(method = RequestMethod.POST) to save data.
+@PutMapping: Shorthand for @RequestMapping(method = RequestMethod.PUT) to update data.
+@DeleteMapping: Shorthand for @RequestMapping(method = RequestMethod.DELETE) to remove data.
+@PathVariable: Extracts a dynamic variable directly out of the URI path segment.
+@RequestParam: Extracts query parameters or form parameters from the incoming request URL.
+@RequestBody: Binds the incoming HTTP request body (like JSON) directly into a Java object.
+@ResponseBody: Instructs Spring to serialize the method return value directly into the HTTP response body.
+@ControllerAdvice: Intercepts exceptions globally across all controllers for centralized error handling.
+@ExceptionHandler: Defines a specific method to handle exceptions thrown during web request processing. [1, 2, 3, 4, 5]
+
+
+Spring Boot Auto-Configuration:
+
+These annotations handle the automatic setup features unique to Spring Boot. [1, 2]
+@SpringBootApplication: Combines @Configuration, @EnableAutoConfiguration, and @ComponentScan to bootstrap the application.
+@EnableAutoConfiguration: Instructs Spring Boot to automatically guess and configure beans based on classpath JAR dependencies.
+@ConfigurationProperties: Binds entire groups of external hierarchy properties into a single type-safe POJO.
+@ConditionalOnClass: Registers a bean only if a specified class file is present on the application classpath.
+@ConditionalOnMissingBean: Registers a bean only if no other bean of the same type is already configured. [1, 2, 3, 4]
+
+
+Data Access & Transaction Management:
+
+These annotations manage transactions and control interactions with databases. [1]
+@Transactional: Configures transactional boundaries around a specific method or class to automate commit and rollback operations.
+@Query: Defines custom JPQL or native SQL queries directly within a Spring Data Repository interface.
+@Modifying: Enhances a @Query annotation to indicate that the executed query changes data (like updates or deletes). [1, 2, 3]
+
+
+
+
+
 
 
 
