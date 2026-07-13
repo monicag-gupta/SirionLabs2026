@@ -1,0 +1,19 @@
+Java Servlets and JavaServer Pages (JSP) are foundational server-side technologies in Java used to build dynamic web applications. 
+While both handle HTTP requests and responses, Servlets focus on backend business logic while JSP simplifies frontend UI presentation.
+
+Servlets are .java files returning response in HTML format. Executed in the Web browser
+JSP are .jsp files written like HTML codes with Java embedded in it. These render servlet to be executed in the Web browser.
+
+
+
+Apache Tomcat is an open-source web server and servlet container that executes Java Servlets and renders JavaServer Pages (JSP). 
+It is widely used to host Java-based web applications and microservices (like Spring Boot) because of its lightweight, flexible, and robust nature.
+
+Download Tomcat Server from: 
+https://tomcat.apache.org/download-10.cgi
+Download zip file, unzip and keep the folder in Desktop
+
+
+
+
+
