@@ -445,19 +445,23 @@ Every bean defined in IoC container needs to have a scope, default scope is Sing
 
 Core Framework & Stereotype Annotations:
 
-Stereotype annotations inform Spring that a class is a managed component (Bean) and define its role within the application architecture. [1, 2]
+Stereotype annotations inform Spring that a class is a managed component (Bean) and define its role within the application architecture.
+
 @Component: Marks a class as a generic Spring-managed component for classpath scanning.
 @Service: Specializes @Component to indicate that a class contains core business logic.
 @Repository: Specializes @Component for data access objects (DAOs) and auto-translates database exceptions.
 @Controller: Marks a class as a traditional web controller that handles HTTP requests and returns views.
 @Configuration: Indicates a class contains source bean definitions using one or more @Bean methods.
 @Bean: Placed on factory methods inside @Configuration classes to register the returned object as a Spring bean.
-@ComponentScan: Configures the base packages where Spring looks for stereotype-annotated classes. [1, 2, 3, 4, 5, 6]
+@ComponentScan: Configures the base packages where Spring looks for stereotype-annotated classes. 
 
 
-Dependency Injection & Configuration:
 
-These annotations control how Spring wires dependencies together and sets configurations. [1]
+
+Dependency Injection & Configuration
+
+These annotations control how Spring wires dependencies together and sets configurations.
+
 @Autowired: Instructs Spring to automatically inject a matching bean dependency into a field, constructor, or setter.
 @Qualifier: Used with @Autowired to specify exactly which bean to inject when multiple beans of the same type exist.
 @Primary: Gives higher preference to a specific bean when multiple candidates are available for injection.
@@ -465,12 +469,15 @@ These annotations control how Spring wires dependencies together and sets config
 @Scope: Defines the lifecycle boundary of a bean, such as singleton or prototype.
 @Value: Injects externalized values from application properties files, system environment variables, or SpEL expressions.
 @Profile: Restricts the registration of a bean or configuration class to specific active application profiles.
-@Import: Imports specific additional configuration classes into the current context. [1, 2, 3, 4]
+@Import: Imports specific additional configuration classes into the current context.
+
+
 
 
 Spring Web & REST Annotations:
 
-These annotations handle incoming HTTP requests, route endpoints, and format web responses. [1]
+These annotations handle incoming HTTP requests, route endpoints, and format web responses.
+
 @RestController: Combines @Controller and @ResponseBody to mark a specialized controller that returns JSON or XML data.
 @RequestMapping: Maps web requests to specific controller paths and can be applied at class or method levels.
 @GetMapping: Shorthand for @RequestMapping(method = RequestMethod.GET) to retrieve data.
@@ -482,25 +489,32 @@ These annotations handle incoming HTTP requests, route endpoints, and format web
 @RequestBody: Binds the incoming HTTP request body (like JSON) directly into a Java object.
 @ResponseBody: Instructs Spring to serialize the method return value directly into the HTTP response body.
 @ControllerAdvice: Intercepts exceptions globally across all controllers for centralized error handling.
-@ExceptionHandler: Defines a specific method to handle exceptions thrown during web request processing. [1, 2, 3, 4, 5]
+@ExceptionHandler: Defines a specific method to handle exceptions thrown during web request processing.
+
+
+
 
 
 Spring Boot Auto-Configuration:
 
-These annotations handle the automatic setup features unique to Spring Boot. [1, 2]
+These annotations handle the automatic setup features unique to Spring Boot.
+
 @SpringBootApplication: Combines @Configuration, @EnableAutoConfiguration, and @ComponentScan to bootstrap the application.
 @EnableAutoConfiguration: Instructs Spring Boot to automatically guess and configure beans based on classpath JAR dependencies.
 @ConfigurationProperties: Binds entire groups of external hierarchy properties into a single type-safe POJO.
 @ConditionalOnClass: Registers a bean only if a specified class file is present on the application classpath.
-@ConditionalOnMissingBean: Registers a bean only if no other bean of the same type is already configured. [1, 2, 3, 4]
+@ConditionalOnMissingBean: Registers a bean only if no other bean of the same type is already configured.
+
+
 
 
 Data Access & Transaction Management:
 
-These annotations manage transactions and control interactions with databases. [1]
+These annotations manage transactions and control interactions with databases.
+
 @Transactional: Configures transactional boundaries around a specific method or class to automate commit and rollback operations.
 @Query: Defines custom JPQL or native SQL queries directly within a Spring Data Repository interface.
-@Modifying: Enhances a @Query annotation to indicate that the executed query changes data (like updates or deletes). [1, 2, 3]
+@Modifying: Enhances a @Query annotation to indicate that the executed query changes data (like updates or deletes). 
 
 
 
