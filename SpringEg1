@@ -1372,8 +1372,22 @@ public class MainApp {
 
 
 
+Exercise
 
+Emp :
+Address
+Eid
+Ename
 
+HR: 
+Emp 
+Sal
+
+CRUD  with menu driven context
+In-memory
+
+Hint:
+Configuration : list of Emp linked with their sal, into HR object
 
 
 
