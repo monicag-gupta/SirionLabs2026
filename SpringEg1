@@ -205,8 +205,11 @@ public class Restaurant {
  		<bean id="idhello" class="com.springcore.HelloWorld">
  			<property name="message" value="Hello World!"/>
  		</bean>
- 		 <bean id="restBean" class="com.springcore.Restaurant">
+ 		 <bean id="restTBean" class="com.springcore.Restaurant">
  			<property name="drink" ref="teaBean"/>
+ 		</bean>
+ 		<bean id="restCBean" class="com.springcore.Restaurant">
+ 			<property name="drink" ref="coffeeBean"/>
  		</bean>
  		<bean id="teaBean" class="com.springcore.Tea"></bean>
  		<bean id="coffeeBean" class="com.springcore.Coffee"></bean>
