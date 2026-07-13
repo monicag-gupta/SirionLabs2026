@@ -612,6 +612,88 @@ public class HelloWorld {
 
 
 
+package com.springcore;
+
+import org.springframework.stereotype.Component;
+
+@Component("teaBean")
+
+public class Tea implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Tea..");
+	}
+
+}
+
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.stereotype.Component;
+
+@Component("restBean")
+public class Restaurant {
+	IHotdrink drink;
+//	Lunch lunch;
+	public Restaurant() {}
+//	public Restaurant(IHotdrink t) {drink=t;}
+	public void setDrink(IHotdrink drink) {this.drink=drink;}
+//	public void setLunch(Lunch lunch) {this.lunch=lunch;}
+	public void serve() {
+		drink.prepare();
+		System.out.println("served..");
+//		lunch.decorate();
+//		System.out.println("Help Yourself with Lunch");
+	}
+	
+
+}
+
+
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+	public static void main(String[] args) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.scan("com.springcore");  //Creates <beans>..</beans>; scans all <bean> from pkg
+		context.refresh(); //create all the bean
+
+		Restaurant tRest = (Restaurant) context.getBean("restBean");
+		Tea t= (Tea) context.getBean("teaBean");
+		tRest.setDrink(t);
+		tRest.serve();
+		
+		
+		
+		context.close();
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
