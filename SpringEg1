@@ -129,4 +129,11 @@ public class MainApp {
 
 
 
+Project->Run as-> maven clean
+Project-> run as -> maven install
+Keep MainApp.Java file tab active and use either Run as Java application option available in the Eclipse IDE or use Ctrl + F11 to compile and run your MainApp application. 
+Your Message : Hello World!
+
+
+
 
