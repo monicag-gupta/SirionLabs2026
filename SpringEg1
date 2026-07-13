@@ -569,6 +569,54 @@ public class MainApp {
 
 
 
+package com.springcore;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+	public static void main(String[] args) {
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.scan("com.springcore");  //Creates <beans>..</beans>; scans all <bean> from pkg
+		context.refresh(); //create all the bean
+
+		HelloWorld obj = (HelloWorld) context.getBean("idhello");
+		obj.setMessage("Hello World!");
+		obj.getMessage();
+		context.close();
+	}
+}
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.stereotype.Component;
+
+@Component("idhello")
+public class HelloWorld {
+	private String message; // property
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void getMessage() {
+		System.out.println("Your Message : " + message);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
