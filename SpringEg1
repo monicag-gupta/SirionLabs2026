@@ -1118,25 +1118,25 @@ import jakarta.annotation.PreDestroy;
 @Component("restaurantBean")
 public class Restaurant {
 	public void greetCustomer() { // Business Logic
-		System.out.println("welcome dear customer!! this is the LifeCycle demo");
+		System.out.println("7. welcome dear customer!! this is the LifeCycle demo");
 	}
 
 	@PostConstruct
 	public void init() { // init-method of Beans
-		System.out.println("Restaurant Bean is going through init.");
+		System.out.println("3. Restaurant Bean is going through init.");
 	}
 
 	@PreDestroy
 	public void destroy() { // destroy-method of Beans
-		System.out.println("Bean will destroy now.");
+		System.out.println("9. Bean will destroy now.");
 	}
 
 	public Restaurant() { // Constructor: instantiation : Context generation
-		System.out.println("Restaurant Constructor");
+		System.out.println("2. Restaurant Constructor");
 	}
 
 	protected void finalize() { // Garbage Collection post Context.close()
-		System.out.println("Restaurant is destroyed by the Garbage Collector");
+		System.out.println("11. Restaurant is destroyed by the Garbage Collector");
 	}
 }
 
