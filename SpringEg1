@@ -848,6 +848,42 @@ public class Restaurant {
 
 
 
+Spring Bean Life Cycle
+
+The life cycle of a Spring bean is easy to understand. When a bean is instantiated, it may be required to perform some initialization to get it into a usable state. 
+Similarly, when the bean is no longer required and is removed from the container, some cleanup may be required.
+To define setup and teardown for a bean, we simply declare the <bean> with init-method and/or destroy-method parameters. 
+The init-method attribute specifies a method that is to be called on the bean immediately upon instantiation. 
+Similarly, destroy-method specifies a method that is called just before a bean is removed from the container.
+
+
+
+
+
+Standard bean lifecycle interfaces & their standard order of execution
+
+1-   IoC container will look for the configuration metadata of given Bean.
+2-   Once find, container will create the instance of Bean(Using reflection API).
+3-   After instance creation dependency will be injected(DI).
+4-   setBeanName method of BeanNameAware Interface. It sets the name of the bean in the bean factory that created this bean.
+5-   setBeanClassLoader method of BeanClassLoaderAware Interface. Callback that supplies the bean to a bean instance.
+6-   setBeanFactory  method of BeanFactoryAware Interface. Callback that supplies the owning factory to a bean instance.
+7-   setResourceLoader  method of ResourceLoaderAware Interface. It set the ResourceLoader that this object runs in.
+8-   setApplicationEventPublisher  method of ApplicationEventPublisherAware Interface. Set the ApplicationEventPublisher that this object runs in.
+9-   setMessageSource method of MessageSourceAware Interface. Set the MessageSource that this object runs in.
+10-   setApplicationContext method of ApplicationContextAware Interface. Set the ApplicationContext that this object runs in.
+11-   setServletContext method of ServletContextAware Interface. Set the ServletContext that this object runs in.
+12-   postProcessBeforeInitialization method of BeanPostProcessor Interface. Apply this BeanPostProcessor to the given new bean instance before any bean initialization callbacks.
+13-   afterPropertiesSet method of InitializingBean Interface. Invoked by a BeanFactory after it has set all bean properties supplied.
+14-   Custom init method will be invoked.
+15-   postProcessAfterInitialization methods of BeanPostProcessors. Apply this BeanPostProcessor to the given new bean instance after any bean initialization callbacks
+
+
+
+
+
+
+
 
 
 
