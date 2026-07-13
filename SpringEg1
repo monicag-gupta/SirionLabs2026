@@ -998,6 +998,60 @@ public class MainApp {
 
 
 
+package com.springcore;
+
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+	public static void main(String[] args) {
+		System.out.println("1. Main Starts : Constructor is called:");
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml"); // constructor
+																											// called
+		System.out.println("4. shutdown hook registered for calling Destroy method before close method");
+		((AbstractApplicationContext) context).registerShutdownHook();
+		System.out.println("5. GetBeans called: run init method:");
+		Restaurant restaurantObj = (Restaurant) context.getBean("restaurantBean");
+		System.out.println("6. Run Business Logic:");
+		restaurantObj.greetCustomer();
+		restaurantObj = null; // destroy restaurantObj
+		System.out.println("8. Before close method: call destroy method:");
+		context.close();
+		System.out.println("10. Post closure we destroy Beans completely by finalize method:");
+		System.gc(); // System.gc() calls the garbage collector
+		System.out.println("11. Main Ends");
+	}
+}
+
+
+
+
+
+package com.springcore;
+public class Restaurant {
+	public void greetCustomer() { //Business Logic
+		System.out.println("7. welcome dear customer!! this is the LifeCycle demo");
+	}
+	public void init() { //init-method of Beans
+		System.out.println("3. Restaurant Bean is going through init.");
+	}
+	public void destroy() { //destroy-method of Beans
+		System.out.println("9. Bean will destroy now.");
+	}
+	public Restaurant() { //Constructor: instantiation : Context generation
+		System.out.println("2. Restaurant Constructor");
+	}
+	protected void finalize()  	{   //Garbage Collection post Context.close()
+	     System.out.println("11. Restaurant is destroyed by the Garbage Collector");  
+	}  
+}
+
+
+
+
+
+
+
 
 
 
