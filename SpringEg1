@@ -882,6 +882,19 @@ Standard bean lifecycle interfaces & their standard order of execution
 
 
 
+Bean Tag Attributes
+
+name / id: This attribute specifies the bean unique identifier. In XML based configuration metadata, you use the id and/or name attributes to specify the bean identifier.
+class: This attribute is mandatory and specify the bean class to be used to create the bean. You should specify fully qualified class name. Include package name.
+scope: This attribute specifies the scope of the objects created from a particular bean definition. The scope values can be prototype, singleton, request, session, and global session.
+constructor-arg: This is used to inject the dependencies through bean constructor.
+properties: This attribute is used to inject the dependencies through setter method.
+autowiring mode: This is used to inject the dependencies.
+lazy-init (lazy-initialization mode): A lazy-initialized bean tells the IoC container to create a bean instance when it is first requested, rather than at startup.
+init-method (initialization method): A callback to be called just after all necessary properties on the bean have been set by the container. This is part of bean lifecycle.
+destroy-method (destruction method): A callback to be used when the container containing the bean is destroyed. This is part of bean lifecycle.
+
+
 
 
 
