@@ -1108,6 +1108,80 @@ Pom.xml :
 
 
 
+package com.springcore;
+
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+
+@Component("restaurantBean")
+public class Restaurant {
+	public void greetCustomer() { // Business Logic
+		System.out.println("welcome dear customer!! this is the LifeCycle demo");
+	}
+
+	@PostConstruct
+	public void init() { // init-method of Beans
+		System.out.println("Restaurant Bean is going through init.");
+	}
+
+	@PreDestroy
+	public void destroy() { // destroy-method of Beans
+		System.out.println("Bean will destroy now.");
+	}
+
+	public Restaurant() { // Constructor: instantiation : Context generation
+		System.out.println("Restaurant Constructor");
+	}
+
+	protected void finalize() { // Garbage Collection post Context.close()
+		System.out.println("Restaurant is destroyed by the Garbage Collector");
+	}
+}
+
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+
+public class MainApp {
+	public static void main(String[] args) {
+		System.out.println("1. Main Starts : Constructor is called:");
+		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
+		context.scan("com.springcore");
+		context.refresh();																											// called
+		System.out.println("4. shutdown hook registered for calling Destroy method before close method");
+		((AbstractApplicationContext) context).registerShutdownHook();
+		System.out.println("5. GetBeans called: run init method:");
+		Restaurant restaurantObj = (Restaurant) context.getBean("restaurantBean");
+		System.out.println("6. Run Business Logic:");
+		restaurantObj.greetCustomer();
+		restaurantObj = null; // destroy restaurantObj
+		System.out.println("8. Before close method: call destroy method:");
+		context.close();
+		System.out.println("10. Post closure we destroy Beans completely by finalize method:");
+		System.gc(); // System.gc() calls the garbage collector
+		System.out.println("11. Main Ends");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
