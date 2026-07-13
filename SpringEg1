@@ -523,6 +523,46 @@ These annotations manage transactions and control interactions with databases.
 
 
 
+Example:
+
+MyAppConfiguration.java
+
+package com.springcore;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configuration
+public class MyAppConfiguration {
+ @Bean("idhello")
+	public HelloWorld getHelloWorld() {
+		return new HelloWorld();
+	}
+}
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+public class MainApp {
+	public static void main(String[] args) {
+		ApplicationContext context = (ApplicationContext) new AnnotationConfigApplicationContext(
+				MyAppConfiguration.class);
+
+		HelloWorld obj = (HelloWorld) context.getBean("idhello");
+		obj.setMessage("Hello World!");
+		obj.getMessage();
+
+	}
+}
+
+
+
+
+
 
 
 
