@@ -137,3 +137,85 @@ Your Message : Hello World!
 
 
 
+
+IOC:
+
+package com.springcore;
+
+public interface IHotdrink {
+	void prepare();
+}
+
+
+
+
+package com.springcore;
+
+public class Tea implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Tea..");
+	}
+
+}
+
+
+
+
+
+package com.springcore;
+
+public class Coffee implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Coffee..");
+	}
+
+
+}
+
+
+
+
+
+package com.springcore;
+
+public class Restaurant {
+	IHotdrink drink;
+	public Restaurant() {}
+	public Restaurant(IHotdrink t) {drink=t;}
+	public void setDrink(IHotdrink drink) {this.drink=drink;}
+	public void serve() {
+		drink.prepare();
+		System.out.println("served..");
+	}
+	
+
+}
+
+
+
+
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 		<bean id="idhello" class="com.springcore.HelloWorld">
+ 			<property name="message" value="Hello World!"/>
+ 		</bean>
+ 		 <bean id="restBean" class="com.springcore.Restaurant">
+ 			<property name="drink" ref="teaBean"/>
+ 		</bean>
+ 		<bean id="teaBean" class="com.springcore.Tea"></bean>
+ 		<bean id="coffeeBean" class="com.springcore.Coffee"></bean>
+</beans>
+
+
+
+
+
+
+
+
