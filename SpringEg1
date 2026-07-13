@@ -953,7 +953,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class MainApp {
 	public static void main(String[] args) {
 		System.out.println("Main Starts : Constructor is called:");
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("SpringConfig.xml"); // constructor
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml"); // constructor
 																											// called
 		System.out.println("shutdown hook registered for calling Destroy method before close method");
 		((AbstractApplicationContext) context).registerShutdownHook();
