@@ -1,0 +1,110 @@
+package com.demo;
+
+public interface IHotdrink {
+	void prepare();
+}
+
+
+
+
+package com.demo;
+
+public class Tea implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Tea..");
+	}
+
+}
+
+
+
+
+
+
+
+
+
+package com.demo;
+
+public class Coffee implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Coffee..");
+	}
+
+
+}
+
+
+
+
+
+
+package com.demo;
+
+public class Restaurant {
+	IHotdrink drink;
+	public Restaurant() {}
+	public Restaurant(IHotdrink t) {drink=t;}
+	public void serve() {
+		drink.prepare();
+		System.out.println("served..");
+	}
+	
+
+}
+
+
+
+
+
+
+
+package com.demo;
+
+public class IOC {
+	//Context Function
+	public Object getBean(String id) {
+		if (id.equals("teabean"))
+			return new Tea();
+		else if (id.equals("coffeebean"))
+			return new Coffee();
+		else if(id.equals("restBean"))
+			return new Restaurant((Tea)getBean("teabean"));
+		else 
+			return new Tea();
+	}
+
+}
+
+
+
+
+
+
+
+
+
+package com.demo;
+
+public class Main {
+
+	public static void main(String[] args) {
+//		IHotdrink i=new IOC().getTea();
+//		Restaurant r=new Restaurant(i);
+		Restaurant r = (Restaurant)new IOC().getBean("restBean");
+		r.serve();
+
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
