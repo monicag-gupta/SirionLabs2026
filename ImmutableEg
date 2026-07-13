@@ -1,0 +1,70 @@
+package pkgDay5;
+
+class Address{
+	String add;
+
+	public String getAdd() {
+		return add;
+	}
+
+	public void setAdd(String add) {
+		this.add = add;
+	}
+	public Address(String add) {this.add=add;}
+	public Address() {}
+}
+
+//Make Emp a Immutable:
+//make it final
+//don't provide setters
+//all attributes are private, so can be set via constructor only
+//if Immutable class contains mutable object:
+//   The Constructor of Immutable class should copy the mutable object's value as a new object
+//   The getter should return another object reference not the Immutable object's ref
+
+final class Emp{
+	int eid;
+	String ename;
+	Address eAdd;
+	public int getEid() {
+		return eid;
+	}
+	
+	public String getEname() {
+		return ename;
+	}
+	public Address getEAdd() {
+		return new Address(eAdd.getAdd());
+	}
+	
+	public Emp(int eid, String ename, Address eAdd) {
+		super();
+		this.eid = eid;
+		this.ename = ename;
+		this.eAdd=new Address(eAdd.getAdd());
+	}
+//	public Emp() {}
+	@Override
+	public String toString() {
+		return "Emp [eid=" + eid + ", ename=" + ename + "EAddress" + eAdd.getAdd() + "]";
+	}
+	
+}
+
+public class myImmutable {
+
+	public static void main(String[] args) {
+		Address a=new Address("Delhi");
+		Emp e=new Emp(101,"John",a);
+		System.out.println("Before Updating Add:" + e.getEid()+ " : " + e.getEname() + " : " + e.getEAdd().getAdd());
+		a.setAdd("Gurugram");
+//		e=new Emp(102,"Jane", a);
+		System.out.println("After Updating Add:" + e.getEid()+ " : " + e.getEname() + " : " + e.getEAdd().getAdd());
+		e.getEAdd().setAdd("Ghaziabad");
+		System.out.println("After Updating Add Again by getter:" + e.getEid()+ " : " + e.getEname() + " : " + e.getEAdd().getAdd());
+
+
+
+	}
+
+}
