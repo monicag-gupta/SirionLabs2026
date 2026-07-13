@@ -90,5 +90,43 @@ Beans.xml
 
 
 
+package com.springcore;
+
+public class HelloWorld {
+	private String message; // property
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public void getMessage() {
+		System.out.println("Your Message : " + message);
+	}
+}
+
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+	public static void main(String[] args) {
+		ApplicationContext context = (ApplicationContext) new ClassPathXmlApplicationContext("Beans.xml");
+		HelloWorld obj = (HelloWorld) context.getBean("idhello");
+		obj.getMessage();
+	}
+}
+
+
+
+
+
+
+
 
 
