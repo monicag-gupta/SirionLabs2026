@@ -562,7 +562,7 @@ public class MainApp {
 
 
 
-
+______________________________
 
 
 
@@ -737,6 +737,110 @@ public class MainApp {
 
 
 
+
+
+_________________________________
+
+
+
+
+
+
+
+package com.springcore;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+@Configuration
+public class MyAppConfiguration {
+ @Bean("idhello")
+	public HelloWorld getHelloWorld() {
+		return new HelloWorld();
+	}
+ @Bean("teaBean")
+	public Tea getTea() {
+		return new Tea();
+	}
+ @Bean("coffeeBean")
+	public Coffee getCoffee() {
+		return new Coffee();
+	}
+ @Bean("restTBean")
+	public Restaurant getRestaurant_t() {
+	 
+		return new Restaurant(getTea());
+	}
+ @Bean("restCBean")
+	public Restaurant getRestaurant_C() {
+	 
+		return new Restaurant(getCoffee());
+	}
+}
+
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.stereotype.Component;
+
+//@Component("coffeeBean")
+public class Coffee implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Coffee..");
+	}
+
+
+}
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.stereotype.Component;
+
+//@Component("teaBean")
+
+public class Tea implements IHotdrink{
+	public void prepare() {
+		System.out.println("Preparing Tea..");
+	}
+
+}
+
+
+
+
+
+
+package com.springcore;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+//@Component("restBean")
+public class Restaurant {
+//	@Autowired
+//	@Qualifier("teaBean")
+	IHotdrink drink;
+//	Lunch lunch;
+	public Restaurant() {}
+	public Restaurant(IHotdrink t) {drink=t;}
+	public void setDrink(IHotdrink drink) {this.drink=drink;}
+//	public void setLunch(Lunch lunch) {this.lunch=lunch;}
+	public void serve() {
+		drink.prepare();
+		System.out.println("served..");
+//		lunch.decorate();
+//		System.out.println("Help Yourself with Lunch");
+	}
+	
+
+}
 
 
 
