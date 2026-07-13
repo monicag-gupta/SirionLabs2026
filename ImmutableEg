@@ -1,3 +1,18 @@
+The 5 Core Rules of Immutability
+1) Don't provide setter methods: Ensure there are no functions that can modify the fields or state of the object after initialization.
+2) Make all fields private and final: Prevents direct external access to variables and ensures fields can only be assigned exactly once within the constructor. 
+3) Declare the class as final: Prevents inheritance, ensuring child classes cannot override methods or introduce mutable behavior.
+4) Initialize fields via a constructor: Use a parameterized constructor to assign all field values at the time of object instantiation. 
+5) Perform defensive copying on mutable fields: If the class contains mutable objects (like List, Map, or Date), clone or copy them during initialization and when returning them from getters.
+
+
+
+
+
+
+
+
+
 package pkgDay5;
 
 class Address{
