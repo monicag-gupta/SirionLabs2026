@@ -113,6 +113,25 @@ Now pom.xml :
 
 
 
+Create Controller Package
+src/main/java -> com.springmvc.controller
+Create HomeController.java in the package
+Create Spring Configuration
+Create:
+src/main/webapp/WEB-INF/spring-servlet.xml
+Create web.xml
+src/main/webapp/WEB-INF/web.xml
+Create JSP Page
+Create a folder views in src/main/webapp/WEB-INF 
+Create home.jsp in the folder
+src/main/webapp/WEB-INF/views/home.jsp
+
+
+
+
+
+
+
 
 
 
