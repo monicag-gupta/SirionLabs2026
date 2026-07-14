@@ -336,3 +336,18 @@ public class WebInitializer extends AbstractAnnotationConfigDispatcherServletIni
 }
 
 
+
+
+
+_______________________________
+
+Add a Controller:
+
+StudentAdmissionController.java
+
+
+
+
+
+
+
