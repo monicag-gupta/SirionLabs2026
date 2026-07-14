@@ -378,5 +378,9 @@ public class StudentAdmissionController {
 
 
 
+Add in views folder:
 
+AdmissionForm.jsp
+
+AdmissionSuccess.jsp
 
