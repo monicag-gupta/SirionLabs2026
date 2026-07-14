@@ -211,6 +211,10 @@ https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
 
 
 
+Note : if a servlet, Serv1 is made through xml file, the servlet name will be Serv1-servlet.xml
+So -servlet.xml is appended to make a servlet.
+Eg: spring-servlet.xml is the servlet java file named spring
+
 
 
 
