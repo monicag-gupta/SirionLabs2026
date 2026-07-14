@@ -269,5 +269,16 @@ add in pom.xml before </project>
 
 
 
+copy views folder to correct position
+copy controller package to correct position
+
+
+
+Create a config package in com.springmvc
+com.springmvc.config
+Create WebConfig.java in the package
+This class replaces spring-servlet.xml
+Create WebInitializer.java in the package
+This class replaces web.xml.
 
 
