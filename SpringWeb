@@ -419,3 +419,17 @@ AdmissionSuccess.jsp
 </html>
 
 
+
+
+
+
+
+
+Exercise:
+
+Login Form submits to a controller, which checks the credentials from a DB and returns Success page Or Error Page.
+
+
+
+
+
