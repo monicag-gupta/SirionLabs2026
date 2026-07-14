@@ -12,4 +12,17 @@ Open JEE Perspective if not in it.
 
 
 
+Right click the Project 
+Configure -> Convert to Maven Project
+
+Give Details:
+Group ID : com.springmvc
+Artifact ID: HelloSpringWeb
+Name: HelloSpringWeb
+Packaging: war
+
+Finish
+
+
+
 
