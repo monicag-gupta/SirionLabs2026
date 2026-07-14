@@ -218,3 +218,20 @@ Eg: spring-servlet.xml is the servlet java file named spring
 
 
 
+home.jsp
+
+<%@ page contentType="text/html;charset=UTF-8"%>
+<html>
+<head>
+<title>Spring MVC</title>
+</head>
+<body>
+	<h2>${message}</h2>
+</body>
+</html>
+
+
+
+
+
+
