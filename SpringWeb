@@ -1,1 +1,15 @@
+Create a Dynamic Web Project in Eclipse
+Name: HelloSpringWeb
+Ensure Target Runtime is 
+Apache Tomcat v10.1
+Click next
+Click Next
+Tick on Generate web.xml
+Click Finish
+Open JEE Perspective if not in it.
+
+
+
+
+
 
