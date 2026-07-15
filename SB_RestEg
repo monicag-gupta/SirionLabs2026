@@ -494,6 +494,19 @@ Request Body
   "salary":95000
 }
 
+
+or 
+
+
+{
+  "id":104,
+  "name":"Rahul Dev Sharma",
+  "salary":95500
+}
+
+
+
+
 Response expected:
 
 {
