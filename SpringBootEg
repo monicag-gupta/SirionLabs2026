@@ -276,6 +276,37 @@ http://localhost:8080/student
 
 
 
+Spring Boot DevTools
+
+Spring Boot DevTools improves the development experience by automatically restarting the application whenever source code changes are detected.
+Maven Dependency
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+    <optional>true</optional>
+</dependency>
+
+
+
+Features
+Automatic restart 
+LiveReload support 
+Faster development 
+Improved debugging 
+Example
+Without DevTools:
+Modify Java Code -> Stop Application -> Save File -> Run Again
+With DevTools:
+Modify Java Code -> Save File -> Application Restarts Automatically
+
+
+
+
+
+
+
+
 
 
 
