@@ -1,0 +1,8 @@
+Spring Boot is a module of the Spring Framework. 
+It is used to create stand-alone, production-grade Spring Based Applications with minimum efforts.
+It is developed on top of the core Spring Framework.
+There are four layers in Spring Boot are as follows:
+  Presentation Layer
+  Business Layer
+  Persistence Layer
+  Database Layer
