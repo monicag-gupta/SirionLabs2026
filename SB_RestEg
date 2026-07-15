@@ -691,7 +691,7 @@ public class EmployeeController {
     }
     
     @GetMapping("/getEmp")
-    public EmployeeDTO getEmployee1(@RequestBody int id) {
+    public EmployeeDTO getEmployee1(@RequestParam("id") int id) {
 
         return service.getEmployee(id);
 
@@ -704,16 +704,18 @@ public class EmployeeController {
 
     }
     @GetMapping("/add")
-    public EmployeeDTO addEmployeeGet(@RequestBody EmployeeDTO dto) {
+    public EmployeeDTO addEmployeeGet(@RequestParam("id") int id,
+    		@RequestParam("name") String name,@RequestParam("salary") double salary) {
 
-        return service.addEmployee(dto);
+        return service.addEmployee(new EmployeeDTO(id, name, salary));
 
     }
     
     @PostMapping("/addPost")
-    public EmployeeDTO addEmployeePost(@RequestBody EmployeeDTO dto) {
+    public EmployeeDTO addEmployeePost(@RequestParam("id") int id,
+    		@RequestParam("name") String name,@RequestParam("salary") double salary) {
 
-        return service.addEmployee(dto);
+        return service.addEmployee(new EmployeeDTO(id, name, salary));
 
     }
 
@@ -726,9 +728,10 @@ public class EmployeeController {
     }
     
     @GetMapping("/updateEmp")
-    public EmployeeDTO updateEmployee1(@RequestBody EmployeeDTO dto) {
+    public EmployeeDTO updateEmployee1(@RequestParam("id") int id,
+    		@RequestParam("name") String name,@RequestParam("salary") double salary) {
 
-        return service.updateEmployee(dto.getId(), dto);
+        return service.updateEmployee(id, new EmployeeDTO(id, name, salary));
 
     }
 
@@ -740,13 +743,14 @@ public class EmployeeController {
     }
     
     @GetMapping("/delEmp")
-    public String deleteEmployee1(@RequestBody int id) {
+    public String deleteEmployee1(@RequestParam("id") int id) {
 
         return service.deleteEmployee(id);
 
     }
 
 }
+
 
 
 
