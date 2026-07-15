@@ -579,6 +579,169 @@ Add validation with spring-boot-starter-validation using annotations such as @No
 
 
 
+in static folder in resources:
+
+add index.html
+
+<html>
+<body>
+    <br>
+    <h2>SpringBoot RESTful Web Application!</h2>
+    <p>
+        <a href="/employees">Click Here</a>
+    </p>
+    <hr>
+    <h2>Form to add Emp by Get: Create in CRUD: </h2>
+    <form action="/employees/add" method="get">
+      Enter Emp id: <input type="text" name="id">
+      Enter Emp Name: <input type="text" name="name">
+      Enter Emp Salary: <input type="text" name="salary">
+      <input type="Submit">
+    </form>
+    <br>
+    <hr>
+    <h2>Form to add Emp by Post: Create in CRUD: </h2>
+    <form action="/employees/addPost" method="post">
+      Enter Emp id: <input type="number" name="eid">
+      Enter Emp Name: <input type="text" name="ename">
+      <input type="Submit">
+    </form>
+    <br>
+    <hr>
+    <h2>Get List of Emps : Read in CRUD: </h2>
+    <a href="/employees"> Get the list of Emps</a>
+
+    <br>
+    <hr>
+    <h2>Form to Update Emp by Get: Update in CRUD: </h2>
+    <form action="/employees/updateEmp" method="get">
+      Enter Emp id: <input type="text" name="id">
+      Enter Emp Name: <input type="text" name="name">
+      Enter Emp Salary: <input type="text" name="salary">
+      <input type="Submit">
+    </form>
+
+    <br>
+    <hr>
+    <h2>Form to Delete Emp by Get: Delete in CRUD: </h2>
+    <form action="/employees/delEmp" method="get">
+      Enter Emp id: <input type="number" name="eid">
+      <input type="Submit">
+    </form>
+
+    <br>
+    <hr>
+    <h2>Form to Get an Emp by Get: Read in CRUD: </h2>
+    <form action="/employees/getEmp" method="get">
+      Enter Emp id: <input type="number" name="eid">
+      <input type="Submit">
+    </form>
+
+    <h1>End of REST</h1>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+Update EmployeeController.java:
+
+
+
+package com.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.demo.dto.EmployeeDTO;
+import com.demo.service.EmployeeService;
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+
+    @Autowired
+    EmployeeService service;
+
+    @GetMapping
+    public List<EmployeeDTO> getAllEmployees() {
+
+        return service.getAllEmployees();
+
+    }
+
+    @GetMapping("/{id}")
+    public EmployeeDTO getEmployee(@PathVariable int id) {
+
+        return service.getEmployee(id);
+
+    }
+    
+    @GetMapping("/getEmp")
+    public EmployeeDTO getEmployee1(@RequestBody int id) {
+
+        return service.getEmployee(id);
+
+    }
+
+    @PostMapping
+    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO dto) {
+
+        return service.addEmployee(dto);
+
+    }
+    @GetMapping("/add")
+    public EmployeeDTO addEmployeeGet(@RequestBody EmployeeDTO dto) {
+
+        return service.addEmployee(dto);
+
+    }
+    
+    @PostMapping("/addPost")
+    public EmployeeDTO addEmployeePost(@RequestBody EmployeeDTO dto) {
+
+        return service.addEmployee(dto);
+
+    }
+
+    @PutMapping("/{id}")
+    public EmployeeDTO updateEmployee(@PathVariable int id,
+                                      @RequestBody EmployeeDTO dto) {
+
+        return service.updateEmployee(id, dto);
+
+    }
+    
+    @GetMapping("/updateEmp")
+    public EmployeeDTO updateEmployee1(@RequestBody EmployeeDTO dto) {
+
+        return service.updateEmployee(dto.getId(), dto);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+
+        return service.deleteEmployee(id);
+
+    }
+    
+    @GetMapping("/delEmp")
+    public String deleteEmployee1(@RequestBody int id) {
+
+        return service.deleteEmployee(id);
+
+    }
+
+}
 
 
 
