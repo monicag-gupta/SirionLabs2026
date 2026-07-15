@@ -1,0 +1,13 @@
+In Spring MVC, ResponseEntity is a powerful class that represents the entire HTTP response: status code, headers, and body. It allows you to have fine-grained control over the response sent back to the client from your controller methods.
+Static Methods for Common Status Codes:
+ResponseEntity.ok(): Returns 200 OK.
+ResponseEntity.created(): Returns 201 Created.
+ResponseEntity.noContent(): Returns 204 No Content.
+ResponseEntity.badRequest(): Returns 400 Bad Request.
+ResponseEntity.notFound(): Returns 404 Not Found.
+ResponseEntity.status(HttpStatus.XXX): Creates a response with a specific HTTP status code.
+Chaining Methods:
+.body(Object body): Sets the response body.
+.headers(HttpHeaders headers): Sets custom headers for the response.
+.build(): Builds the ResponseEntity.
+
