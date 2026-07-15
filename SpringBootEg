@@ -246,6 +246,17 @@ public class StudentController {
 
 
 
+Understanding @Value
+Spring reads
+college.name=ABC Engineering College
+and injects it into
+@Value("${college.name}")private String collegeName;
+
+
+
+
+
+
 
 
 
