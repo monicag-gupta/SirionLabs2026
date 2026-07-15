@@ -658,6 +658,148 @@ ___________________________________________
 
 
 
+Add Student.java in model
+Modify StudentController.java in controller
+
+
+
+package com.springboot.model;
+public class Student {
+    private int id;
+    private String name;
+    private String course;
+    private double marks;
+    public Student() {  }
+    public Student(int id, String name, String course, double marks) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+        this.marks = marks;
+    }
+    public int getId() { return id;  }
+    public void setId(int id) { this.id = id;  }
+    public String getName() {  return name;  }
+    public void setName(String name) {  this.name = name;  }
+    public String getCourse() { return course;   }
+    public void setCourse(String course) {  this.course = course;  }
+    public double getMarks() {  return marks; }
+    public void setMarks(double marks) {  this.marks = marks;  }
+    @Override
+    public String toString() {
+        return "Student [id=" + id + ", name=" + name + ", course=" + course + ", marks=" + marks + "]";
+    }
+}
+
+
+
+
+
+package com.springboot.controller;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import com.springboot.model.Student;
+@RestController
+public class StudentController {
+    List<Student> students = new ArrayList<>();
+    public StudentController() {
+        students.add(new Student(101, "Rahul", "Java", 90));
+        students.add(new Student(102, "Amit", "Python", 85));
+    }
+    // CREATE
+    @GetMapping("/add/{id}/{name}/{course}/{marks}")
+    public String addStudent(@PathVariable int id, @PathVariable String name, @PathVariable String course, @PathVariable double marks) {
+        students.add(new Student(id, name, course, marks));
+        return "Student Added Successfully";
+    }
+    // READ ALL
+    @GetMapping("/students")
+    public List<Student> getStudents() {
+        return students;
+    }
+    // READ BY ID
+    @GetMapping("/student/{id}")
+    public Student getStudent(@PathVariable int id) {
+        for(Student s : students) {
+            if(s.getId()==id)
+                return s;
+        }
+        return null;
+    }
+    // UPDATE
+    @GetMapping("/update/{id}/{name}/{course}/{marks}")
+    public String updateStudent(@PathVariable int id, @PathVariable String name, @PathVariable String course, @PathVariable double marks) {
+        for(Student s : students) {
+            if(s.getId()==id) {
+                s.setName(name);
+                s.setCourse(course);
+                s.setMarks(marks);
+                return "Student Updated Successfully";
+            }
+        }
+        return "Student Not Found";
+    }
+    // DELETE
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        Student temp = null;
+        for(Student s : students) {
+            if(s.getId()==id) {
+                temp = s;
+            }
+        }
+        if(temp != null) {
+            students.remove(temp);
+            return "Student Deleted Successfully";
+        }
+        return "Student Not Found";
+    }
+}
+
+
+
+
+
+
+Read All Students
+http://localhost:8080/students
+[{"id":101,"name":"Rahul","course":"Java","marks":90.0},{"id":102,"name":"Amit","course":"Python","marks":85.0}]
+Read Student by ID
+http://localhost:8080/student/101
+{"id":101,"name":"Rahul","course":"Java","marks":90.0}
+
+
+
+
+Add Student
+http://localhost:8080/add/103/Priya/SpringBoot/95
+Output
+Student Added Successfully
+Now check
+http://localhost:8080/students
+
+
+
+Update Student
+http://localhost:8080/update/103/Priya/React/99
+Output
+Student Updated Successfully
+Verify using
+http://localhost:8080/student/103
+
+
+
+Delete Student
+http://localhost:8080/delete/103
+Output
+Student Deleted Successfully
+Verify again:
+http://localhost:8080/students
+Student 103 will no longer appear.
+
+
+
+
 
 
 
