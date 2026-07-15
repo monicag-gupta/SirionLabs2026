@@ -801,6 +801,27 @@ Student 103 will no longer appear.
 
 
 
+CRUD Summary:
+
+This example intentionally uses GET requests for all operations because it is designed for learning path variables and testing directly from a browser. 
+In real RESTful applications, the recommended HTTP methods are:
+POST → Create 
+GET → Read 
+PUT → Update 
+DELETE → Delete 
+Using the appropriate HTTP methods is the standard practice for production applications.
+
+
+
+
+
+Exercise:
+
+Using JDBC design the Crud operation for student table in a database
+
+
+
+
 
 
 
