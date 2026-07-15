@@ -416,6 +416,12 @@ public class StudController {
 
 
 
+Run as Maven build (goal : clean install spring-boot:run)
+
+open browser :
+http://localhost:8080/stud?name=Rahul%20Sharma&email=rahul@gmail.com&age=22&course=Java
+
+http://localhost:8080/stud?name=A&email=abc&age=15&course=
 
 
 
