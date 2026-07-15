@@ -53,6 +53,46 @@ Add Dependency in pom.xml for Swagger:
 </dependency>
 
 
+A Data Transfer Object (DTO) is an object used to encapsulate and 
+transmit data between different layers or processes of an application
+
+A service class in Spring Boot houses your core business logic and acts 
+as an intermediary layer between the controller (API endpoints) and the 
+repository (database operations)
+
+
+
+EmployeeCRUD
+|
+src/main/java
+|
+com.demo
+|
+├── EmployeeCrudApplication.java
+├── controller
+│ EmployeeController.java
+│
+├── dto
+│ EmployeeDTO.java
+│
+├── model
+│ Employee.java
+│
+├── service
+│ EmployeeService.java
+│
+└── exception
+EmployeeNotFoundException.java
+
+
+
+
+
+
+
+
+
+
 
 
 
