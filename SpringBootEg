@@ -72,6 +72,17 @@ Enables Spring Boot Auto Configuration.
 Scans the package for Spring components.
 
 
+Create Controller Package
+com.springboot.controller
+Create HelloController.java in it
+
+
+
+
+
+
+
+
 
 
 
