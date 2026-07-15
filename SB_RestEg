@@ -187,6 +187,158 @@ public class EmployeeDTO {
 
 
 
+package com.demo.exception;
+
+public class EmployeeNotFoundException extends RuntimeException {
+
+    public EmployeeNotFoundException(String message) {
+        super(message);
+    }
+
+}
+
+
+
+
+
+
+package com.demo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.demo.dto.EmployeeDTO;
+import com.demo.exception.EmployeeNotFoundException;
+import com.demo.model.Employee;
+
+@Service
+public class EmployeeService {
+
+    List<Employee> employees = new ArrayList<>();
+
+    public EmployeeService() {
+
+        employees.add(new Employee(101, "John", 50000));
+        employees.add(new Employee(102, "Mary", 70000));
+        employees.add(new Employee(103, "David", 65000));
+
+    }
+
+    // DTO -> Entity
+    private Employee convertToEntity(EmployeeDTO dto) {
+
+        return new Employee(dto.getId(),
+                dto.getName(),
+                dto.getSalary());
+
+    }
+
+    // Entity -> DTO
+    private EmployeeDTO convertToDTO(Employee emp) {
+
+        return new EmployeeDTO(emp.getId(),
+                emp.getName(),
+                emp.getSalary());
+
+    }
+
+    // Get All
+
+    public List<EmployeeDTO> getAllEmployees() {
+
+        List<EmployeeDTO> list = new ArrayList<>();
+
+        for (Employee emp : employees) {
+
+            list.add(convertToDTO(emp));
+
+        }
+
+        return list;
+
+    }
+
+    // Get By Id
+
+    public EmployeeDTO getEmployee(int id) {
+
+        for (Employee emp : employees) {
+
+            if (emp.getId() == id) {
+
+                return convertToDTO(emp);
+
+            }
+
+        }
+
+        throw new EmployeeNotFoundException("Employee Not Found");
+
+    }
+
+    // Add
+
+    public EmployeeDTO addEmployee(EmployeeDTO dto) {
+
+        Employee emp = convertToEntity(dto);
+
+        employees.add(emp);
+
+        return dto;
+
+    }
+
+    // Update
+
+    public EmployeeDTO updateEmployee(int id, EmployeeDTO dto) {
+
+        for (Employee emp : employees) {
+
+            if (emp.getId() == id) {
+
+                emp.setName(dto.getName());
+                emp.setSalary(dto.getSalary());
+
+                return convertToDTO(emp);
+
+            }
+
+        }
+
+        throw new EmployeeNotFoundException("Employee Not Found");
+
+    }
+
+    // Delete
+
+    public String deleteEmployee(int id) {
+
+        Employee emp = employees.stream()
+                .filter(e -> e.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new EmployeeNotFoundException("Employee Not Found"));
+
+        employees.remove(emp);
+
+        return "Employee Deleted";
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
