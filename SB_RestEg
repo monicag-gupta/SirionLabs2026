@@ -11,3 +11,49 @@ Chaining Methods:
 .headers(HttpHeaders headers): Sets custom headers for the response.
 .build(): Builds the ResponseEntity.
 
+
+
+
+Test Scenarios:
+
+Verify HTTP Methods: Test each endpoint with appropriate HTTP methods (GET, POST, PUT, DELETE, etc.).
+Verify Request Parameters: Test endpoints that expect query parameters or path variables.
+Verify Headers: Test endpoints that require specific headers (e.g., authentication tokens).
+Verify Response Codes: Ensure endpoints return correct HTTP status codes (200 OK, 404 Not Found, 400 Bad Request, etc.).
+Verify Response Payloads: Validate the structure and content of JSON or XML responses returned by endpoints.
+Verify Error Handling: Test how endpoints handle invalid requests or errors (4xx and 5xx responses).
+
+
+
+
+Create Project
+Create a Spring Starter Project
+Artifact Id: EmployeeCRUD
+Name: EmployeeCRUD
+Group Id: com.demo
+Package: com.demo
+Jar
+Jdk 21
+Maven
+
+Add Dependencies
+Spring Web
+Spring Boot DevTools
+
+
+
+
+
+Add Dependency in pom.xml for Swagger:
+
+<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    <version>2.8.9</version>
+</dependency>
+
+
+
+
+
+
