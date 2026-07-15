@@ -347,6 +347,15 @@ Date must be in the future
 
 
 
+Edit pom.xml, add dependency
+Add Stud.java in model
+Add StudController.java in controller
+
+
+
+
+
+
 
 
 
