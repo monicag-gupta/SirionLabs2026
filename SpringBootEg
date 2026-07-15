@@ -118,6 +118,17 @@ clean install spring-boot:run
 
 
 
+How Spring Boot Works Internally
+main() ->
+SpringApplication.run() ->
+Create Spring Container ->
+Auto Configuration ->
+Component Scan ->
+Create Beans ->
+Start Embedded Tomcat ->
+Ready to Accept Requests
+
+
 
 
 
