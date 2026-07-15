@@ -54,6 +54,15 @@ Wait till the downloads are done
 
 
 
+It automatically includes:
+Spring MVC 
+Embedded Tomcat 
+Jackson 
+Validation 
+Spring Core
+
+
+
 
 
 
