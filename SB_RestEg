@@ -333,6 +333,71 @@ public class EmployeeService {
 
 
 
+package com.demo.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import com.demo.dto.EmployeeDTO;
+import com.demo.service.EmployeeService;
+
+@RestController
+@RequestMapping("/employees")
+public class EmployeeController {
+
+    @Autowired
+    EmployeeService service;
+
+    @GetMapping
+    public List<EmployeeDTO> getAllEmployees() {
+
+        return service.getAllEmployees();
+
+    }
+
+    @GetMapping("/{id}")
+    public EmployeeDTO getEmployee(@PathVariable int id) {
+
+        return service.getEmployee(id);
+
+    }
+
+    @PostMapping
+    public EmployeeDTO addEmployee(@RequestBody EmployeeDTO dto) {
+
+        return service.addEmployee(dto);
+
+    }
+
+    @PutMapping("/{id}")
+    public EmployeeDTO updateEmployee(@PathVariable int id,
+                                      @RequestBody EmployeeDTO dto) {
+
+        return service.updateEmployee(id, dto);
+
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteEmployee(@PathVariable int id) {
+
+        return service.deleteEmployee(id);
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
