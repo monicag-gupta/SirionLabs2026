@@ -426,4 +426,64 @@ http://localhost:8080/stud?name=A&email=abc&age=15&course=
 
 
 
+____________________________________________
+
+
+Endpoint
+Purpose
+/actuator
+Lists available endpoints
+/actuator/health
+Application health
+/actuator/info
+Application information
+/actuator/beans
+Spring beans
+/actuator/env
+Environment properties
+/actuator/metrics
+Performance metrics
+/actuator/mappings
+URL mappings
+/actuator/loggers
+Logging configuration
+
+
+
+
+Benefits
+Health monitoring 
+Performance metrics 
+Environment inspection 
+Bean information 
+Application diagnostics 
+Production monitoring
+Spring Boot Actuator is a production-ready module that exposes endpoints for monitoring and managing an application, including health checks, metrics, environment details, bean information, and request mappings.
+
+
+
+
+
+
+Modify pom.xml and add dependency:
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-actuator</artifactId>
+	</dependency>
+Modify application.properties and add:
+		management.endpoints.web.exposure.include=*
+		management.endpoint.health.show-details=always
+And then Run the application
+Maven clean
+Maven install
+Spring boot run
+Then in URL check the actuator output
+
+
+
+
+
+
+
+
 
