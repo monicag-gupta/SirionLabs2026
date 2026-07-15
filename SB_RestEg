@@ -391,6 +391,17 @@ public class EmployeeController {
 
 
 
+maven clean
+maven install
+spring-boot:run
+
+For Swagger:
+
+Open browser:
+http://localhost:8080/swagger-ui/index.html
+
+
+
 
 
 
