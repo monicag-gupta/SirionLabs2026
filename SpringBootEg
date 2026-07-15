@@ -114,7 +114,7 @@ server.port=8080
 
 
 
-
+clean install spring-boot:run
 
 
 
