@@ -432,4 +432,15 @@ Login Form submits to a controller, which checks the credentials from a DB and r
 
 
 
+______________________________________
+
+
+Create Package
+com.springmvc.interceptor
+Create LoggingInterceptor.java in the package
+Modify WebConfig.java to Register the Interceptor
+
+
+
+
 
