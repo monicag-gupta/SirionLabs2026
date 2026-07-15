@@ -776,6 +776,114 @@ _____________________________________________________________
 Session Management
 
 
+Example:
+Modify the earlier Project
+
+Modify LoginController.java to add /logout
+session.invalidate(); 
+The session is destroyed.
+
+Modify .jsp pages to add logout href
+
+Post the session is destroyed:
+User tries to open:
+http://localhost:8080/HelloSpringMVC/admissionForm.html
+The interceptor checks:
+session.getAttribute("username")
+It returns null, so the user is redirected back to the login page.
+
+
+
+
+
+LoginController.java
+
+package com.springmvc.controller;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+@Controller
+public class LoginController {
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";    }
+    @PostMapping("/login")
+    public String login(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session) {
+        if (username.equals("admin") && password.equals("123")) {
+            session.setAttribute("loggedIn", true);
+            return "redirect:/admissionForm.html";
+        }
+        return "login";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
+}
+
+
+
+
+
+
+
+
+
+AdmissionSuccess.jsp
+
+<html>
+<body>
+	<h1>Congratulations!! the Company has processed your Application form successfully</h1>
+
+	<h2>${msg}</h2>
+	
+	<h3>
+		<a href="admissionForm.html"> Back to Admission Form</a>
+		<br><br>
+		<a href="logout">Logout</a>	
+	</h3>
+	
+</body>
+</html>
+
+
+
+
+
+
+AdmissionForm.jsp
+
+<html>
+<body>
+	<h1>FORM FOR COMPANY</h1>
+	<form action="submitAdmissionForm.html" method="post">
+		<p>
+			Candidate's Name : <input type="text" name="candidateName" />
+		</p>
+		<p>
+			Candidate's Hobby : <input type="text" name="candidateHobby" />
+		</p>
+		<input type="submit" value="Submit this form by clicking here" />
+	</form>
+	<br><br>
+	<a href="logout">Logout</a>	
+</body>
+</html>
+
+
+
+
+
+Run on server
+
+
+
+_________________________________
+
+Exercise
+
+Login username and password for the previous example is to be checked from the MySQL database using JDBC methodology.
 
 
 
