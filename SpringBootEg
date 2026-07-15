@@ -316,6 +316,39 @@ SB Validation:
 
 
 
+Annotation
+Purpose
+@NotNull
+Value must not be null
+@NotBlank
+Text must not be blank
+@NotEmpty
+Collection or string must not be empty
+@Size
+String/Collection length limits
+@Min
+Minimum numeric value
+@Max
+Maximum numeric value
+@Positive
+Positive number only
+@Negative
+Negative number only
+@Email
+Valid email address
+@Pattern
+Match a regular expression
+@Past
+Date must be in the past
+@Future
+Date must be in the future
+
+
+
+
+
+
+
 
 
 
