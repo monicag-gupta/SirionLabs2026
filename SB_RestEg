@@ -552,6 +552,18 @@ Response
 
 
 
+Exercise :
+
+Once this basic CRUD works, add more production-oriented features:
+Use ResponseEntity<T> to return appropriate HTTP status codes (200 OK, 201 Created, 204 No Content, 404 Not Found). 
+Add validation with spring-boot-starter-validation using annotations such as @NotBlank, @Positive, and @Min. 
+
+
+
+
+
+
+
 
 
 
