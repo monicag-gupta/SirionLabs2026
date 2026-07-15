@@ -6,3 +6,36 @@ There are four layers in Spring Boot are as follows:
   Business Layer
   Persistence Layer
   Database Layer
+
+
+
+Profiles allow different configurations for different environments such as:
+Development 
+Testing 
+Production 
+Each profile can have its own database, logging level, and server settings.
+Configuration Files
+application.properties
+application-dev.properties
+application-test.properties
+application-prod.properties
+Example
+spring.profiles.active=dev
+When the active profile is dev, Spring Boot loads:
+application-dev.properties
+Benefits
+Separate configurations for each environment 
+Easier deployment 
+Better security 
+Cleaner configuration management
+
+
+
+
+
+
+
+
+
+
+
