@@ -33,6 +33,24 @@ Cleaner configuration management
 
 
 
+Create a new project -> Spring Starter Project
+Project Details:
+Name : HelloSpringBoot
+Type : Maven
+Packaging : Jar
+Java Version : 21
+Group : com.springboot
+Artifact Id : HelloSpringBoot
+Package : com.springboot
+Next
+Select Dependencies
+Spring Web
+Finish
+Wait till the downloads are done
+
+
+
+
 
 
 
