@@ -559,6 +559,98 @@ Shows
 
 
 
+CPU Usage
+http://localhost:8080/actuator/metrics/system.cpu.usage
+Shows current CPU utilization.
+
+{"availableTags":[],"description":"The \"recent cpu usage\" of the system the application is running in","measurements":[{"statistic":"VALUE","value":0.0}],"name":"system.cpu.usage"}
+
+
+
+
+
+HTTP Requests
+http://localhost:8080/actuator/metrics/http.server.requests
+Shows
+Total Requests 
+GET Requests 
+POST Requests 
+Average Response Time
+
+
+
+
+Request Mappings
+http://localhost:8080/actuator/mappings
+Lists every endpoint.
+Example
+/ /student /hello /login
+
+
+
+
+
+Enable in application.properties:
+	management.endpoint.shutdown.enabled=true
+	management.endpoints.web.exposure.include=*
+Then send a POST request to:
+http://localhost:8080/actuator/shutdown
+The application shuts down gracefully.
+
+
+
+
+
+URL
+Purpose
+http://localhost:8080/actuator
+Lists all available Actuator endpoints
+http://localhost:8080/actuator/health
+Application health status
+http://localhost:8080/actuator/info
+Application information
+http://localhost:8080/actuator/beans
+Lists all Spring beans
+http://localhost:8080/actuator/env
+Environment properties and variables
+http://localhost:8080/actuator/configprops
+Configuration properties
+http://localhost:8080/actuator/mappings
+All request mappings
+http://localhost:8080/actuator/metrics
+Available metrics
+http://localhost:8080/actuator/metrics/jvm.memory.used
+JVM memory usage
+http://localhost:8080/actuator/metrics/system.cpu.usage
+CPU usage
+http://localhost:8080/actuator/metrics/http.server.requests
+HTTP request statistics
+http://localhost:8080/actuator/loggers
+Logging configuration
+http://localhost:8080/actuator/loggers/root
+Root logger details
+http://localhost:8080/actuator/conditions
+Auto-configuration report
+http://localhost:8080/actuator/startup
+Application startup details
+http://localhost:8080/actuator/scheduledtasks
+Scheduled tasks
+http://localhost:8080/actuator/threaddump
+JVM thread dump
+http://localhost:8080/actuator/heapdump
+JVM heap dump
+POST http://localhost:8080/actuator/shutdown
+Gracefully stop the application (must be enabled)
+
+
+
+
+___________________________________________
+
+
+
+
+
 
 
 
