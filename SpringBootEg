@@ -130,6 +130,39 @@ Ready to Accept Requests
 
 
 
+Configuration Properties allow you to read values from application.properties or application.yml and inject them into Java classes. This keeps configuration separate from the application code.
+Spring Boot provides:
+@Value (for single values) 
+@ConfigurationProperties (for groups of related properties)
+
+
+Without Configuration Properties
+String dbUser="root";String dbPassword="root";String url="jdbc:mysql://localhost:3306/javadb";
+Problems:
+Hardcoded values 
+Difficult to change 
+Different code for Dev/Testing/Production 
+With Configuration Properties
+spring.datasource.url=jdbc:mysql://localhost:3306/javadbspring.datasource.username=rootspring.datasource.password=root
+Simply modify the properties file.
+No Java code changes.
+
+
+
+
+Modify application.properties
+
+Create a package model in com.springboot
+Create a class StudentProperties.java in com.springboot.model package
+
+Create a Controller StudentController.java in controller package
+
+
+
+
+
+
+
 
 
 
