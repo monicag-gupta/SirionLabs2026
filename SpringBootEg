@@ -599,6 +599,15 @@ The application shuts down gracefully.
 
 
 
+# Grant permitted access level to the shutdown endpoint
+management.endpoint.shutdown.access=unrestricted
+
+
+
+
+
+
+
 
 
 URL
