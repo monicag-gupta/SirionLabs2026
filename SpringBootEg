@@ -108,6 +108,9 @@ Unlike @Controller, it does not require JSP pages.
 
 
 
+application.properties
+Leave it empty or specify a custom port.
+server.port=8080
 
 
 
