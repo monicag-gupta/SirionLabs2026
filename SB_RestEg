@@ -401,6 +401,128 @@ Open browser:
 http://localhost:8080/swagger-ui/index.html
 
 
+http://localhost:8080/swagger-ui/index.html
+
+You will see the available endpoints:
+GET     /employees
+GET     /employees/{id}
+POST    /employees
+PUT     /employees/{id}
+DELETE  /employees/{id}
+
+
+
+
+Post:
+
+Request Body
+
+{
+  "id":104,
+  "name":"Rahul",
+  "salary":85000
+}
+
+Response output expected:
+
+{
+  "id":104,
+  "name":"Rahul",
+  "salary":85000
+}
+
+
+
+
+
+Test GET:
+
+GET
+/employees
+Response
+[
+  {
+    "id":101,
+    "name":"John",
+    "salary":50000
+  },
+  {
+    "id":102,
+    "name":"Mary",
+    "salary":70000
+  },
+  {
+    "id":103,
+    "name":"David",
+    "salary":65000
+  },
+  {
+    "id":104,
+    "name":"Rahul",
+    "salary":85000
+  }
+]
+
+
+
+
+
+
+
+Test PUT:
+
+PUT
+
+/employees/104
+
+Request Body
+
+{
+  "id":104,
+  "name":"Rahul Sharma",
+  "salary":95000
+}
+
+Response expected:
+
+{
+  "id":104,
+  "name":"Rahul Sharma",
+  "salary":95000
+}
+
+
+
+
+
+Test DELETE:
+
+DELETE
+
+/employees/104
+
+Response
+
+Employee Deleted
+
+
+
+
+Test GET by ID
+
+GET
+
+/employees/101
+
+Response
+
+{
+  "id":101,
+  "name":"John",
+  "salary":50000
+}
+
+
 
 
 
