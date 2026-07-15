@@ -479,6 +479,85 @@ Maven install
 Spring boot run
 Then in URL check the actuator output
 
+http://localhost:8080/actuator
+http://localhost:8080/actuator/health
+
+
+
+Add to application.properties
+	info.app.name=Student Management System
+	info.app.version=1.0
+	info.app.developer=Monica
+
+	management.info.env.enabled=true
+
+Re run as Spring boot App
+Now open
+http://localhost:8080/actuator/info
+Output:
+{"app":{"name":"Student Management System","version":"1.0","developer":"Monica"}}
+
+
+
+
+
+Lists every Spring Bean.
+http://localhost:8080/actuator/beans
+Shows
+Controllers 
+Services 
+Repositories 
+Auto-configured beans 
+DispatcherServlet 
+ViewResolver 
+Usually thousands of lines.
+
+
+
+http://localhost:8080/actuator/beans
+
+
+
+Environment Variables
+http://localhost:8080/actuator/env
+
+Shows
+Java Version 
+OS 
+Environment Variables 
+application.properties 
+JVM Properties 
+
+
+
+
+Metrics
+http://localhost:8080/actuator/metrics
+Output
+jvm.memory.used
+jvm.gc.memory
+process.cpu.usage
+system.cpu.usage
+http.server.request
+disk.free
+disk.total
+
+
+
+
+JVM Memory
+http://localhost:8080/actuator/metrics/jvm.memory.used
+Shows
+{
+	"name":"jvm.memory.used",
+	"measurements":[
+		{
+			"value":51245678
+		}
+	]
+}
+
+
 
 
 
