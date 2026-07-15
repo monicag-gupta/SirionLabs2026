@@ -305,6 +305,18 @@ Modify Java Code -> Save File -> Application Restarts Automatically
 
 
 
+____________________
+
+SB Validation:
+
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-validation</artifactId>
+</dependency>
+
+
+
+
 
 
 
