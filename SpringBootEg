@@ -387,7 +387,31 @@ public class Stud {
 
 
 
+StudController.java:
 
+package com.springboot.controller;
+import com.springboot.model.Stud;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+@RestController
+public class StudController {
+    @GetMapping("/stud")
+    public String registerStudent(@Valid @ModelAttribute Stud stud, BindingResult result) {
+        if (result.hasErrors()) {
+            StringBuilder errors = new StringBuilder();
+            result.getAllErrors().forEach(error ->
+                    errors.append(error.getDefaultMessage())
+                          .append("<br>"));
+            return errors.toString();
+        }
+        return "Student Registered Successfully"
+                + "<br><br>Name : " + stud.getName()
+                + "<br>Email : " + stud.getEmail()
+                + "<br>Age : " + stud.getAge()
+                + "<br>Course : " + stud.getCourse();
+    }
+}
 
 
 
