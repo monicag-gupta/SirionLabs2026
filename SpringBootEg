@@ -160,6 +160,23 @@ Create a Controller StudentController.java in controller package
 
 
 
+application.properties:
+
+
+spring.application.name=HelloSpringBoot
+
+server.port=8080
+
+college.name=ABC Engineering College
+college.city=Delhi
+college.established=1995
+
+student.name=Rahul Sharma
+student.course=Java Full Stack
+student.age=22
+
+
+
 
 
 
