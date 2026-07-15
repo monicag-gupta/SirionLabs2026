@@ -217,6 +217,33 @@ You never write this code.
 
 
 
+StudentController.java
+
+
+package com.springboot.controller;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+@RestController
+public class StudentController {
+    @Value("${college.name}")
+    private String collegeName;
+
+    @Value("${college.city}")
+    private String city;
+
+    @Value("${college.established}")
+    private int year;
+
+    @GetMapping("/college")
+    public String collegeInfo() {
+        return "College : " + collegeName + "<br>City : "
+                + city  + "<br>Established : " + year;
+    }
+}
+
+
+
 
 
 
