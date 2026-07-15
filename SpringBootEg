@@ -221,11 +221,17 @@ StudentController.java
 
 
 package com.springboot.controller;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.springboot.model.StudentProperties;
 @RestController
 public class StudentController {
+	@Autowired
+	StudentProperties std;
+	
     @Value("${college.name}")
     private String collegeName;
 
@@ -240,7 +246,12 @@ public class StudentController {
         return "College : " + collegeName + "<br>City : "
                 + city  + "<br>Established : " + year;
     }
+    @GetMapping("/student")
+    public StudentProperties studentInfo() {
+        return std;
+    }
 }
+
 
 
 
@@ -254,6 +265,11 @@ and injects it into
 
 
 
+
+
+Run as Spring Boot App:
+http://localhost:8080/college
+http://localhost:8080/student
 
 
 
