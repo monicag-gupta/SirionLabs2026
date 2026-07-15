@@ -207,6 +207,20 @@ public class StudentProperties {
 
 
 
+Spring automatically performs
+StudentProperties student = new StudentProperties();
+student.setName("Rahul Sharma");
+student.setCourse("Java Full Stack");
+student.setAge(22);
+You never write this code.
+
+
+
+
+
+
+
+
 
 
 
