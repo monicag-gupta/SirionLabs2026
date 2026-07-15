@@ -97,6 +97,20 @@ public class HelloController {
 
 
 
+Understanding @RestController:
+
+@RestController tells Spring Boot that:
+This class handles HTTP requests. 
+The returned value is written directly to the HTTP response body. 
+
+Unlike @Controller, it does not require JSP pages.
+
+
+
+
+
+
+
 
 
 
