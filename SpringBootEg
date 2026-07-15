@@ -62,6 +62,18 @@ Validation
 Spring Core
 
 
+Understanding @SpringBootApplication:
+This single annotation combines three annotations:
+@Configuration
+Marks the class as a configuration class.
+@EnableAutoConfiguration
+Enables Spring Boot Auto Configuration.
+@ComponentScan
+Scans the package for Spring components.
+
+
+
+
 
 
 
