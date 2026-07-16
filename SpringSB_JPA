@@ -879,6 +879,12 @@ INSERT INTO employeetbl (name, department, designation, salary, joining_date) VA
 
 
 
+Project name: EmployeeManager
+Package name: com.employee
+Dependencies:
+Spring Web
+Spring Data JPA
+MySQL Driver
 
 
 
