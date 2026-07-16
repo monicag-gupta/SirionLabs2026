@@ -115,3 +115,106 @@ Executed whenever called: Object
 Executed whenever called: Classname
 Executed whenever called: Classname
 
+
+
+
+
+
+
+package srcPkg;
+
+public class MathFns {
+	public static int square(int x) {
+		return x*x;
+	}
+	public static int cube(int x) {
+		return x*x*x;
+	}
+	public static int max(int[] nos) {
+		int m=0;
+		for(int a : nos) {
+			if(m<a) {
+				m=a;
+			}
+		}
+		return m;
+	}
+
+}
+
+
+
+
+
+package pkg1;
+
+import srcPkg.MathFns;
+
+interface tests{
+	void test();
+}
+
+public class Main {
+	static {
+		System.out.println("Only Once : Before All Tests");
+	}
+	
+	public static void initB4EachTest() {
+		System.out.println("Test Begins");
+	}
+	
+	public static void cleanAfterEachTest() {
+		System.out.println("Test ends");
+	}
+	
+	public void TestCaseSquare() {
+		if(MathFns.square(2) == 4) {
+			System.out.println("Test Succedded");
+			
+		}
+		else
+			System.err.println("Test Failed");
+	}
+	public void TestCaseMax() {
+		if(MathFns.max(new int[] {0,1,8,4}) == 8) {
+			System.out.println("Test Succedded");
+			
+		}
+		else
+			System.err.println("Test Failed");
+	}
+	public void TestCaseMaxNeg() {
+		if(MathFns.max(new int[] {-2,-9,-8,-4}) == -2) {
+			System.out.println("Test Succedded");
+			
+		}
+		else
+			System.err.println("Test Failed");
+	}
+	
+	public static void runTest(tests t) {
+		initB4EachTest();
+		t.test();
+		cleanAfterEachTest();
+	}
+	public static void AfterAllTests() {
+		System.out.println("Cleanup post all tests");
+	}
+	public static void main(String[] args) {
+//		System.out.println("Main called");
+
+		runTest(new Main() :: TestCaseMax);
+		runTest(new Main() :: TestCaseSquare);
+		runTest(new Main() :: TestCaseMaxNeg);
+		
+		
+		AfterAllTests();
+
+	}
+
+}
+
+
+
+
+
