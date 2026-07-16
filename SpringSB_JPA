@@ -516,6 +516,17 @@ Spring Boot DevTools (Optional)
 
 
 
+│   └───com.example.demo
+│                 RestCrudsbMySqlApplication.java
+│               ├───com.example.demo.controller
+│                     EmpController.java
+│               └───com.example.demo.model
+│                       Emp.java
+│                       EmpDAO.java
+├───resources
+│        application.properties
+└───static (inside resources)
+        index.html
 
 
 
