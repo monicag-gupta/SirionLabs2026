@@ -1,1 +1,35 @@
+Spring Core with JPA
+
+Create a simple project (without archetype)
+Artifact ID: SpringCoreJPAProject
+Name: SpringCoreJPAProject
+Group ID: com.example
+Packaging : jar
+
+In MySQL:
+
+-- CREATE DATABASE javadb;
+USE javadb;
+drop table if exists student;
+CREATE TABLE student (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    course VARCHAR(100) NOT NULL,
+    marks DOUBLE NOT NULL
+);
+INSERT INTO student(name, course, marks)
+VALUES
+('Rahul', 'Java', 85.5),
+('Priya', 'Spring', 91.0),
+('Amit', 'Hibernate', 78.5),
+('Neha', 'JPA', 88.0),
+('Vikas', 'MySQL', 82.0);
+
+select * from student;
+
+
+
+
+
+
 
