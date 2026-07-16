@@ -101,3 +101,17 @@ public class Main {
 }
 
 
+
+Output:
+
+Main called
+static Initializer:Once for Main1 per JVM. Called when Class name is mentioned 1st time
+Initializers : Executed before Constructor 4 each obj
+Constructor 4 each obj
+Executed whenever called: Object
+Initializers : Executed before Constructor 4 each obj
+Constructor 4 each obj
+Executed whenever called: Object
+Executed whenever called: Classname
+Executed whenever called: Classname
+
