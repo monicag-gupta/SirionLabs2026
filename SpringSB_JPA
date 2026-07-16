@@ -502,7 +502,9 @@ __________________________________________________________________
 
 
 SpringBoot starter Project:
-Artifact : RestCRUDSBMySQL
+Artifact/Name : RestCRUDSBMySQL
+Package /GroupID: com.example.demo
+
 
 Next
 Add Dependency:
