@@ -906,6 +906,55 @@ com.employee
 
 
 
+application.properties:
+
+
+# PostgreSQL connection
+spring.datasource.url=jdbc:mysql://localhost:3306/javadb
+spring.datasource.username=root
+spring.datasource.password=root
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Hibernate
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+
+# Server
+server.port=8080
+
+
+
+
+
+
+
+
+Employeetbl.java:
+
+
+
+package com.employee.model;
+
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+public class Employeetbl {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String department;
+    private String designation;
+    private double salary;
+    private LocalDate joiningDate;
+
+    // Getters and setters
+}
+
+
 
 
 
