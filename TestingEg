@@ -50,3 +50,36 @@ public class MathFns {
 
 
 
+
+
+
+
+package pkg1;
+
+public class Main1 {
+	public Main1() {
+		System.out.println("Constructor 4 each obj");
+	}
+	
+	{
+		System.out.println("Initializers : Executed before Constructor 4 each obj");
+	}
+	
+	static {
+		System.out.println("static Initializer:Once for Main1 per JVM. Called when Class name is mentioned 1st time");
+	}
+	
+	public static void staticFn() {
+		System.out.println("Executed whenever called: Classname");
+	}
+	public void instanceFn() {
+		System.out.println("Executed whenever called: Object");
+	}
+	
+
+}
+
+
+
+
+
