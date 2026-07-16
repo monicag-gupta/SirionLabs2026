@@ -242,5 +242,51 @@ So now Pom.xml becomes:
 
 
 
+Dependency
+Purpose
+spring-context
+Spring Core container and dependency injection
+spring-orm
+Integration of Spring with JPA/Hibernate
+spring-jdbc
+JDBC support and DataSource utilities
+spring-tx
+Declarative transaction management
+spring-data-jpa
+JPA repository support
+hibernate-core
+JPA implementation (Hibernate)
+jakarta.persistence-api
+JPA annotations (@Entity, @Id, etc.)
+mysql-connector-j
+MySQL JDBC driver
+slf4j-simple
+Console logging
+
+
+
+Create the package
+com.example.springcorejpa.config
+Create the class SpringConfig.java inside it
+
+
+
+Student Entity
+Package: com.example.springcorejpa.entity
+Class: Student.java
+Repository
+Package: com.example.springcorejpa.repository
+Class: StudentRepository.java
+Service
+Package: com.example.springcorejpa.service
+Class: StudentService.java
+Main Class
+Package: com.example.springcorejpa.main
+Class: App.java
+
+
+
+
+
 
 
