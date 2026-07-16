@@ -889,3 +889,23 @@ MySQL Driver
 
 
 
+
+com.employee
+├── controller
+│   └── EmployeeController.java
+├── service
+│   └── EmployeeService.java
+├── repository
+│   └── EmployeeRepository.java
+├── model
+│   └── Employeetbl.java
+├── EmployeeManagerApplication.java
+
+
+
+
+
+
+
+
+
