@@ -268,4 +268,26 @@ Check the Result.
 
 
 
+package source;
+
+public class MainClass {
+	public static int square(int x) {
+		return x*x;
+	}
+	public static int cube(int x) {
+		return x*x*x;
+	}
+	public static int findMax(int[] nos) {
+		int m=0;
+		for(int a : nos) {
+			if(m<a) {
+				m=a;
+			}
+		}
+		return m;
+	}
+
+}
+
+
 
