@@ -457,6 +457,8 @@ public class StudentService {
 
 
 
+
+
 App.java
 
 package com.example.springcorejpa.main;
@@ -490,5 +492,36 @@ public class App {
         ((AnnotationConfigApplicationContext)context).close();
     }
 }
+
+
+
+
+
+
+__________________________________________________________________
+
+
+SpringBoot starter Project:
+Artifact : RestCRUDSBMySQL
+
+Next
+Add Dependency:
+MySQL Driver
+Spring Web
+Spring Data JPA
+Spring Boot DevTools (Optional)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
