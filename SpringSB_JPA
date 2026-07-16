@@ -1111,7 +1111,7 @@ public class EmployeeController {
 Paginate all records
 	http://localhost:8080/api/employees?page=0&size=5&sort=name
 3. GET /api/employees/filter?
-http://localhost:8080/api/employees?department=Engineering&page=0&size=3
+http://localhost:8080/api/employees/filter?department=Engineering&page=0&size=3
 department=Engineering&page=0&size=3
 
 
