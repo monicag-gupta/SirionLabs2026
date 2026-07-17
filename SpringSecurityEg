@@ -222,7 +222,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;  
 @EnableWebMvc  
 @Configuration  
-@ComponentScan({ "com.springsecure.controller.*" })  
+@ComponentScan({ "com.springsecure.controller" })  
 public class AppConfig {  
     @Bean  
     public InternalResourceViewResolver viewResolver() {  
@@ -233,6 +233,7 @@ public class AppConfig {
         viewResolver.setSuffix(".jsp");  
         return viewResolver;  
     }  	} 
+
 
 
 
