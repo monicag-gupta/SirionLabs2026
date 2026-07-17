@@ -229,5 +229,46 @@ public class JwtService {
 
 
 
+package com.example.jwt.service;
+
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class CustomUserDetailsService implements UserDetailsService {
+
+    private PasswordEncoder encoder=new BCryptPasswordEncoder();
+
+    @Override
+    public UserDetails loadUserByUsername(String username){
+
+        if(username.equals("admin")) {
+
+            return User.builder()
+
+                    .username("admin")
+                    .password(encoder.encode("admin123"))
+                    .roles("ADMIN")
+                    .build();
+        }
+
+        return User.builder()
+
+                .username("user")
+                .password(encoder.encode("user123"))
+                .roles("USER")
+                .build();
+    }
+
+}
+
+
+
+
+
 
 
