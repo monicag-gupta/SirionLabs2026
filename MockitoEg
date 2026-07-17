@@ -170,6 +170,19 @@ this.name = name;
 
 
 
+Package com.sbMockitoprj.repository
+UserRepository
+
+
+
+package com.sbMockitoprj.repository;
+
+import com.sbMockitoprj.model.User;
+
+public interface UserRepository {
+    User findById(int id);
+}
+
 
 
 
