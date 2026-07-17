@@ -319,6 +319,13 @@ public class WebSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .anyRequest().hasRole("ADMIN"))
             .formLogin(Customizer.withDefaults())
+//            .loginPage("/login")
+            .rememberMe()
+            .key("rem")
+            .rememberMeParameter("remember") // it is name of checkbox at login page
+            .rememberMeCookieName("rememberlogin") // it is name of the cookie
+            .tokenValiditySeconds(100) // remember for number of seconds
+            .and()
             .httpBasic(Customizer.withDefaults())
             .logout(logout -> logout
                 .logoutSuccessUrl("/"));
@@ -326,8 +333,6 @@ public class WebSecurityConfig {
         return http.build();
     }
 }
-
-
 
 
 
