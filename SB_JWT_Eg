@@ -75,3 +75,18 @@ Lombok (Optional)
 
 
 
+
+
+application.properties:
+
+spring.application.name=JWTSecurityDemo
+server.port=8080
+jwt.secret=1234567890123456789012345678901234567890123456789012345678901234
+jwt.expiration=3600000
+
+
+
+
+
+
+
