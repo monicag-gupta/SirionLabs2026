@@ -87,15 +87,16 @@ Once seen, then Stop the Application.
 
 package com.hello.controllers;
 
-import com.hello.model.Employee;
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
 import static org.hamcrest.Matchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.jupiter.api.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(TestController.class)
 public class TestControllerTest {
@@ -113,6 +114,8 @@ public class TestControllerTest {
             .andExpect(jsonPath("$.salary", is(3000.0)));
     }
 }
+
+
 
 
 
