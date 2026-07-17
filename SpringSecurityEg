@@ -1,0 +1,18 @@
+Spring Security provides its own set of authentication features. Specifically, Spring Security currently supports authentication integration with all of these technologies:
+HTTP BASIC authentication headers (an IEFT RFC-based standard) (Imp)
+HTTP Digest authentication headers (an IEFT RFC-based standard) (Imp)
+HTTP X.509 client certificate exchange (an IEFT RFC-based standard)
+LDAP (a very common approach to cross-platform authentication needs, especially in large environments)
+Form-based authentication (for simple user interface needs) (Imp)
+OpenID authentication (Imp)
+Authentication based on pre-established request headers (such as Computer Associates Site Reminder)
+JA-SIG Central Authentication Service (otherwise known as CAS, which is a popular open source single sign on system)
+Transparent authentication context propagation for Remote Method Invocation (RMI) and HttpInvoker (a Spring remoting protocol)
+Automatic "remember-me" authentication (so you can tick a box to avoid re-authentication for a predetermined period of time) (Imp)
+Anonymous authentication (allowing every call to automatically assume a particular security identity)
+
+
+
+
+
+
