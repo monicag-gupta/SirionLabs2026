@@ -6,7 +6,8 @@ Features:
 2) JWT authentication
 3) Project Management Reports
 Key areas:
-Project table (pid, pname, duration, pmngr, PLanguage)
+Project tables:
+Project (pid, pname, duration, pmngr, PLanguage)
 Emp(eid, ename)
 Skills(sName, eid)
 Team(eid, pid)
