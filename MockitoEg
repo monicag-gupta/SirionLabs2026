@@ -269,3 +269,12 @@ public class UserServiceTest {
 }
 
 
+
+
+
+Run as Maven->clean, install
+Run the Tests as Junit Tests
+
+
+
+
