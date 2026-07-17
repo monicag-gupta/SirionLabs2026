@@ -1,0 +1,12 @@
+Exercise
+
+Create a SpringBoot JPA project for CRUD operation of Projects for Project Managers.
+Features:
+1) CRUD through Postman
+2) JWT authentication
+3) Project Management Reports
+Key areas:
+Project table (pid, pname, duration, pmngr, PLanguage)
+Emp(eid, ename)
+Skills(sName, eid)
+Team(eid, pid)
