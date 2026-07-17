@@ -1,0 +1,21 @@
+Purpose
+Method
+Create mock
+mock(MyClass.class)
+Stub return
+when().thenReturn()
+Stub void
+doNothing().when() / doThrow().when()
+Argument matchers
+anyInt(), anyString(), eq(val)
+Verify call
+verify(mock).method()
+Verify call count
+verify(mock, times(n)).method()
+No extra interactions
+verifyNoMoreInteractions(mock)
+Spy real object
+spy(realObject)
+Capture args
+ArgumentCaptor<T>
+
