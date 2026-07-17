@@ -389,6 +389,35 @@ public class HomeController {
 
 
 
+_____________________________________
+
+
+package com.springsecure;
+import org.springframework.context.annotation.Bean;  
+import org.springframework.context.annotation.ComponentScan;  
+import org.springframework.context.annotation.Configuration;  
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;  
+import org.springframework.web.servlet.view.InternalResourceViewResolver;  
+import org.springframework.web.servlet.view.JstlView;  
+@EnableWebMvc  
+@Configuration  
+@ComponentScan({ "com.springsecure.controller" })  
+public class AppConfig {  
+    @Bean  
+    public InternalResourceViewResolver viewResolver() {  
+        InternalResourceViewResolver viewResolver  
+                          = new InternalResourceViewResolver();  
+        viewResolver.setViewClass(JstlView.class);  
+        viewResolver.setPrefix("/WEB-INF/views/");  
+        viewResolver.setSuffix(".jsp");  
+        return viewResolver;  
+    }  	} 
+
+
+
+
+
+
 
 
 
@@ -449,6 +478,17 @@ public class WebSecurityConfig {
         return http.build();
     }
 }
+
+
+
+package com.springsecure;
+import org.springframework.security.web.context.*;  
+public class SecurityWebApplicationInitializer  extends AbstractSecurityWebApplicationInitializer {  
+  
+} 
+
+
+
 
 
 
@@ -540,5 +580,95 @@ Welcome Admin! ?
 </body>
 </html>
 
+
+
+
+Pom.xml:
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.springsecure</groupId>
+	<artifactId>SpringSecurityLoginExample</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>SpringSecurityLoginExample</name>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<release>21</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<java.version>21</java.version>
+		<spring.version>6.2.8</spring.version>
+		<spring.security.version>6.5.1</spring.security.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Jakarta Servlet -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.servlet.jsp.jstl</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
+			<version>3.0.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+</project>
 
 
