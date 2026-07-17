@@ -387,3 +387,153 @@ public class HomeController {
 
 
 
+
+
+package com.springsecure;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.Customizer;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig {
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.withUsername("admin")
+                .password(passwordEncoder().encode("java"))
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        http
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().hasRole("ADMIN"))
+            .formLogin(Customizer.withDefaults())
+//            .loginPage("/login")
+            .rememberMe()
+            .key("rem")
+            .rememberMeParameter("remember") // it is name of checkbox at login page
+            .rememberMeCookieName("rememberlogin") // it is name of the cookie
+            .tokenValiditySeconds(100) // remember for number of seconds
+            .and()
+            .httpBasic(Customizer.withDefaults())
+            .logout(logout -> logout
+                .logoutSuccessUrl("/"));
+
+        return http.build();
+    }
+}
+
+
+
+
+
+
+package com.springsecure.controller;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+@Controller
+public class HomeController {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index() {
+        return "admin";
+    }
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login() {
+        return "login";
+    }
+    @RequestMapping(value = "/admin", method = RequestMethod.GET)
+    public String admin() {
+        return "admin";
+    }
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public String logout() {
+        return "index";
+    }
+}
+
+
+
+
+
+
+index.jsp:
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Home Page</title>
+</head>
+<body>
+Goto Login page :
+<a href="login">login</a>
+</body>
+</html>
+
+
+
+
+login.jsp
+
+<%@ taglib    prefix="c"    uri="http://java.sun.com/jsp/jstl/core"%>
+<c:url value="/login" var="loginUrl"/>
+<form action="${loginUrl}" method="post">
+    <c:if test="${param.error != null}">
+        <p>            Invalid username and password.        </p>
+    </c:if>
+    <c:if test="${param.logout != null}">
+        <p>        You have been logged out.     </p>	    </c:if>	    
+<p>        <label for="username">Username</label>
+        <input type="text" id="username" name="username"/>
+    </p>    <p>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"/>
+    </p>    <p>
+        <label for="remember"> Remember me</label>
+        <input type="checkbox" name="remember" />
+    </p>
+    <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+    <button type="submit" class="btn">Log in</button>
+</form>
+
+
+
+
+
+admin.jsp:
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Admin Page</title>
+</head>
+<body>
+Welcome Admin! ?
+<a href="logout">logout</a>
+</body>
+</html>
+
+
+
