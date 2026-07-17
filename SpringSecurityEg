@@ -69,51 +69,144 @@ Add dependencies in pom.xml
 
 
 
- <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>5.2.15.RELEASE</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.2.15.RELEASE</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.2.15.RELEASE</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-config</artifactId>
-            <version>5.2.15.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>4.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-    </dependencies>
+ <properties>
+		<java.version>21</java.version>
+		<spring.version>6.2.8</spring.version>
+		<spring.security.version>6.5.1</spring.security.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Jakarta Servlet -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
 
 
 
+
+
+Pom.xml:
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.springsecure</groupId>
+	<artifactId>SpringSecurityLoginExample</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>SpringSecurityLoginExample</name>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.13.0</version>
+				<configuration>
+					<release>21</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.3</version>
+				<configuration>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<properties>
+		<java.version>21</java.version>
+		<spring.version>6.2.8</spring.version>
+		<spring.security.version>6.5.1</spring.security.version>
+	</properties>
+
+	<dependencies>
+
+		<!-- Spring MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Jakarta Servlet -->
+		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+</project>
 
 
 
@@ -156,15 +249,14 @@ public class MvcWebApplicationInitializer extends
         return new Class[] { WebSecurityConfig.class };  
     }  
     @Override  
-    protected Class<?>[] getServletConfigClasses() {  
- 		return null;  
-    }  
-    @Override  
     protected String[] getServletMappings() {  
         return new String[] { "/" };  
     }  
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class[] { AppConfig.class };
+    }
 } 
-
 
 
 
@@ -173,6 +265,7 @@ import org.springframework.security.web.context.*;
 public class SecurityWebApplicationInitializer  extends AbstractSecurityWebApplicationInitializer {  
   
 } 
+
 
 
 
@@ -185,29 +278,53 @@ Add a ContextLoaderListener that loads the WebSecurityConfig.
 
 
 package com.springsecure;
-import org.springframework.context.annotation.*;   import org.springframework.security.config.annotation.web.builders.HttpSecurity;  	import org.springframework.security.config.annotation.web.configuration.*;  import org.springframework.security.core.userdetails.User;  	import org.springframework.security.core.userdetails.UserDetailsService;  import org.springframework.security.provisioning.InMemoryUserDetailsManager;  	import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;  
-@EnableWebSecurity  
-@ComponentScan("com.springsecure")  
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {  
-      @Bean  
-  public UserDetailsService userDetailsService() {  
-      InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();  
-      manager.createUser(User.withDefaultPasswordEncoder()  
-      .username("admin").password("java").roles("ADMIN").build());  
-      return manager;  	  }  
-      @Override  
-  protected void configure(HttpSecurity http) throws Exception {  
-       http                              
-      .authorizeRequests()  
-          .anyRequest().hasRole("ADMIN")  
-          .and().formLogin().and()  
-      .httpBasic()  
-      .and()  
-      .logout()  
-      .logoutUrl("/j_spring_security_logout")  
-      .logoutSuccessUrl("/")  	      ;  
-  }  	} 
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.config.Customizer;
+
+@Configuration
+@EnableWebSecurity
+public class WebSecurityConfig {
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        UserDetails user = User.withUsername("admin")
+                .password(passwordEncoder().encode("java"))
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user);
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        http
+            .authorizeHttpRequests(auth -> auth
+                .anyRequest().hasRole("ADMIN"))
+            .formLogin(Customizer.withDefaults())
+            .httpBasic(Customizer.withDefaults())
+            .logout(logout -> logout
+                .logoutSuccessUrl("/"));
+
+        return http.build();
+    }
+}
 
 
 
@@ -216,14 +333,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 package com.springsecure.controller;
-import javax.servlet.http.HttpServletRequest;  
-import javax.servlet.http.HttpServletResponse;  
-import org.springframework.security.core.Authentication;  
-import org.springframework.security.core.context.SecurityContextHolder;  
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;  
-import org.springframework.stereotype.Controller;  
-import org.springframework.web.bind.annotation.RequestMapping;  
-import org.springframework.web.bind.annotation.RequestMethod;  
+ 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;  
 @Controller  
 public class HomeController {  
     @RequestMapping(value = "/", method = RequestMethod.GET)  
