@@ -3,3 +3,45 @@ In Mac:
 Open Terminal:
 
 kill -9 $(lsof -t -i:8080)
+
+
+
+
+
+To instantly kill whatever is running on port 8080 on your Mac, open your Terminal and run this one-line command: [1, 2, 3]
+
+kill -9 $(lsof -t -i:8080)
+
+
+If you prefer to see what is running first or want alternative methods, follow the broken-down steps below. 
+Option 1: The Step-by-Step Way (Recommended)
+This method lets you check what application is using the port before you force-close it.
+1.	Find the Process ID (PID): Open Terminal and run the following command:
+
+lsof -i :8080
+
+2.	Identify the PID: Look at the output table. Locate the number listed under the PID column.
+
+3.	Kill the process: Run the kill command by replacing YOUR_PID with that number:
+
+kill -9 YOUR_PID
+
+
+
+Option 2: Using Node/NPX (Easiest for Web Developers)
+If you are a web developer and have Node.js installed, you can use the built-in kill-port package without needing to look up PIDs: [1]
+
+npx kill-port 8080
+
+
+
+Option 3: Troubleshooting Permission Issues
+If you get a permission error or the process refuses to close, elevate your terminal privileges with sudo: 
+
+sudo kill -9 $(sudo lsof -t -i:8080)
+
+(Note: You will be prompted to type your Mac's login password).
+
+
+
+
