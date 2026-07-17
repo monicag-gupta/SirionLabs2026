@@ -10,6 +10,24 @@ JA-SIG Central Authentication Service (otherwise known as CAS, which is a popula
 Transparent authentication context propagation for Remote Method Invocation (RMI) and HttpInvoker (a Spring remoting protocol)
 Automatic "remember-me" authentication (so you can tick a box to avoid re-authentication for a predetermined period of time) (Imp)
 Anonymous authentication (allowing every call to automatically assume a particular security identity)
+Run-as authentication (which is useful if one call should proceed with a different security identity) (Imp)
+Java Authentication and Authorization Service (JAAS) (Imp)
+JEE container authentication (so you can still use Container Managed Authentication if desired)
+Kerberos
+Java Open Source Single Sign On (JOSSO) *
+OpenNMS Network Management Platform *
+AppFuse *
+AndroMDA *
+Mule ESB *
+Direct Web Request (DWR) *
+Grails *
+Tapestry *
+JTrac *
+Jasypt *
+Roller *
+Elastic Path *
+Atlassian Crowd *
+Your own authentication systems
 
 
 
