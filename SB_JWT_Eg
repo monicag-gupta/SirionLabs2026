@@ -1,0 +1,50 @@
+Topic
+Purpose
+JWT Authentication
+Verifies user identity and issues a signed token after login.
+Token Generation
+Creates a JWT containing user identity and claims after successful authentication.
+Token Validation
+Verifies the token's signature, expiration, and claims on every request.
+RBAC
+Restricts access to URLs or resources based on user roles or authorities.
+Method-Level Security
+Protects individual service or controller methods using annotations such as @PreAuthorize.
+CORS
+Allows trusted web applications hosted on different origins to call your REST APIs.
+CSRF
+Protects cookie-based applications from forged requests; commonly disabled for stateless JWT APIs.
+Secure REST APIs
+Combine HTTPS, strong password hashing, short-lived JWTs, refresh tokens, input validation, exception handling, rate limiting, and security headers to build production-ready APIs.
+
+
+
+
+JWT contains three parts
+xxxxx.yyyyy.zzzzz
+Example
+eyJhbGciOiJIUzI1NiIs...
+.
+eyJzdWIiOiJqYXki...
+.
+sdfjksdf98sd7f9s...
+Part 1: Header
+Part 2: Payload
+Part 3: Signature
+
+
+
+
+
+
+Create Spring Starter Project
+Name/ Artifact ID: JWTSecurityDemo
+Package/ Group Id: com.example.jwt
+Jar, Java, Maven, JDK 21
+Dependencies
+Spring Web
+Spring Security
+Validation
+JWT (jjwt) ( to be added as dependency later)
+Lombok (Optional)
+
