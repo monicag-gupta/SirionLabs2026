@@ -71,6 +71,18 @@ public class TestController {
 
 
 
+Run as -> Maven clean, install, SB:run
+Go to localhost:8080/employee
+
+
+{"designation":"manager","empId":"1","name":"emp1","salary":3000.0}
+
+
+
+Once seen, then Stop the Application.
+
+
+
 
 
 
