@@ -90,3 +90,30 @@ jwt.expiration=3600000
 
 
 
+JWTSecurityDemo
+├── src/main/java
+├── com.example.jwt
+│      ├── JwtSecurityDemoApplication.java
+│      ├── config
+│      │      SecurityConfig.java
+│      ├── controller
+│      │      AuthController.java
+│      │      EmployeeController.java
+│      ├── dto
+│      │      LoginRequest.java
+│      │      LoginResponse.java
+│      ├── security
+│      │      JwtAuthenticationFilter.java
+│      │      JwtService.java
+│      └── service
+│             CustomUserDetailsService.java
+└── resources
+       application.properties
+
+
+
+
+
+
+
+
