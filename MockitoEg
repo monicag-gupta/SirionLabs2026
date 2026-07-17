@@ -187,6 +187,32 @@ public interface UserRepository {
 
 
 
+package com.sbMockitoprj.service
+class UserService
+
+
+package com.sbMockitoprj.service;
+
+import org.springframework.stereotype.Service;
+
+import com.sbMockitoprj.model.User;
+import com.sbMockitoprj.repository.UserRepository;
+
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    // Constructor injection
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public String getUserName(int id) {
+        User user = userRepository.findById(id);
+        return (user != null) ? user.getName() : "Unknown";
+    }
+}
 
 
 
