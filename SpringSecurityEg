@@ -47,6 +47,7 @@ com.springsecure.controller package
 HomeController.java
 Add the folder views in WEB-INF. Add index.jsp 
 Convert to Maven
+package/groupID:  com.springsecure
 Add dependencies
 
 
@@ -63,6 +64,10 @@ com.springsecure.controller package
 HomeController.java
 Add the folder views in WEB-INF. Add index.jsp there
 Add dependencies in pom.xml
+
+
+
+
 
 
 
