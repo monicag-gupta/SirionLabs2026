@@ -19,3 +19,123 @@ spy(realObject)
 Capture args
 ArgumentCaptor<T>
 
+
+
+
+
+Mockito Methods list: 
+1. Creating Mocks
+
+MyService mockService = mock(MyService.class);
+Creates a mock object of the specified class/interface.
+
+
+
+Mockito Methods list: 
+
+2. Stubbing Method Calls
+
+1. when(...).thenReturn(...)
+when(mockService.getName()).thenReturn("Alice");
+Specifies that when getName() is called, "Alice" should be returned.
+
+2. when(...).thenThrow(...)
+when(mockService.getData()).thenThrow(new RuntimeException("Error"));
+Throws an exception when the method is called.
+
+3. doReturn(...).when(...)
+Used for stubbing void methods or avoiding early evaluation:
+doReturn("Mocked").when(mockService).getName();
+
+
+3. Stubbing Void Methods
+
+1. doNothing().when(...)
+doNothing().when(mockService).deleteUser(anyInt());
+2. doThrow(...).when(...)
+doThrow(new RuntimeException("Delete error")).when(mockService).deleteUser(anyInt());
+
+
+4. Argument Matchers
+
+Used to match parameters dynamically.
+when(mockService.findUserById(anyInt())).thenReturn(new User(1, "Test"));
+when(mockService.saveUser(any(User.class))).thenReturn(true);
+Common matchers:
+any(), anyInt(), anyString(), eq(value), isNull(), notNull()
+
+
+5. Verifying Interactions
+
+1. verify(...)
+verify(mockService).getName();
+Checks that the method was called.
+
+2. verify(..., times(n))
+verify(mockService, times(2)).getName();
+Verifies the method was called exactly n times.
+
+3. verifyNoMoreInteractions(...)
+verifyNoMoreInteractions(mockService);
+Fails if any other method was called on the mock.
+
+4. verifyZeroInteractions(...) (deprecated, use verifyNoInteractions)
+verifyNoInteractions(mockService);
+
+
+6. Spying on Real Objects
+
+Say,
+List<String> list = new ArrayList<>();
+List<String> spyList = spy(list);
+
+You can stub/verify like this:
+doReturn(100).when(spyList).size();
+verify(spyList).add("item");
+
+
+
+7. Capturing Arguments
+
+Use ArgumentCaptor to capture values passed to mocks:
+ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+verify(mockService).saveData(captor.capture());
+System.out.println(captor.getValue());  // prints the argument
+
+
+8. Resetting Mocks
+
+reset(mockService);
+Clears all interactions and stubs.
+
+
+9. Timeout Verification (for async)
+
+verify(mockService, timeout(100)).loadData();
+
+
+
+
+
+
+Example:
+
+Project Setup (Spring Boot Starter Project)
+
+Open Eclipse → File > New > Spring Starter Project
+Project name/ArtifactID : SBServiceMockitoPrj
+GroupID/package: com.sbMockitoprj
+
+Add the following dependencies:
+Spring Web
+
+
+
+
+
+
+
+
+
+
+
