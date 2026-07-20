@@ -328,6 +328,25 @@ public class MicroserviceOneApplication {
 
 
 
+package com.example.demo.bean;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@FeignClient(name = "microservice-two")
+public interface MicroserviceTwoClient {
+	@GetMapping("/hello")
+	String getHello();
+}
+
+
+
+
+
+
+
+
+
 
 
 
