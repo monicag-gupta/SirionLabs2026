@@ -1187,3 +1187,44 @@ public class AppUser {
 
 
 
+CustomUserDetailsService:
+
+package com.example.securitydemo.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.example.securitydemo.entity.AppUser;
+import com.example.securitydemo.repository.UserRepository;
+
+@Service
+
+public class CustomUserDetailsService implements UserDetailsService
+{
+    @Autowired
+    UserRepository repository;
+
+    @Override
+    public UserDetails loadUserByUsername (String username)
+    throws UsernameNotFoundException
+    {
+        AppUser user= repository.findByUsername(username)
+        		.orElseThrow(()->
+        		new UsernameNotFoundException(username));
+
+        return User.builder()
+        		.username(user.getUsername())
+        		.password(user.getPassword())
+        		.roles(user.getRole()
+        		.replace("ROLE_",""))
+        		.disabled(!user.isEnabled())
+        		.build();
+
+    }
+
+}
+
