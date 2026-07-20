@@ -85,3 +85,18 @@ https://microservices.io/patterns/microservices.html
 
 
 
+
+
+
+Example:
+
+SB Project:
+limits-service
+
+Group: com.example
+Package:
+com.example.demo
+
+
+
+
