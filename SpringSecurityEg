@@ -1026,7 +1026,7 @@ access-denied.html
 
 application.properties
 
-spring.application.name=SpringSecurityMySQL
+spring.application.name=SpringSecurityInMemoryMySQL
 server.port=8080
 spring.datasource.url=jdbc:mysql://localhost:3306/springsecuritydb
 spring.datasource.username=root
