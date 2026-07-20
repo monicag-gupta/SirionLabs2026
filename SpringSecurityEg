@@ -1088,3 +1088,25 @@ public class SpringSecurityInMemoryMySqlApplication {
 
 
 
+
+
+CREATE DATABASE springsecuritydb;
+USE springsecuritydb;
+
+drop table if exists users;
+
+CREATE TABLE users(
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(50) UNIQUE,
+    password VARCHAR(200),
+    role VARCHAR(30),
+    enabled BOOLEAN
+);
+
+INSERT INTO users (username,password,role,enabled) VALUES 
+('user', '$2a$10$Yeqq9fTlyFG5VVdU98st2.RxlVj5RpiVlt1limgXLLarzgEAoIugi', 'ROLE_USER', true),
+('admin', '$2a$10$bikI6woOSp9RsUqMkZNV/.49RdV.ugVj7nJWTgCeq/xbNQr.Qbhxu', 'ROLE_ADMIN', true);
+
+select * from users;
+
+
