@@ -100,3 +100,16 @@ com.example.demo
 
 
 
+Dependencies:
+Spring Web
+Spring Boot DevTools
+Spring Boot Actuator
+Config Client
+
+
+
+
+
+
+
+
