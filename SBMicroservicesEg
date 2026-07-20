@@ -721,6 +721,13 @@ Access http://localhost:8083/h2-console to view the H2 database console.
 Test the CRUD operations on http://localhost:8083/employees using a tool like Postman or a web browser.
 
 
+Post: http://localhost:8083/employees
+
+{
+  "name": "John Doe",
+  "position": "Software Engineer"
+}
+
 
 
 
