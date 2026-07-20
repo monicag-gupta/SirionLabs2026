@@ -764,6 +764,29 @@ Spring Boot DevTools
 
 
 
+SpringSecurityMySQL
+src/main/java
+com.example.securitydemo
+    SpringSecurityMySQLApplication.java
+ config
+    SecurityConfig.java
+    controller
+         HomeController.java
+    entity
+         AppUser.java
+    repository
+         UserRepository.java
+    service
+         CustomUserDetailsService.java
+src/main/resources
+    static
+        index.html
+        login.html
+        welcome.html
+        user.html
+        admin.html
+        access-denied.html
+application.properties
 
 
 
