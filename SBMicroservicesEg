@@ -490,10 +490,8 @@ Create a new Spring Boot project for the third microservice:
 Project name: microservice-three
 Dependencies: Eureka Discovery, Web, JPA, H2
 Add necessary dependencies.
-Create the Employee entity / repository
 Create the Employee entity class in model
 Create the EmployeeRepository interface in repository
-Create a service and controller.
 Create the EmployeeService class in service
 Create EmployeeController class in controller
 Configure the H2 database.
