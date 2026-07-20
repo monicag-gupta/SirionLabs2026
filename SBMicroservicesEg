@@ -483,6 +483,25 @@ Multi-Version Concurrency Control (MVCC): H2 uses MVCC to handle concurrent acce
 
 
 
+Microservice-three
+This new microservice : microservice-three and will manage a simple entity, Employee. 
+Create microservice-three project
+Create a new Spring Boot project for the third microservice:
+Project name: microservice-three
+Dependencies: Eureka Discovery, Web, JPA, H2
+Add necessary dependencies.
+Create the Employee entity / repository
+Create the Employee entity class in model
+Create the EmployeeRepository interface in repository
+Create a service and controller.
+Create the EmployeeService class in service
+Create EmployeeController class in controller
+Configure the H2 database.
+Connect microservice-three with Eureka Server.
+
+
+
+
 
 
 
