@@ -764,12 +764,12 @@ Spring Boot DevTools
 
 
 
-SpringSecurityMySQL
+SpringSecurityInMemoryMySQL
 src/main/java
 com.example.securitydemo
-    SpringSecurityMySQLApplication.java
- config
-    SecurityConfig.java
+    SpringSecurityInMemoryMySQLApplication.java
+ 	config
+    	SecurityConfig.java
     controller
          HomeController.java
     entity
