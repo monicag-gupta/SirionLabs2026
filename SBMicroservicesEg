@@ -47,3 +47,16 @@ Zipkin is an open-source project m project. That provides a mechanism for sendin
 
 
 
+Application
+Port
+Spring Cloud Config Server
+8888
+Netflix Eureka Naming Server
+8761
+Netflix Zuul API gateway Server
+8765
+Zipkin distributed Tracing Server
+9411
+
+
+
