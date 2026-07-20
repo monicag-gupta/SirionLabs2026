@@ -732,3 +732,36 @@ Post: http://localhost:8083/employees
 
 
 
+
+
+cloud.properties in Eureka server
+
+Now, Create the Cloud Properties file
+Click on File –> New –> Other –> File and add the below code in this file and save it.
+
+eureka.instance.hostname=${vcap.application.uris[0]:localhost}
+eureka.instance.nonSecurePort=80
+eureka.instance.metadataMap.instanceId=${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+eureka.instance.leaseRenewalIntervalInSeconds = 5
+eureka.client.region = default
+eureka.client.registryFetchIntervalSeconds = 5
+eureka.client.serviceUrl.defaultZone=${vcap.services.pwa-eureka-service.credentials.uri}/eureka/
+
+
+
+
+cloud.properties in Client microservices
+
+Now, Create the Cloud Properties file
+Click on File –> New –> Other –> File and add below code in this file and save it.
+
+eureka.instance.hostname=${vcap.application.uris[0]:localhost}
+eureka.instance.nonSecurePort=80
+eureka.instance.metadataMap.instanceId=${vcap.application.instance_id:${spring.application.name}:${spring.application.instance_id:${server.port}}}
+eureka.instance.leaseRenewalIntervalInSeconds = 5
+
+eureka.client.region = default
+eureka.client.registryFetchIntervalSeconds = 5
+eureka.client.serviceUrl.defaultZone=${vcap.services.pwa-eureka-service.credentials.uri}/eureka/
+
+
