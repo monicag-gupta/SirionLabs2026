@@ -1053,9 +1053,9 @@ package com.example.securitydemo;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @SpringBootApplication
-public class SpringSecurityInMemoryApplication {
+public class SpringSecurityInMemoryMySqlApplicationn {
 	public static void main(String[] args) {
-//		SpringApplication.run(SpringSecurityInMemoryApplication.class, args);
+//		SpringApplication.run(SpringSecurityInMemoryMySqlApplication.class, args);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	    System.out.println(encoder.encode("user123"));
 	    System.out.println(encoder.encode("admin123"));
