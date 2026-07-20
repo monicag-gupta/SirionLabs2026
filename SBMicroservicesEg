@@ -117,6 +117,24 @@ spring.cloud.config.enabled=false
 
 LimitsConfigurationController
 
+package com.example.demo;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.beans.LimitConfiguration;
+
+@RestController
+public class LimitsConfigurationController {
+	@GetMapping("/limits")
+	public LimitConfiguration retriveLimitsFromConfigurations() {
+		return new LimitConfiguration(1000, 1);
+	}
+}
+
+
+
+
 .. beans
 LimitConfiguration
 
