@@ -286,3 +286,22 @@ No service is registered for now.
 
 
 
+
+
+
+microservice-one project
+
+Project: microservice-one
+Dependencies: 
+Eureka Discovery Client, 
+Spring Web 
+OpenFeign
+
+Edit Main App: MicroserviceOneApplication
+In client package: Add Interface : MicroserviceTwoClient
+In controller package: Add Class: HelloController 
+Edit : application.properties
+
+
+
+
