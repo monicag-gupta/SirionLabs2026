@@ -1,0 +1,302 @@
+git --version 
+
+git init
+
+git config --global user.name "<yourName>"
+
+git config --global user.email "<your mail ID>"
+
+git config --global core.editor "code --wait"
+
+git config --list
+
+
+In VS Code : 
+Create a file : abc.txt:
+Hello world
+
+save the file
+
+The file becomes U : Un-commited
+
+Now go to terminal:
+ git add abc.txt
+
+The file became : A (added in branch)
+
+
+
+Now go to terminal:
+ git commit -m "First commit : abc.txt"
+
+The file gets commited
+
+
+Now edit the file:
+abc.txt:
+Hello World
+Modified Abc
+
+
+save the file
+
+
+The file became : M (Modified in branch, which was already comitted)
+
+Now again add and commit with message "Second commit with modified abc.txt"
+
+
+git clone clones the repository into our local current folder 
+as a new folder with the same name as the repository name, with git initialized:
+
+git clone https://github.com/monicag-gupta/Proj1.git
+
+
+If fatal SSH (https security) error occurs:
+
+git -c http.sslVerify=false clone https://github.com/monicag-gupta/Proj1.git
+
+cd Proj1
+Edit hello.html
+
+git add .
+git commit -m "Hello.html changed"
+
+
+
+
+
+Know about Remote:
+git remote –v
+
+
+Know about branches:
+git branch
+
+
+
+push a branch to remote:
+git push -u origin main
+
+If fatal SSH error occurs:
+
+git config --global http.sslBackend schannel
+and then:
+git push -u origin main
+
+You need to authenticate the github account
+and then check the repository for the updated content
+
+
+
+
+
+https://github.com/monicag-gupta/Proj1.git
+
+Git config command: 
+Git config get and set configuration variables that control all facets of how Git looks and operates.
+You can view all of your settings and where they are coming from using:
+
+git config --list --show-origin
+
+Set the name:
+
+git config --global user.name "User name"
+git config --global user.name "Monica"
+
+Set the email:
+git config --global user.email "gupta.monicag@gmail.com"
+
+Set the default editor: (here visual studio code, can have notepad.exe)
+git config --global core.editor Vim
+
+The below tells default editor VS Code to wait till the next command of git is given.
+git config --global core.editor "code --wait"
+
+Set the default branch:
+git config --global init.defaultbranch main
+
+Check the setting:
+git config --list
+
+Git alias: Set up an alias for each command:
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+
+To know value of just one setting:
+git config user.name
+Monica
+
+create a new repository on the command line:
+echo "# JavaCodes" >> README.md
+
+git init
+This marks the project folder and all its contents as a version control system.
+.git is hidden in this system.
+All metadata lies in this folder
+
+git add README.md
+git commit -m "first commit"
+
+Clone a repository as a folder:
+git clone https://github.com/monicag-gupta/Proj1.git
+
+Add remote URL to current directory:
+git remote add origin https://github.com/monicag-gupta/Proj1.git
+
+push committed data to remote:
+git push -u origin main
+
+Git branch:
+ 
+Create branch:
+git branch 
+Create and Switch to a New Branch
+git checkout -b feature-branch
+
+List Branches:
+git branch --list 
+
+Delete a Branch:
+git branch -d 
+Delete a remote Branch:
+git push origin -delete 
+
+Rename Branch:
+git branch -m
+Rename the current branch:
+git branch -m <new-name>
+
+Switch to the main Branch
+git checkout main
+
+Know about branches:
+git branch
+
+Force Rename your current branch to "main":
+git branch -M main
+
+Delete a branch:
+git branch -D tmp
+Delete a remote branch:
+git push origin --delete feature-branch
+
+push a branch to remote:
+git push -u origin main
+git push origin HEAD:main
+
+Overwrite remote:
+git push --force origin main
+
+Check Status:
+git status
+
+Know about Remote:
+git remote –v
+
+Take help for a command:
+git help <command>
+git help status
+
+Track changes: Git diff: 
+Track the changes that have not been staged: 
+git diff
+Track the changes that have staged but not committed:
+git diff --staged
+Track the changes after committing a file:
+git diff HEAD
+
+Track the changes between two commits:
+git diff <commit1> <commit2>
+git diff between Branches:
+git diff branch1 branch2
+
+
+Git pull: Pull the data from the server:
+git pull origin master
+Pull a remote branch:
+git pull
+
+Clone repository and switch to main:
+git checkout main
+git pull origin main
+
+Pull Unrelated Repos:
+git pull origin main --allow-unrelated-histories
+
+List the Commit History:
+To find the commit hashes:
+git log --oneline --graph --all
+
+
+Stashing Changes : 
+Temporarily saves changes without committing them:
+git stash
+Restoring Stashed Changes : Restores the most recent stashed changes:
+git stash pop
+Displays only the names of stashed commits:
+git stash show
+Shows a list of all stashes with indices (stash@{0}, stash@{1}, etc.):
+git stash list
+Removes the most recent stash:
+git stash drop
+Deletes all stashes:
+git stash clear
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+The three file stages of Git are:
+1. Committed
+The unmodified changes from the last snapshot.
+2. Modified
+The files changed or modified; You could edit, add or delete contents of an existing file or could totally add or delete files.
+3. Staged
+The files bookmarked to be added to the next commit snapshot.  
+
+Every File changed in the project folder can be:
+Tracked by git OR Untracked by git
+
+Process:
+1. created TOC.txt
+Added a line: Hello
+2. git status : showed us an untracked file : TOC.txt
+3. git add TOC.txt 
+4. git Status: now TOC.txt is staged (tracked), but not committed
+5. modified TOC.txt
+Added one more line: World
+6. git status : TOC.txt is staged ; TOC.txt is modified post add
+Right now if we commit the working directory, we will get the old added file of TOC.txt (with only Hello). Why? Because we used git add before modification. 
+It means that only staged files are committed
+7. If you want the modified file to be committed, pl add it to the staged area via the add command
+
+
+.gitignore – Specifies which files/folders Git should ignore.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
