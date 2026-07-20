@@ -704,3 +704,24 @@ public class MicroserviceThreeApplication {
 }
 
 
+
+
+
+
+Run Eureka Server:
+Right-click the eureka-server project and select Run As > Spring Boot App.
+Run Microservice One:
+Right-click the microservice-one project and select Run As > Spring Boot App.
+Run Microservice Two:
+Right-click the microservice-two project and select Run As > Spring Boot App.
+Run Microservice Three:
+Right-click the microservice-three project and select Run As > Spring Boot App.
+Test the H2 database and CRUD operations:
+Access http://localhost:8083/h2-console to view the H2 database console.
+Test the CRUD operations on http://localhost:8083/employees using a tool like Postman or a web browser.
+
+
+
+
+
+
