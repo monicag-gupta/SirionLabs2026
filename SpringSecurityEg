@@ -747,10 +747,23 @@ Pom.xml:
 
 
 
-
-
-
 ___________________________________________
+
+
+Name/Artifact Id: SpringSecurityInMemory 
+Group Id/package : com.example.securitydemo
+
+
+dependencies:
+Spring Web
+Spring Security
+Spring Data JPA
+MySQL Driver
+Spring Boot DevTools
+
+
+
+
 
 
 
