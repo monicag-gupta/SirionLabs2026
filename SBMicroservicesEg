@@ -765,3 +765,5 @@ eureka.client.registryFetchIntervalSeconds = 5
 eureka.client.serviceUrl.defaultZone=${vcap.services.pwa-eureka-service.credentials.uri}/eureka/
 
 
+
+
