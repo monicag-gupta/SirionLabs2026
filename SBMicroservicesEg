@@ -385,6 +385,21 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 
 
+microservice-two
+
+Project: microservice-two
+Dependencies: 
+Eureka Discovery Client, 
+Spring Web 
+
+Edit Main App: MicroserviceTwoApplication
+In controller package: Add Class: HelloController 
+Edit : application.properties
+
+
+
+
+
 
 
 
