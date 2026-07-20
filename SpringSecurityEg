@@ -792,6 +792,33 @@ application.properties
 
 
 
+application.properties
+
+spring.application.name=SpringSecurityInMemoryMySQL
+server.port=8080
+
+
+
+
+package com.example.securitydemo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    public String home() {
+
+        return "forward:/index.html";
+
+    }
+
+}
+
+
+
 
 
 
