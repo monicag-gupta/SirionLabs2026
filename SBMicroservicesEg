@@ -447,7 +447,7 @@ eureka.client.service-url.defaultZone=http://localhost:8761/eureka
 
 
 
-
+Exercise:
 Create a Eureka Server
 Create four Services for CRUD on Employees
 MS-create
