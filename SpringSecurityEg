@@ -1037,3 +1037,27 @@ spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
 
+
+
+
+
+Generate Password online compiler or plain java project
+
+Passwords must be BCrypt encoded.
+For example: user123 and admin123
+
+Use this utility once to generate BCrypt hashes.
+
+
+package com.example.securitydemo;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+@SpringBootApplication
+public class SpringSecurityInMemoryApplication {
+	public static void main(String[] args) {
+//		SpringApplication.run(SpringSecurityInMemoryApplication.class, args);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	    System.out.println(encoder.encode("user123"));
+	    System.out.println(encoder.encode("admin123"));
+	}
+}
