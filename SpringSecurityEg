@@ -1061,3 +1061,30 @@ public class SpringSecurityInMemoryMySqlApplication {
 	    System.out.println(encoder.encode("admin123"));
 	}
 }
+
+
+
+
+
+$2a$10$Yeqq9fTlyFG5VVdU98st2.RxlVj5RpiVlt1limgXLLarzgEAoIugi
+$2a$10$bikI6woOSp9RsUqMkZNV/.49RdV.ugVj7nJWTgCeq/xbNQr.Qbhxu
+
+
+
+Now change it back:
+
+package com.example.securitydemo;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+@SpringBootApplication
+public class SpringSecurityInMemoryMySqlApplication {
+	public static void main(String[] args) {
+		SpringApplication.run(SpringSecurityInMemoryMySqlApplication.class, args);
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//	    System.out.println(encoder.encode("user123"));
+//	    System.out.println(encoder.encode("admin123"));
+	}
+}
+
+
+
