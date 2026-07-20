@@ -467,6 +467,19 @@ It can be used as a standalone database or as an embedded database within a Java
 H2 is known for its fast performance and small footprint, making it an excellent choice for development, testing, and small-scale production applications.
 
 
+In-Memory Mode: H2 can run completely in memory, which makes it very fast for testing and development purposes. All data is lost when the application is restarted.
+Embedded Mode: H2 can be embedded within a Java application, allowing for quick setup without the need for an external database server.
+Server Mode: H2 can also run in server mode, where it acts as a standalone database server that multiple clients can connect to.
+SQL Compatibility: H2 supports standard SQL and offers compatibility modes to emulate other databases like MySQL, PostgreSQL, and Oracle.
+Web Console: H2 includes a web-based console application, allowing you to interact with the database using a web browser.
+Small Footprint: H2 is very lightweight, with a small jar file size, making it easy to include in Java projects.
+Transactions: H2 supports transactions, including the standard ACID properties (Atomicity, Consistency, Isolation, Durability).
+Encryption: H2 supports encrypted database files, providing an additional layer of security.
+Multi-Version Concurrency Control (MVCC): H2 uses MVCC to handle concurrent access to the database efficiently.
+
+
+
+
 
 
 
