@@ -942,3 +942,87 @@ login.html
 </html>
 
 
+
+
+welcome.html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome</title>
+</head>
+<body>
+	<h1>Welcome</h1>
+	<a href="user.html">User Page</a>
+	<br>
+	<a href="admin.html">Admin Page</a>
+	<br>
+	<form action="/logout" method="post">
+		<button>Logout</button>
+	</form>
+</body>
+</html>
+
+
+
+
+
+
+admin.html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin</title>
+</head>
+<body>
+	<h1>Admin Dashboard</h1>
+	Only ADMIN can access.
+	<br><br>
+	<a href="welcome.html">Back</a>
+</body>
+</html>
+
+
+
+
+
+user.html
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User</title>
+</head>
+<body>
+	<h1>User Dashboard</h1>
+	Only USER can access.
+	<br><br>
+	<a href="welcome.html">Back</a>
+</body>
+</html>
+
+
+
+
+
+
+
+access-denied.html
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Access Denied</title>
+</head>
+<body>
+	<h1>403 Access Denied</h1>
+	<a href="/">Home</a>
+</body>
+</html>
+
+
+
+
+
