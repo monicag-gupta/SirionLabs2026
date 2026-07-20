@@ -822,3 +822,83 @@ public class HomeController {
 
 
 
+
+
+package com.example.securitydemo.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+public class SecurityConfig {
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    InMemoryUserDetailsManager users(PasswordEncoder encoder) {
+
+        UserDetails user = User.builder()
+                .username("user")
+                .password(encoder.encode("user123"))
+                .roles("USER")
+                .build();
+
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password(encoder.encode("admin123"))
+                .roles("ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(user, admin);
+    }
+
+    @Bean
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        http
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                        "/",
+                        "/index.html",
+                        "/login.html",
+                        "/css/**",
+                        "/js/**",
+                        "/images/**"
+                ).permitAll()
+                .requestMatchers("/user.html")
+                .hasRole("USER")
+                .requestMatchers("/admin.html")
+                .hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
+            )
+
+            .formLogin(login -> login
+                    .loginPage("/login.html")
+                    .loginProcessingUrl("/login")
+                    .defaultSuccessUrl("/welcome.html", true)
+                    .permitAll())
+            .logout(logout -> logout
+                    .logoutSuccessUrl("/login.html"))
+            .rememberMe(Customizer.withDefaults());
+
+        return http.build();
+    }
+
+}
+
+
+
+
