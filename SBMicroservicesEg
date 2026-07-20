@@ -460,6 +460,11 @@ Create a feign client to read these services and provide index.html for performi
 
 
 
+H2
+
+H2 is an open-source, lightweight, in-memory, and embedded relational database management system (RDBMS) written in Java. 
+It can be used as a standalone database or as an embedded database within a Java application. 
+H2 is known for its fast performance and small footprint, making it an excellent choice for development, testing, and small-scale production applications.
 
 
 
