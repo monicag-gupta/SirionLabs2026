@@ -149,6 +149,44 @@ Rebase interactively (modify commits before merging):
 git rebase -i <branch-name>
 
 
+4. Deleting Branches
+Delete a local branch:
+git branch -d <branch-name>
+Force delete a local branch (if it has unmerged changes):
+git branch -D <branch-name>
+Delete a remote branch:
+git push origin --delete <branch-name>
+5. Merging Branches
+Merge a branch into the current branch:
+git merge <branch-name>
+Merge and create a commit automatically:
+git merge --no-ff <branch-name>
+6. Rebasing Branches
+Rebase the current branch onto another branch:
+git rebase <branch-name>
+Rebase interactively (modify commits before merging):
+git rebase -i <branch-name>
+
+
+7. Tracking Remote Branches
+Create a new local branch that tracks a remote branch:
+git checkout -b <branch-name> origin/<branch-name>
+Set an existing branch to track a remote branch:
+git branch --set-upstream-to=origin/<branch-name>
+8. Renaming Branches
+Rename the current branch:
+git branch -m <new-name>
+Rename a different branch:
+git branch -m <old-name> <new-name>
+9. Pushing and Pulling Branches
+Push a new branch to the remote repository:
+git push -u origin <branch-name>
+Pull changes from the remote branch:
+git pull origin <branch-name>
+
+
+
+
 
 
 
