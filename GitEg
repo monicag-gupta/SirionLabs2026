@@ -47,3 +47,9 @@ git config --global alias.st status
 
 
 
+To know value of just one setting:
+git config user.name
+Monica
+
+
+
