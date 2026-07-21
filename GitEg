@@ -279,6 +279,129 @@ git push origin main
 
 
 
+Add the remote and name it origin
+git remote add origin https://github.com/monicag-gupta/gitAristrocat.git
+Now origin is created as the name for your remote repository.
+Verify it
+git remote -v
+origin  https://github.com/monicag-gupta/gitAristrocat.git (fetch)
+origin  https://github.com/monicag-gupta/gitAristrocat.git (push)
+If origin already exists and you want to change it
+git remote set-url origin https://github.com/username/newrepo.git
+git remote set-url origin https://github.com/monicag-gupta/NewRepoAris.git
+If you need to remove and re-add
+git remote remove origin
+git remote add origin <new-url>
+
+
+Basic git pull Command
+git pull
+Fetches from the default remote (origin) and merges the current branch with the fetched changes.
+With Rebase Example
+git pull --rebase origin main
+Good for keeping a cleaner commit history (linear).
+With Fast-Forward Only
+git pull --ff-only
+Safer for CI/CD environments — avoids unintended merge commits.
+Verbose Output
+git pull --verbose
+Useful for debugging fetch/merge steps.
+Pull Unrelated Repos
+git pull origin main --allow-unrelated-histories
+Used when combining projects from different sources.
+
+
+
+Basic git push Command
+git push
+Pushes your committed changes to the default remote (origin) and the current branch.
+Push and set upstream:
+git push -u origin main
+-u or --set-upstream: Sets the default remote tracking for your branch.
+Force push 
+Overwrite remote:
+git push --force origin main
+--force will overwrite the remote branch no matter what — dangerous in shared repos.
+Safer force push:
+git push --force-with-lease origin main
+--force-with-lease ensures:
+You only overwrite the remote branch if it hasn’t changed since your last fetch.
+If someone else pushed to origin/main after you last fetched, your push will be rejected — to avoid accidentally wiping their changes.
+
+
+Delete a remote branch:
+git push origin --delete feature-branch
+Push tags:
+git push origin --tags
+Dry-run (just to test):
+git push --dry-run
+It tells you what would happen — like pushing the main branch — but nothing is actually pushed.
+Check Current Upstream Tracking
+git branch -vv
+is super useful — it shows all local branches along with:
+The tracking remote branch (if any)
+The last commit hash
+The latest commit message
+Whether the branch is ahead/behind its remote
+
+
+git fetch
+git fetch Syntax
+git fetch [<options>] [<remote> [<refspec>...]]
+Fetch from origin
+git fetch origin
+Downloads new commits from origin/main
+Stores them in your local repo
+DOES NOT change your working files or branches
+Good for reviewing changes before merging
+Fetch all remotes
+git fetch --all
+
+
+
+Fetch and clean up stale branches
+git fetch --prune
+Simulate a fetch
+git fetch --dry-run
+Fetch tags only
+git fetch --tags
+Fetch with full details
+git fetch --verbose
+Shallow fetch (last 5 commits)
+git fetch --depth 5
+Combine Options
+git fetch --all --prune --verbose
+Fetch from all remotes, clean up old branches, and show detailed output.
+
+
+
+
+Fetch changes from origin
+git fetch origin
+Downloads updates from origin/main (the GitHub version of main)
+But does not merge them into your local main yet
+Compare local and remote
+git log HEAD..origin/main --oneline
+This shows the commits on origin/main that you don’t have locally yet.
+Merge if you’re ready
+git merge origin/main
+Or just use:
+git pull origin main
+...if you’re okay with fetching + merging together.
+Bonus Example with All-in-One
+git fetch --all --prune --verbose
+Fetches updates from all remotes
+Removes stale references to deleted remote branches
+Shows verbose output
+
+
+git fetch = Download new mail, but don’t open it
+git pull = Download + open + merge it into your current doc
+
+
+
+
+
 
 
 
