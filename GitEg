@@ -20,6 +20,16 @@ git commit -m "  "
 git clone https://github.com/monicag-gupta/SirionChamps2026.git
 
 
+cd SirionChamps2026
+
+add a file hello.html
+<html>
+  <body>
+    <h1>Hello Champs</h1>
+  </body>
+</html>
+
+
 
 
 
