@@ -53,3 +53,36 @@ Monica
 
 
 
+
+1. Setting Up a Repository : Initializes a new Git repository in the current directory.
+git init
+2. Cloning a Repository :  Clones an existing repository into a new directory.
+git clone <repository-url>
+3. Checking Repository Status : Shows the state of the working directory and staging area.
+git status
+4. Adding Files to Staging Area : Stages changes for the next commit.
+git add <file>
+5. Committing Changes : Saves changes in the local repository.
+git commit -m "Commit message"
+6. Checking Commit History : Displays the commit history.
+git log
+7. Pushing Changes to Remote Repository : Sends local commits to the remote repository.
+git push origin main
+8. Pulling Changes from Remote Repository : Fetches and merges changes from the remote repository.
+git pull origin main
+9. Creating a New Branch : Creates a new branch named feature-branch.
+git branch feature-branch
+10. Switching Between Branches : Switches to the branch feature-branch.
+git checkout feature-branch
+11. Merging Changes : Merges the changes from feature-branch into the current branch.
+git merge feature-branch
+12. Deleting a Branch : Deletes the branch feature-branch.
+git branch -d feature-branch
+13. Stashing Changes : Temporarily saves changes without committing them.
+git stash
+14. Restoring Stashed Changes : Restores the most recent stashed changes.
+git stash pop
+
+
+
+
