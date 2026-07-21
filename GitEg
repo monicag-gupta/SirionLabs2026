@@ -6,3 +6,8 @@ git config --global user.name Monica
 git config --global user.email aaa@gmail.com
 
 
+git config --global core.editor "code --wait"
+
+
+
+
