@@ -8,6 +8,14 @@ git config --global user.email aaa@gmail.com
 
 git config --global core.editor "code --wait"
 
+git config --global init.defaultBranch main
+
+git config --list
+
+
+
+
+
 
 
 
