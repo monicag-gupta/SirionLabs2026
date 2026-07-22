@@ -1059,3 +1059,21 @@ Bob,25
 
 
 
+RW_CSV.py
+
+# Reading a CSV File
+import csv
+with open('data.csv', mode='r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+# Writing to a CSV File
+# import csv
+data = [['Name', 'Age'], ['Alice', 30], ['Bob', 25]]
+with open('output.csv', mode='w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(data)
+ 
+
+
+
