@@ -1514,6 +1514,63 @@ print(s.age)
 
 
 
+class Employee:
+   'Common base class for all employees'
+   empCount = 0
+
+   def __init__(self, name, salary):
+      self.name = name
+      self.salary = salary
+      Employee.empCount += 1
+   
+   def displayCount(self):
+     print ("Total Employee %d" % Employee.empCount)
+
+   def displayEmployee(self):
+      print ("Name : ", self.name,  ", Salary: ", self.salary)
+
+
+
+
+print("from EmployeeClass1 import Employee:")
+print ("Employee.__doc__:", Employee.__doc__)
+#Employee.__doc__: Common base class for all employees
+
+print ("Employee.__name__:", Employee.__name__)
+#Employee.__name__: Employee
+
+print ("Employee.__module__:", Employee.__module__)
+#Employee.__module__: EmployeeClass
+
+print ("Employee.__bases__:", Employee.__bases__)
+#Employee.__bases__: (<class 'object'>,)
+
+print ("Employee.__dict__:", Employee.__dict__)
+#Employee.__dict__: {'__module__': 'EmployeeClass', '__doc__': 'Common base class for all employees', 'empCount': 2, '__init__': <function Employee.__init__ at 0x02E3ADF0>, 'displayCount': <function Employee.displayCount at 0x02E3ADA8>, 'displayEmployee': <function Employee.displayEmployee at 0x02E3AD60>, '__dict__': <attribute '__dict__' of 'Employee' objects>, '__weakref__': <attribute '__weakref__' of 'Employee' objects>}
+
+print("\n\nEmp2:\n")
+class Employee2:
+    'This is the doc of Emp2..'
+    id=10   
+    name="John Doe"    
+    def display (self):    
+        print("ID: %d \nName: %s"%(self.id,self.name))
+
+
+print ("Employee.__doc__:", Employee2.__doc__)
+
+print ("Employee.__name__:", Employee2.__name__)
+
+print ("Employee.__module__:", Employee2.__module__)
+
+print ("Employee.__bases__:", Employee2.__bases__)
+
+print ("Employee.__dict__:", Employee2.__dict__)
+
+
+
+
+
 
 
 
