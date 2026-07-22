@@ -1078,3 +1078,37 @@ with open('output.csv', mode='w', newline='') as file:
 
 
 
+Library: json
+Structure: Key-value pairs, nested support
+Common Use Cases: APIs, Config files
+ 
+Consider a file:
+data.json:
+{
+    "name": "Alice",
+    "age": 30
+}
+
+
+
+
+
+RW_Json.py
+
+
+#Reading a JSON File
+import json
+
+with open('data.json', 'r') as file:
+    data = json.load(file)
+    print(data)
+
+# Writing to a JSON File
+# import json
+
+person = {'name': 'John', 'sal': 30}
+with open('output.json', 'w') as file:
+    json.dump(person, file, indent=4)
+
+
+
