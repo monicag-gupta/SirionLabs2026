@@ -1746,5 +1746,31 @@ d.speak()
 
 
 
+Duck Typing:
+# If an object “quacks like a duck,” it can be used like a duck.
+
+class Dog:
+    def speak(self):
+        print("Woof!")
+ 
+class Cat:
+    def speak(self):
+        print("Meow!")
+ 
+def make_sound(animal):
+    animal.speak()
+ 
+make_sound(Dog())  # Woof!
+make_sound(Cat())  # Meow!
+
+# No need to check types — just call the method.
+
+
+
+
+
+
+
+
 
 
