@@ -146,3 +146,11 @@ print(a % b)  # Modulus: 1
 print(a ** b)  # Exponentiation: 1000
 print(a // b)  # Floor Division: 3
 
+
+
+
+
+
+
+
+
