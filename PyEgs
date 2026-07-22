@@ -151,6 +151,45 @@ print(a // b)  # Floor Division: 3
 
 
 
+a, b = 10, 3
+print(a == b)  # Equal to: False
+print(a != b)  # Not equal to: True
+print(a > b)   # Greater than: True
+print(a < b)   # Less than: False
+print(a >= b)  # Greater than or equal to: True
+print(a <= b)  # Less than or equal to: False
+a, b = True, False
+print(a and b)  # Logical AND: False
+print(a or b)   # Logical OR: True
+print(not a)    # Logical NOT: False
+
+
+
+
+
+a, b = 5, 3  # Binary: 101, 011
+print(a & b)  # Bitwise AND: 1 (001)
+print(a | b)  # Bitwise OR: 7 (111)
+print(a ^ b)  # Bitwise XOR: 6 (110)
+print(~a)     # Bitwise NOT: -6
+print(a << 1) # Left Shift: 10 (1010)
+print(a >> 1) # Right Shift: 2 (10)
+
+
+
+a = 10
+a += 5  # Add and assign: 15
+a -= 3  # Subtract and assign: 12
+a *= 2  # Multiply and assign: 24
+a /= 4  # Divide and assign: 6.0
+a %= 3  # Modulus and assign: 0.0
+a **= 2 # Exponentiation and assign: 0.0
+a //= 2 # Floor division and assign: 0.0
+print(a)
+
+
+
+
 
 
 
