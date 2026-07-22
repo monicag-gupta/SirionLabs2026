@@ -1046,5 +1046,16 @@ E005,Karan Mehta,Information Technology,70000
 
 
 
+Library: csv
+Delimiter: ,
+Structure: Table-like data, rows and columns
+Common Use Cases: Spreadsheets, Data export/import
+ 
+Consider a file:
+data.csv
+Name,Age
+Alice,30
+Bob,25
+
 
 
