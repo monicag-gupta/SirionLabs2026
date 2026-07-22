@@ -914,6 +914,24 @@ print(square_list)
 
 
 
+from functools import reduce
+
+# 1. Sum of All Elements
+nums = [1, 2, 3, 4]
+result = reduce(lambda x, y: x + y, nums)
+print(result)  # Output: 10
+# 2. Product of All Elements
+nums = [1, 2, 3, 4]
+product = reduce(lambda x, y: x * y, nums)
+print(product)  # Output: 24
+# 3. Finding Maximum
+nums = [4, 1, 7, 3]
+maximum = reduce(lambda x, y: x if x > y else y, nums)
+print(maximum)  # Output: 7
+# 4. Using an Initializer
+nums = [1, 2, 3]
+total = reduce(lambda x, y: x + y, nums, 10)
+print(total)  # Output: 16 (10 + 1 + 2 + 3)
 
 
 
