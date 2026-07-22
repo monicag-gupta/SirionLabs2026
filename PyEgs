@@ -561,12 +561,33 @@ print("Symmetric difference using ^:", my_set ^ another_set)
 
 
 
-
+Exercise:
 Design a set of Employees’ empid
 1001, 7003, 6002, 2000, 3050
 Sort the set in ascending order
 Display the set (sorted)
 Hint: Convert the set to list. Sort it. Display.
+
+
+
+
+
+
+# Using if...elif...else
+score = int(input("Enter your score: "))
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 80:
+    print("Grade: B")
+elif score >= 70:
+    print("Grade: C")
+elif score >= 60:
+    print("Grade: D")
+else:
+    print("Grade: F")
+
+
 
 
 
