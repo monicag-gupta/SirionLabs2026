@@ -1727,5 +1727,24 @@ d = Dog("Bruno", "Labrador")
 
 
 
+class Animal:
+    def speak(self):
+        print("Animal speaks")
+
+class Dog(Animal):
+    def speak(self):
+        super().speak()         # Call the parent class method
+        print("Dog barks")
+
+d = Dog()
+d.speak()
+# Animal speaks
+# Dog barks
+
+
+
+
+
+
 
 
