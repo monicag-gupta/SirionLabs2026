@@ -951,7 +951,7 @@ with open("sample.txt", "r", encoding="utf-8") as file:
 
 
 
-Sample.txt
+sample.txt
 
 Welcome to Python File Handling.
 
