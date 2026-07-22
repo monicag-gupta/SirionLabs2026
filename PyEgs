@@ -1012,3 +1012,20 @@ with open("employees.txt", "w", encoding="utf-8") as file:
 # Be careful with "w" mode because it removes the file’s previous content.
 
 
+
+
+
+The "a" mode adds new content at the end of an existing file without deleting the previous content.
+with open("activity_log.txt", "a", encoding="utf-8") as file:
+    file.write("User completed Python file-handling exercise.\n")
+Example of appending workshop attendance:
+learner_name = "Priya Sharma"
+attendance_status = "Present"
+
+with open("attendance.txt", "a", encoding="utf-8") as file:
+    file.write(f"{learner_name} - {attendance_status}\n")
+
+
+
+
+
