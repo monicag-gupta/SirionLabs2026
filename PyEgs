@@ -741,3 +741,20 @@ Delete a student by name.
 Sort students by their grades.
 The program should allow the user to perform these tasks in a loop until they decide to exit. (Menu driven program)
 
+
+
+
+
+# Documentation of a block like function, class, package etc can be 
+# done by """ """, ''' ''' for mulitple lines or by " " for single line doc
+# This has to be the 1st statement in the block.
+# can be accessed by __doc__
+def fn():
+    """ Print happy day """
+    print("Happy Day")
+
+print(fn.__doc__)
+fn()
+
+
+
