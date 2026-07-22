@@ -835,5 +835,32 @@ for i in range(1,11):
 
 
 
+Open terminal or command prompt.
+Create the virtual environment:
+	python -m venv myenv
+myenv is the name of your virtual environment directory.
+Locate the Python executable in your virtual environment. Path will look like:
+	Windows: myenv\Scripts\python.exe
+	macOS/Linux: myenv/bin/python
+Activate the environment:
+Windows	
+	myenv\Scripts\activate
+macOS/Linux	
+	source myenv/bin/activate
+After activation, you’ll see the environment name in your terminal prompt like: (myenv)
+Install packages inside the environment
+	pip install requests flask
+These packages are only installed inside myenv, not globally.
+Deactivate the environment
+	deactivate
+
+
+
+
+
+
+
+
+
 
 
