@@ -621,6 +621,14 @@ Example:  range(2, 10, 3) creates the list  [2, 5, 8]
 
 
 
+# Counting using a while loop
+count = 1
+while count <= 5:
+    print(count)
+    count += 1
+
+
+
 
 
 
