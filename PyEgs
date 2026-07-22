@@ -7,3 +7,35 @@ import keyword
 print("The list of keywords is : ")
 print(keyword.kwlist)
 
+
+
+
+
+
+Python is dynamically typed, so you don't need to declare the data type explicitly; it is inferred at runtime based on the assigned value.
+1. Numeric Types
+int: Integer numbers (e.g., 10, -5, 0).
+float: Floating-point numbers (e.g., 10.5, -2.3, 0.0).
+complex: Complex numbers with a real and imaginary part (e.g., 3 + 5j).
+2. Sequence Types
+str: Strings, used to represent text (e.g., "Hello", 'Python').
+list: Ordered and mutable collections (e.g., [1, 2, 3], ["a", "b", "c"]).
+tuple: Ordered and immutable collections (e.g., (1, 2, 3), ("a", "b", "c")).
+range: Immutable sequence of numbers, often used in loops (e.g., range(5) for numbers 0 to 4).
+3. Mapping Type: dict: Dictionary, an unordered collection of key-value pairs (e.g., {"key": "value", "age": 25}).
+4. Set Types
+set: Unordered collection of unique elements (e.g., {1, 2, 3}).
+frozenset: Immutable version of a set (e.g., frozenset({1, 2, 3})).
+5. Boolean Type: bool: Represents logical values (True or False).
+6. Binary Types
+bytes: Immutable sequences of bytes (e.g., b"hello").
+bytearray: Mutable sequences of bytes (e.g., bytearray(b"hello")).
+memoryview: Provides memory access to binary data without copying (e.g., memoryview(b"hello")).
+7. None Type
+NoneType: Represents the absence of a value or a null value (e.g., None).
+
+
+
+
+
+
