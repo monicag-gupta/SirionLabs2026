@@ -1029,3 +1029,22 @@ with open("attendance.txt", "a", encoding="utf-8") as file:
 
 
 
+
+Exercise:
+
+The file uses this format:
+Employee ID,Name,Department,Salary
+Sample employee.txt
+Create a file named employee.txt in the same folder as the Python program and add:
+E001,Rahul Sharma,Training,45000
+E002,Priya Nair,Human Resources,52000
+E003,Amit Verma,Finance,60000
+E004,Neha Singh,Operations,48000
+E005,Karan Mehta,Information Technology,70000
+
+
+
+
+
+
+
