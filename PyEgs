@@ -707,6 +707,10 @@ print("Iterating through keys and values:")
 for key, value in my_dict.items():
     print(f"{key}: {value}")
 
+print("Iterating through keys:")
+for key in my_dict:
+    print(f"{key}: {my_dict[key]}")
+
 # 11. Checking Key Existence
 print("Is 'name' in my_dict?", "name" in my_dict)
 print("Is 'salary' not in my_dict?", "salary" not in my_dict)
