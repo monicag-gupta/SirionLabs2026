@@ -858,6 +858,60 @@ Deactivate the environment
 
 
 
+print("1. Create Dictionary from List")
+nums = [1, 2, 3, 4]
+squares = {x: x*x for x in nums}
+print(squares)
+#Output: {1: 1, 2: 4, 3: 9, 4: 16}
+print("2. Using range() with conditions")
+even_cubes = {x: x**3 for x in range(10) if x % 2 == 0}
+print(even_cubes)
+#Output: {0: 0, 2: 8, 4: 64, 6: 216, 8: 512}
+print("3. Swapping Keys and Values")
+original = {'a': 1, 'b': 2, 'c': 3}
+swapped = {v: k for k, v in original.items()}
+print(swapped)
+#Output: {1: 'a', 2: 'b', 3: 'c'}
+
+print("4. Filtering a Dictionary")
+data = {'apple': 3, 'banana': 5, 'cherry': 2, 'date': 7}
+filtered = {k: v for k, v in data.items() if v > 3}
+print(filtered)
+#Output: {'banana': 5, 'date': 7}
+print("5. Nested Dictionary Comprehension")
+table = {x: {y: x*y for y in range(1, 6)} for x in range(1, 6)}
+print(table)
+#Output (Partial): {1: {1: 1, 2: 2, 3: 3, 4: 4, 5: 5}, 2: {1: 2, 2: 4, ...}, ...}
+
+
+
+#Consider the following example where we filter out the only odd number from the given list.
+
+#program to filter out the tuple which contains odd numbers    
+lst = (10,22,37,41,100,123,29)  
+
+oddlist = tuple(filter(lambda x:(x%2 == 1),lst)) 
+
+# the tuple contains all the items of the tuple for which the lambda function evaluates to true    
+
+print(oddlist)    
+
+#Output:
+#(37, 41, 123, 29)
+
+
+#program to map the list and get its square    
+lst = [10,20,30,40,50,60]
+
+square_list = list(map(lambda x:x**2,lst)) 
+
+# the tuple contains all the items of the list for which the lambda function returns another list with square of each element of the list    
+
+print(square_list)    
+
+#Output:
+#[100, 400, 900, 1600, 2500, 3600]
+
 
 
 
