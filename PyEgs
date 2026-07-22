@@ -989,3 +989,26 @@ with open("sample.txt", "r", encoding="utf-8") as file:
 
 
 
+
+
+
+The "w" mode creates a new file or replaces the existing content.
+
+write2FileEg.py
+
+with open("employee_report.txt", "w", encoding="utf-8") as file:
+    file.write("Employee Name: Rahul\n")
+    file.write("Department: Training\n")
+    file.write("Status: Active\n")
+# Writing multiple lines:
+employees = [
+    "Rahul - Training\n",
+    "Anita - Operations\n",
+    "Karan - Finance\n"
+]
+
+with open("employees.txt", "w", encoding="utf-8") as file:
+    file.writelines(employees)
+# Be careful with "w" mode because it removes the file’s previous content.
+
+
