@@ -274,6 +274,30 @@ Output:
 
 
 
+x=10
+y="20"
+print("y=" + y,end=", ")
+print("x=" + str(x))
+print("x=",x)
+print(f"x={x} y={y}")
+
+name=input("Enter your name")
+age=int(input("Enter your age"))
+retirement_age = 65-age
+print(f"Hello, {name}!! Since you r {age} old, you have {retirement_age} to retire")
+skills=list(input("Enter Skills separated by , ").split(","))
+print(f"You have skills {skills}")
+
+
+retirement_age = 65-age
+
+
+
+
+
+
+
+
 
 
 
