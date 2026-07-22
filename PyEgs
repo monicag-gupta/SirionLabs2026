@@ -1344,3 +1344,33 @@ Output:
 Enter the age:10
 The age is not valid
 
+
+
+
+_______________________________________
+
+
+class Employee:    
+    id=10   
+    name="Jay"    
+    def display (self):    
+        print("ID: %d \nName: %s"%(self.id,self.name))    
+
+# Creating a emp instance of Employee class  
+emp=Employee()    
+emp.display()    
+
+Output:
+ID: 10 
+Name: Jay
+
+
+
+
+
+
+
+
+
+
+
