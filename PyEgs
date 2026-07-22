@@ -1846,3 +1846,13 @@ print(b)  # Book: Python OOP
 
 
 
+
+Exercise:
+
+Write a Python class to convert an integer to a roman numeral and a roman numeral to an integer
+Write a Python class to reverse a string word by word.Input string : 'hello world'Expected Output : 'world hello'
+
+
+
+
+
