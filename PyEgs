@@ -1285,7 +1285,41 @@ can't divide by zero
 
 
 
+try:    
+    a = int(input("Enter a:"))    
+    b = int(input("Enter b:"))    
+    c = a/b  
+    print("a/b = %d"%c)    
+    # Using exception object with the except statement  
+except Exception as e:    
+    print("can't divide by zero")    
+    print(e)  
+else:    
+    print("Hi I am else block")
+
+Output:    
+Enter a:10
+Enter b:0
+can't divide by zero
+division by zero
 
 
+
+
+
+
+try:    
+    a = int(input("Enter a:"))    
+    b = int(input("Enter b:"))    
+    c = a/b  
+    print(f"{a}/{b} = {c}")    
+# Using Exception with except statement.  
+except Exception as e:    
+    print("Error has happened, details: ")    
+    print(e)  
+else:    
+    print("Hi I am else block, I will run when try is fully successful")     
+finally:
+    print("Hi I am finally block, I will run always")
 
 
