@@ -726,3 +726,18 @@ print("After clearing:", my_dict)
 
 
 
+
+
+Exercise:
+Write a Python program that:
+Stores student information (name, age, grade) in a list of dictionaries.
+For each student, determine if they have passed or failed based on their grade (pass = grade ≥ 50).
+Perform the following tasks:
+Add new students to the list.
+Display all students' names and whether they have passed or failed.
+Display the average grade of all students.
+Allow the user to search for a student by name and view their details.
+Delete a student by name.
+Sort students by their grades.
+The program should allow the user to perform these tasks in a loop until they decide to exit. (Menu driven program)
+
