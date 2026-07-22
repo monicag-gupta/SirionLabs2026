@@ -1771,6 +1771,78 @@ make_sound(Cat())  # Meow!
 
 
 
+Sr.No.
+Method, Description & Sample Call
+1
+__init__ ( self [,args...] )
+Constructor (with any optional arguments)
+Sample Call : obj = className(args)
+2
+__del__( self )
+Destructor, deletes an object
+Sample Call : del obj
+3
+__repr__( self )
+Evaluable string representation
+Sample Call : repr(obj)
+4
+__str__( self )
+Printable string representation
+Sample Call : str(obj)
+5
+__cmp__ ( self, x )
+Object comparison
+Sample Call : cmp(obj, x)
+
+
+
+
+Operator
+Magic Method
++
+__add__(self, other)
+–
+__sub__(self, other)
+*
+__mul__(self, other)
+/
+__truediv__(self, other)
+//
+__floordiv__(self, other)
+%
+__mod__(self, other)
+**
+__pow__(self, other)
+>>
+__rshift__(self, other)
+<<
+__lshift__(self, other)
+&
+__and__(self, other)
+|
+__or__(self, other)
+^
+__xor__(self, other)
+
+
+
+
+
+
+
+
+class Book:
+    def __init__(self, title):
+        self.title = title
+
+    def __str__(self):
+        return f"Book: {self.title}"
+
+b = Book("Python OOP")
+print(b)  # Book: Python OOP
+# Here, __str__() overrides the default object.__str__() to provide a custom string output.
+
+
 
 
 
