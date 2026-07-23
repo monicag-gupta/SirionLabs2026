@@ -476,3 +476,10 @@ if __name__ == "__main__":
 
 
 
+
+Exercise:
+
+Use Flask API Integration with MySQL, replacing the temporary list or text-file storage in the earlier Course CRUD API with permanent database storage.
+
+
+
