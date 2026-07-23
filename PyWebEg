@@ -68,6 +68,36 @@ print(add(3,4))
 
 
 
+usemod3.py
+
+from mymod import add, author
+
+def add(a):
+    b=10
+    return a*a + b*b + 2*a*b
+
+# print(add(3,5))
+print(author)
+print(add(3))
+
+
+
+
+usemod4.py
+
+from mymod import *
+
+def add(a):
+    b=10
+    return a*a + b*b + 2*a*b
+
+# print(add(3,5))
+print(author)
+print(add(3))
+
+
+
+
 
 
 
