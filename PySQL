@@ -79,6 +79,35 @@ and all libraries will get installed with the mentioned version.
 
 
 
+database.py
+
+
+import os
+import mysql.connector
+from mysql.connector import Error
+
+def get_connection():
+    """Create and return a connection to MySQL."""
+    try:
+        connection = mysql.connector.connect(
+            host=os.getenv("MYSQL_HOST", "localhost"),
+            port=int(os.getenv("MYSQL_PORT", "3306")),
+            user=os.getenv("MYSQL_USER", "root"),
+            password=os.getenv("MYSQL_PASSWORD", "root"),
+            database=os.getenv("MYSQL_DATABASE", "training_db")
+        )
+        return connection
+    except Error as error:
+        print(f"Database connection failed: {error}")
+        return None
+
+
+
+
+
+
+
+
 
 
 
