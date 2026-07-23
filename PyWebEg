@@ -137,6 +137,75 @@ http://127.0.0.1:5000/
 
 
 
+Flask Architecture
+
+Flask applications follow a request-response architecture.
+User or Browser
+       |
+       | HTTP Request
+       v
+Web Server / Flask Application
+       |
+       | URL Routing
+       v
+Python View Function
+       |
+       | Business Logic
+       v
+Template / Database / API
+       |
+       | HTTP Response
+       v
+User or Browser
+
+
+
+
+
+Request-Response Flow
+
+Consider this URL:
+http://127.0.0.1:5000/employees
+The application processes it through the following steps:
+The browser sends an HTTP request.
+Flask receives the request.
+Flask checks the URL routing table.
+Flask identifies the matching view function.
+The view function executes the required logic.
+The view function returns a response.
+Flask sends the response to the browser.
+Flask automatically creates a request context while processing each incoming request. 
+This allows the application to access request-related information through objects such as request and session.
+
+
+
+
+
+Important Flask Components
+
+Component
+Purpose
+Flask application
+Main web application object
+Route
+Connects a URL to a Python function
+View function
+Processes a request and generates a response
+Request object
+Contains data sent by the client
+Response object
+Contains data returned to the client
+Template
+Generates dynamic HTML
+Static files
+Stores CSS, JavaScript, images, and other resources
+Jinja
+Flask’s template-rendering engine
+Werkzeug
+Provides request, response, and routing utilities
+
+
+
 
 
 
