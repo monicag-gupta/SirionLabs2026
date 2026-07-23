@@ -114,4 +114,143 @@ http://127.0.0.1:8000/redoc
 
 
 
+from typing import Annotated
+from fastapi import FastAPI, HTTPException, Path, Query, status
+from pydantic import BaseModel, Field
+
+app = FastAPI(
+    title="Course Management API",
+    description="FastAPI introduction and validation example",
+    version="1.0.0"
+)
+
+class CourseCreate(BaseModel):
+    course_name: str = Field(
+        min_length=2,
+        max_length=150
+    )
+    category: str = Field(
+        min_length=2,
+        max_length=100
+    )
+    duration_hours: float = Field(gt=0)
+    trainer: str = Field(
+        min_length=2,
+        max_length=100
+    )
+    fee: float = Field(ge=0)
+
+class CourseResponse(CourseCreate):
+    course_id: int
+
+courses: list[CourseResponse] = [
+    CourseResponse(
+        course_id=101,
+        course_name="Python Fundamentals",
+        category="Programming",
+        duration_hours=24,
+        trainer="Rahul Sharma",
+        fee=15000
+    ),
+    CourseResponse(
+        course_id=102,
+        course_name="Flask Web Development",
+        category="Web Development",
+        duration_hours=20,
+        trainer="Anita Desai",
+        fee=18000
+    ),
+    CourseResponse(
+        course_id=103,
+        course_name="Data Analytics with Python",
+        category="Data Analytics",
+        duration_hours=30,
+        trainer="Priya Nair",
+        fee=22000
+    )
+]
+
+@app.get("/")
+async def home():
+    return {
+        "application": "Course Management API",
+        "framework": "FastAPI",
+        "status": "running"
+    }
+
+@app.get(
+    "/courses",
+    response_model=list[CourseResponse]
+)
+async def get_all_courses(
+    category: Annotated[
+        str | None,
+        Query(
+            min_length=2,
+            max_length=100
+        )
+    ] = None,
+    limit: Annotated[
+        int,
+        Query(
+            ge=1,
+            le=100
+        )
+    ] = 10
+):
+    results = courses
+    if category:
+        results = [
+            course
+            for course in results
+            if category.lower()
+            in course.category.lower()
+        ]
+    return results[:limit]
+
+@app.get(
+    "/courses/{course_id}",
+    response_model=CourseResponse
+)
+async def get_course(
+    course_id: Annotated[
+        int,
+        Path(ge=1)
+    ]
+):
+    for course in courses:
+        if course.course_id == course_id:
+            return course
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Course not found"
+    )
+
+@app.post(
+    "/courses",
+    response_model=CourseResponse,
+    status_code=status.HTTP_201_CREATED
+)
+async def create_course(
+    course: CourseCreate
+):
+    new_course_id = (
+        max(
+            existing_course.course_id
+            for existing_course in courses
+        )
+        + 1
+        if courses
+        else 101
+    )
+    new_course = CourseResponse(
+        course_id=new_course_id,
+        **course.model_dump()
+    )
+    courses.append(new_course)
+    return new_course
+
+
+
+
 
