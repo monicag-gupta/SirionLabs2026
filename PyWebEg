@@ -257,6 +257,17 @@ def employee_by_name(name):
     return f"Employee name: {name}"
 
 
+# The path converter accepts text containing forward slashes.
+@app.route("/department/<path:department_name>")
+def department(department_name):
+    return f"Department: {department_name}"
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
