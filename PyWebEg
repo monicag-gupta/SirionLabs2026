@@ -238,6 +238,12 @@ def contact():
 def employees():
     return "Employee List"
 
+@app.route("/employee", methods=["GET", "POST"])
+def employee():
+    return "Employee request received"
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
