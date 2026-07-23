@@ -263,6 +263,9 @@ if __name__ == "__main__":
 
 
 
+Exercise
+Create a list of emp dict so that get /emps gives the list and 
+post /emps/name/sal adds the name and sal in the form of dict to the list
 
 
 
