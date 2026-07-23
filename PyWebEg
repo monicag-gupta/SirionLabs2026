@@ -481,11 +481,29 @@ def search():
 
 
 
-
-
 @app.route("/employee/<name>")
 def employee_by_name(name):
     return f"Employee name: {name}"
+
+
+
+@app.post("/api/employees")
+def create_employee():
+    data = request.get_json()
+
+    name = data.get("name")
+    department = data.get("department")
+
+    return {
+        "message": "Employee created",
+        "name": name,
+        "department": department
+    }
+
+
+
+
+
 
 
 if __name__ == "__main__":
@@ -494,7 +512,10 @@ if __name__ == "__main__":
 
 
 
-
+Example JSON request:
+{    "name": "Rahul Sharma",
+    "department": "Training"
+}
 
 
 
