@@ -33,3 +33,29 @@ Display Available Databases
 Display the Selected Database
   SELECT DATABASE();
 
+
+
+CREATE TABLE courses ( 
+course_id INT PRIMARY KEY AUTO_INCREMENT, 
+course_name VARCHAR(150) NOT NULL, 
+category VARCHAR(100) NOT NULL, 
+duration_hours DECIMAL(6, 2) NOT NULL, 
+trainer VARCHAR(100) NOT NULL, 
+fee DECIMAL(10, 2) NOT NULL, 
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+);
+
+DESCRIBE courses;
+
+INSERT INTO courses (course_name, category, duration_hours, trainer, fee) VALUES 
+('Python Fundamentals', 'Programming', 24, 'Rahul Sharma', 15000), 
+('Flask Web Development', 'Web Development', 20, 'Anita Desai', 18000), 
+('Data Analytics with Python', 'Data Analytics', 30, 'Priya Nair', 22000);
+
+SELECT * FROM courses;
+
+
+
+
+
+
