@@ -274,6 +274,12 @@ def salary(amount):
 
 
 
+@app.route("/search")
+def search():
+    department = request.args.get("department")
+    return f"Searching employees in: {department}"
+
+# http://127.0.0.1:5000/search?department=Finance
 
 
 
