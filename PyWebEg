@@ -507,6 +507,12 @@ def headers():
     user_agent = request.headers.get("User-Agent")
     return f"Browser information: {user_agent}"
 
+@app.route("/welcome")
+def welcome():
+    return """
+        <h1>Employee Management System</h1>
+        <p>Welcome to the Flask application.</p>
+    """
 
 
 
