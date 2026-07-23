@@ -15,6 +15,46 @@ The current FastAPI tutorial recommends installing FastAPI with its standard opt
 pip install "fastapi[standard]"
 This installation includes the compcal development and server execution. A minimal installation can also be performed with pip install fastapi, but additional packages may then need to be installed separately.
 
+Step 4: Verify the Installation
+fastapi --version
+You can also verify the Python import:
+import fastapi
+print("FastAPI imported successfully.")
+Step 5: Create folder
+fastapi_course_app
+> cd fastapi_course_app
+Step 6: Create requirements.txt
+pip freeze > requirements.txt
+A simple requirements file may contain packages such as:
+fastapi
+uvicorn
+pydantic
+The exact versions depend on the environment in which the file was created.
+
+
+
+
+For a simple application:
+fastapi_course_app/
+├── main.py
+├── requirements.txt
+├── tests/
+            └── test_main.py
+For a larger application:
+fastapi_course_app/
+├── app/
+│   ├── __init__.py
+│   ├── main.py
+│   ├── models.py / schemas.py / database.py
+│   ├── dependencies.py
+│   └── routers/
+│       ├── __init__.py
+│       ├── courses.py / users.py
+├── tests/
+│   ├── __init__.py
+│   └── test_courses.py
+│ provides `APIRouter` for grouping related endpoints and organizing larger applications across multiple files. 
+It is broadly comparable to Flask Blueprints. 
 
 
 
