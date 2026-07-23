@@ -555,8 +555,8 @@ def old_home():
 
 
 
-@app.route("/emp/<int:employee_id>")
-def get_employee(employee_id):
+@app.route("/emple/<int:employee_id>")
+def get_employee123(employee_id):
     if employee_id != 101:
         abort(404)
     return {
