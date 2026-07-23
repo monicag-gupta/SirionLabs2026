@@ -58,4 +58,19 @@ SELECT * FROM courses;
 
 
 
+python_mysql_project/
+├── app.py
+├── database.py
+├── create_database.py
+├── test_connection.py
+├── requirements.txt
+└── venv/
+
+
+
+
+
+
+
+
 
