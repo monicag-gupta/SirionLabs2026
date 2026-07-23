@@ -1,0 +1,22 @@
+Installing FastAPI
+
+Step 1: Create a Project Folder
+mkdir fastapi_course_app
+cd fastapi_course_app
+Step 2: Create a Virtual Environment
+Windows
+python -m venv venv
+venv\Scripts\activate
+macOS or Linux
+python3 -m venv venv
+source venv/bin/activate
+Step 3: Install FastAPI
+The current FastAPI tutorial recommends installing FastAPI with its standard optional dependencies:
+pip install "fastapi[standard]"
+This installation includes the compcal development and server execution. A minimal installation can also be performed with pip install fastapi, but additional packages may then need to be installed separately.
+
+
+
+
+
+
