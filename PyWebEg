@@ -282,6 +282,20 @@ def search():
 # http://127.0.0.1:5000/search?department=Finance
 
 
+@app.route("/searchs")
+def searchs():
+    department = request.args.get("department", "All")
+    location = request.args.get("location", "All")
+
+    return {
+        "department": department,
+        "location": location
+    }
+# http://127.0.0.1:5000/searchs?department=Finance&location=Mumbai
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
