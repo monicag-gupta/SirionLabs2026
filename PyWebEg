@@ -302,6 +302,35 @@ if __name__ == "__main__":
 
 
 
+
+
+
+HTML form: index.html :
+<form method="post" action="/add-employees">
+    <input type="text" name="employee_name">
+    <input type="text" name="department">
+    <button type="submit">Add Employee</button>
+</form>
+
+
+Flask route:
+from flask import Flask, request,render_template
+
+@app.route("/index")
+def index():
+    return render_template("index.html")
+
+@app.route("/add-employees", methods=["POST"])
+def add_employees():
+    name = request.form.get("employee_name")
+    department = request.form.get("department")
+
+    return f"{name} added to {department}"
+
+
+
+
+
 Exercise
 Create a list of emp dict so that get /emps gives the list and 
 post /emps/name/sal adds the name and sal in the form of dict to the list
