@@ -12,7 +12,7 @@ python3 -m venv venv
 source venv/bin/activate
 Step 3: Install FastAPI
 The current FastAPI tutorial recommends installing FastAPI with its standard optional dependencies:
-pip install "fastapi[standard]"
+            pip install "fastapi[standard]"
 This installation includes the compcal development and server execution. A minimal installation can also be performed with pip install fastapi, but additional packages may then need to be installed separately.
 
 Step 4: Verify the Installation
@@ -58,5 +58,21 @@ It is broadly comparable to Flask Blueprints.
 
 
 
+
+main.py
+
+from fastapi import FastAPI
+app = FastAPI(
+    title="Course Management API",
+    description="A simple API created using FastAPI",
+    version="1.0.0"
+)
+@app.get("/")
+async def home():
+    return {
+        "application": "Course Management API",
+        "framework": "FastAPI",
+        "status": "running"
+    }
 
 
