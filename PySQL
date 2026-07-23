@@ -1,0 +1,17 @@
+Create and activate a virtual environment.
+Windows
+python -m venv venv
+venv\Scripts\activate
+macOS or Linux
+python3 -m venv venv
+source venv/bin/activate
+Install the official MySQL Connector/Python package:
+pip install mysql-connector-python
+The official MySQL documentation recommends installing the classic Connector/Python API through the mysql-connector-python package.
+Verify the installation:
+pip show mysql-connector-python
+Test the import:
+import mysql.connector
+
+print("MySQL Connector imported successfully.")
+
