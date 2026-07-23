@@ -517,6 +517,13 @@ def welcome():
 
 
 
+@app.post("/api/empl")
+def add_empl():
+    return {
+        "message": "Employee created successfully"
+    }, 201
+
+
 
 
 
