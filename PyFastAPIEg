@@ -91,6 +91,8 @@ You can also run:
             uvicorn main:app --reload
 Do not use automatic reload as a production deployment configuration.
 
+python3 -m uvicorn main:app --reload
+
 
 
 
