@@ -218,7 +218,7 @@ pip install -r requirements.txt
 
 
 
-from flask import Flask
+from flask import Flask, request
 
 app = Flask(__name__)
 
@@ -347,6 +347,82 @@ if __name__ == "__main__":
 
 
 
+from flask import Flask, request
+
+app = Flask(__name__)
+
+li=[{"name":"John","sal":10},{"name":"Jane","sal":100}]
+
+@app.route("/")
+def home():
+    return "Home Page"
+
+@app.route("/about")
+def about():
+    return "About Us"
+
+@app.route("/contact")
+def contact():
+    return "Contact Us"
+
+@app.route("/employees")
+def employees():
+    return "Employee List"
+
+
+@app.get("/emp")
+def get_employees12():
+    name = request.args.get("name")
+    for i in li:
+        if(i["name"].lower()==name.lower()):
+            return i
+    return "Not Found"
+
+
+
+
+@app.get("/emps")
+def get_employees():
+    return li
+
+@app.post("/emps/<name>/<sal>")
+def add_employee(name, sal):
+    d={"name":name,"sal":sal}
+    li.append(d)
+    return "Employee created"
+
+
+# The path converter accepts text containing forward slashes.
+@app.route("/department/<path:department_name>")
+def department(department_name):
+    return f"Department: {department_name}"
+
+
+@app.route("/empl/<int:employee_id>")
+def employee_by_id(employee_id):
+    return f"Employee ID: {employee_id}"
+
+@app.route("/salary/<float:amount>")
+def salary(amount):
+    return f"Employee salary: {amount}"
+
+
+@app.route("/search")
+def search():
+    department = request.args.get("department")
+    return f"Searching employees in: {department}"
+
+
+
+
+
+@app.route("/employee/<name>")
+def employee_by_name(name):
+    return f"Employee name: {name}"
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 
