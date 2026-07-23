@@ -40,6 +40,25 @@ def div(x,y):
 
 
 
+usemod1.py
+
+import mymod
+
+def add(a,b):
+    return a*a + b*b + 2*a*b
+
+print(mymod.add(3,5))
+print(mymod.author)
+print(add(3,4))
+
+
+
+
+usemod2.py
+
+
+
+
 
 
 
