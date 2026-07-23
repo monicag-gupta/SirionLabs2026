@@ -242,10 +242,22 @@ def employees():
 def employee():
     return "Employee request received"
 
+@app.get("/emps")
+def get_employees():
+    return "Display all employees"
+
+@app.post("/emps")
+def add_employee():
+    return "Create an employee"
+
+
 
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
 
 
 
