@@ -26,22 +26,26 @@ pip install requests flask
 
 
 
-import os
-from dotenv import load_dotenv
-from google import genai
+A basic Flask application can be created using only a few lines of Python code.
+from flask import Flask
 
-load_dotenv()
+app = Flask(__name__)
 
-client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+@app.route("/")
+def home():
+    return "Welcome to Flask!"
 
-response = client.models.generate_content(
-    model="gemini-2.5-flash",
-    contents="Tell me about Generative AI."
-)
+if __name__ == "__main__":
+    app.run(debug=True)
+When the application runs, open the following address in a browser:
+http://127.0.0.1:5000
 
-print(response.text)
+
+
+
+
+
+
 
 
 
