@@ -205,6 +205,20 @@ Werkzeug
 Provides request, response, and routing utilities
 
 
+Flask also installs supporting libraries such as Werkzeug, Jinja, Click, ItsDangerous and Blinker.
+
+
+Creating requirements.txt (for any VM-> to provide to others for creating the requirement installations)
+Run:
+pip freeze > requirements.txt
+A simple requirements.txt may contain:
+Flask==3.1.2
+Packages can later be installed using:
+pip install -r requirements.txt
+
+
+
+
 
 
 
