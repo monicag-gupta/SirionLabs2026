@@ -67,6 +67,14 @@ python_mysql_project/
 └── venv/
 
 
+If all the pip installed libraries are to be kept in requirements.txt, then:
+pip freeze > requirements.txt
+
+
+carry the requirements.txt whereever the libraries are required.
+There run:
+pip install -r requirements.txt
+and all libraries will get installed with the mentioned version.
 
 
 
