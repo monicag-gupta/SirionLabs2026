@@ -160,6 +160,30 @@ User or Browser
 
 
 
+A small Flask application may use the following structure:
+flask_employee_app/
+│
+├── app.py
+├── employee.txt
+├── requirements.txt
+│
+├── templates/
+│   ├── index.html
+│   ├── employees.html
+│   └── add_employee.html
+│
+└── static/
+    ├── css/
+    │   └── style.css
+    │
+    ├── js/
+    │   └── script.js
+    │
+    └── images/
+        └── logo.png
+
+
+
 
 
 Request-Response Flow
