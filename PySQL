@@ -184,3 +184,295 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+
+app.py
+
+from decimal import Decimal, InvalidOperation
+from mysql.connector import Error
+from database import get_connection
+
+def validate_positive_number(value, field_name):
+    """Convert and validate a positive decimal number."""
+    try:
+        number = Decimal(str(value))
+    except InvalidOperation as error:
+        raise ValueError(f"{field_name} must be a valid number.") from error
+    if number <= 0:
+        raise ValueError(f"{field_name} must be greater than zero.")
+    return number
+
+def validate_non_negative_number(value, field_name):
+    """Convert and validate a non-negative decimal number."""
+    try:
+        number = Decimal(str(value))
+    except InvalidOperation as error:
+        raise ValueError(f"{field_name} must be a valid number.") from error
+    if number < 0:
+        raise ValueError(f"{field_name} cannot be negative.")
+    return number
+
+def create_course(course_name, category, duration_hours, trainer, fee):
+    """Insert a new course."""
+    course_name = course_name.strip()
+    category = category.strip()
+    trainer = trainer.strip()
+    if not course_name:
+        raise ValueError("Course name is mandatory.")
+    if not category:
+        raise ValueError("Category is mandatory.")
+    if len(trainer) < 2:
+        raise ValueError("Trainer name must contain at least two characters.")
+    duration_hours = validate_positive_number(duration_hours, "Duration")
+    fee = validate_non_negative_number(fee, "Fee")
+    connection = get_connection()
+    cursor = None
+    if connection is None:
+        return
+    try:
+        cursor = connection.cursor()
+        query = """
+            INSERT INTO courses (course_name, category, duration_hours, trainer, fee)
+            VALUES (%s, %s, %s, %s, %s)
+        """
+        values = (course_name, category, duration_hours, trainer, fee )
+        cursor.execute(query, values)
+        connection.commit()
+        print("Course created successfully.")
+        print(f"New Course ID: {cursor.lastrowid}")
+    except Error as error:
+        connection.rollback()
+        print(f"Unable to create course: {error}")
+    finally:
+        if cursor is not None:
+            cursor.close()
+        connection.close()
+
+def get_all_courses():
+    """Retrieve and display all courses."""
+    connection = get_connection()
+    cursor = None
+    if connection is None:
+        return
+    try:
+        cursor = connection.cursor(dictionary=True)
+        query = """
+            SELECT course_id, course_name, category, duration_hours, trainer, fee, created_at
+            FROM courses
+            ORDER BY course_id
+        """
+        cursor.execute(query)
+        courses = cursor.fetchall()
+        if not courses:
+            print("No courses found.")
+            return
+        print("\nCourse Records")
+        print("-" * 100)
+        for course in courses:
+            print(
+                f"ID: {course['course_id']} | "
+                f"Course: {course['course_name']} | "
+                f"Category: {course['category']} | "
+                f"Duration: {course['duration_hours']} hours | "
+                f"Trainer: {course['trainer']} | "
+                f"Fee: {course['fee']}"
+            )
+    except Error as error:
+        print(f"Unable to retrieve courses: {error}")
+    finally:
+        if cursor is not None:
+            cursor.close()
+        connection.close()
+
+def get_course_by_id(course_id):
+    """Retrieve one course by ID."""
+    connection = get_connection()
+    cursor = None
+    if connection is None:
+        return None
+    try:
+        cursor = connection.cursor(dictionary=True)
+        query = """
+            SELECT course_id, course_name, category, duration_hours,
+                trainer, fee, created_at FROM courses
+            WHERE course_id = %s
+        """
+        cursor.execute(query, (course_id,))
+        course = cursor.fetchone()
+        if course is None:
+            print("Course not found.")
+            return None
+        print("\nCourse Details")
+        print(f"Course ID       : {course['course_id']}")
+        print(f"Course Name     : {course['course_name']}")
+        print(f"Category        : {course['category']}")
+        print(f"Duration Hours  : {course['duration_hours']}")
+        print(f"Trainer         : {course['trainer']}")
+        print(f"Fee             : {course['fee']}")
+        print(f"Created At      : {course['created_at']}")
+        return course
+    except Error as error:
+        print(f"Unable to retrieve course: {error}")
+        return None
+    finally:
+        if cursor is not None:
+            cursor.close()
+        connection.close()
+
+def update_course(course_id, course_name, category, duration_hours, trainer, fee):
+    """Update an existing course."""
+    course_name = course_name.strip()
+    category = category.strip()
+    trainer = trainer.strip()
+    if not course_name:
+        raise ValueError("Course name is mandatory.")
+    if not category:
+        raise ValueError("Category is mandatory.")
+    if len(trainer) < 2:
+        raise ValueError("Trainer name must contain at least two characters.")
+    duration_hours = validate_positive_number(duration_hours, "Duration")
+    fee = validate_non_negative_number(fee, "Fee")
+    connection = get_connection()
+    cursor = None
+    if connection is None:
+        return
+    try:
+        cursor = connection.cursor()
+        query = """
+            UPDATE courses SET course_name = %s, category = %s,
+                duration_hours = %s, trainer = %s, fee = %s
+            WHERE course_id = %s
+        """
+        values = (course_name, category, duration_hours, trainer, fee, course_id)
+        cursor.execute(query, values)
+        if cursor.rowcount == 0:
+            print("Course not found.")
+            connection.rollback()
+            return
+        connection.commit()
+        print("Course updated successfully.")
+    except Error as error:
+        connection.rollback()
+        print(f"Unable to update course: {error}")
+    finally:
+        if cursor is not None:
+            cursor.close()
+        connection.close()
+
+def delete_course(course_id):
+    """Delete a course by ID."""
+    connection = get_connection()
+    cursor = None
+    if connection is None:
+        return
+    try:
+        cursor = connection.cursor()
+        query = """
+            DELETE FROM courses
+            WHERE course_id = %s
+        """
+        cursor.execute(query, (course_id,))
+        if cursor.rowcount == 0:
+            print("Course not found.")
+            connection.rollback()
+            return
+        connection.commit()
+        print("Course deleted successfully.")
+    except Error as error:
+        connection.rollback()
+        print(f"Unable to delete course: {error}")
+    finally:
+        if cursor is not None:
+            cursor.close()
+        connection.close()
+
+def search_courses_by_category(category):
+    """Search for courses by category."""
+    connection = get_connection()
+    cursor = None
+    if connection is None:
+        return
+    try:
+        cursor = connection.cursor(dictionary=True)
+        query = """
+            SELECT
+                course_id, course_name, category, duration_hours, trainer, fee
+            FROM courses WHERE category LIKE %s
+            ORDER BY course_name
+        """
+        search_value = f"%{category.strip()}%"
+        cursor.execute(query, (search_value,))
+        courses = cursor.fetchall()
+        if not courses:
+            print("No matching courses found.")
+            return
+        for course in courses:
+            print(course)
+    except Error as error:
+        print(f"Unable to search for courses: {error}")
+    finally:
+        if cursor is not None:
+            cursor.close()
+        connection.close()
+
+def display_menu():
+    print("\n" + "=" * 45)
+    print("       COURSE DATABASE MANAGEMENT")
+    print("=" * 45)
+    print("1. Add Course")
+    print("2. View All Courses")
+    print("3. View Course by ID")
+    print("4. Update Course")
+    print("5. Delete Course")
+    print("6. Search by Category")
+    print("7. Exit")
+    print("=" * 45)
+
+def main():
+    while True:
+        display_menu()
+        choice = input("Enter your choice: ").strip()
+        try:
+            if choice == "1":
+                course_name = input("Course name: ")
+                category = input("Category: ")
+                duration = input("Duration in hours: ")
+                trainer = input("Trainer name: ")
+                fee = input("Course fee: ")
+                create_course(course_name, category, duration, trainer, fee)
+            elif choice == "2":
+                get_all_courses()
+            elif choice == "3":
+                course_id = int(input("Enter course ID: "))
+                get_course_by_id(course_id)
+            elif choice == "4":
+                course_id = int(input("Enter course ID: "))
+                course_name = input("New course name: ")
+                category = input("New category: ")
+                duration = input("New duration: ")
+                trainer = input("New trainer: ")
+                fee = input("New fee: ")
+                update_course(course_id, course_name, category, duration, trainer, fee)
+            elif choice == "5":
+                course_id = int(input("Enter course ID: "))
+                delete_course(course_id)
+            elif choice == "6":
+                category = input("Enter category to search: ")
+                search_courses_by_category(category)
+            elif choice == "7":
+                print("Application closed.")
+                break
+            else:
+                print("Invalid choice. Select 1 to 7.")
+        except ValueError as error:
+            print(f"Invalid input: {error}")
+
+if __name__ == "__main__":
+    main()
+
+
+
+
