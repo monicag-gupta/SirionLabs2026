@@ -264,6 +264,14 @@ def department(department_name):
 
 
 
+@app.route("/employee/<int:employee_id>")
+def employee_by_id(employee_id):
+    return f"Employee ID: {employee_id}"
+
+@app.route("/salary/<float:amount>")
+def salary(amount):
+    return f"Employee salary: {amount}"
+
 
 
 
