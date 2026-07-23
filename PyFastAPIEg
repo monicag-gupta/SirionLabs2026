@@ -76,3 +76,22 @@ async def home():
     }
 
 
+
+
+
+
+
+FastAPI Development Command
+Run:
+            fastapi dev main.py
+            http://127.0.0.1:8000
+The `fastapi dev` command starts the development server and automatically reloads the application when source files change.
+Method 2: Uvicorn Command
+You can also run:
+            uvicorn main:app --reload
+Do not use automatic reload as a production deployment configuration.
+
+
+
+
+
