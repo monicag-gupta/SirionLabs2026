@@ -252,6 +252,11 @@ def add_employee():
 
 
 
+@app.route("/employee/<name>")
+def employee_by_name(name):
+    return f"Employee name: {name}"
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
