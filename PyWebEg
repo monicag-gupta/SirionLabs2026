@@ -26,6 +26,28 @@ pip install requests flask
 
 
 
+
+mymod.py
+
+def add(x,y):
+    return x+y
+
+author="John Doe"
+company="SL"
+
+def div(x,y):
+    return 0 if y==0 else x/y
+
+
+
+
+
+
+
+
+
+
+
 A basic Flask application can be created using only a few lines of Python code.
 from flask import Flask
 
