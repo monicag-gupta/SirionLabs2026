@@ -568,3 +568,32 @@ def get_employee123(employee_id):
 
 
 
+
+Employee Information API
+Create a Flask application that provides the following routes:
+
+Route
+Method
+Purpose
+/
+GET
+Display the application name
+/employees
+GET
+Display all employees
+/employees/<employee_id>
+GET
+Display one employee
+/employees
+POST
+Add a new employee
+/search
+GET
+Search employees by department
+/application-info
+GET
+Return a custom response
+
+
+
+
