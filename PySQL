@@ -24,12 +24,12 @@ print("MySQL Connector imported successfully.")
 Open MySQL Workbench or the MySQL command-line client.
 Log in using a MySQL account that has permission to create databases.
 Create a Database
-CREATE DATABASE training_db;
+  CREATE DATABASE training_db;
 Select the database:
-USE training_db;
+  USE training_db;
 A database can be created using CREATE DATABASE, provided the connected MySQL user has the required privileges.
 Display Available Databases
-SHOW DATABASES;
+  SHOW DATABASES;
 Display the Selected Database
-SELECT DATABASE();
+  SELECT DATABASE();
 
