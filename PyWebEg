@@ -264,7 +264,7 @@ def department(department_name):
 
 
 
-@app.route("/employee/<int:employee_id>")
+@app.route("/empl/<int:employee_id>")
 def employee_by_id(employee_id):
     return f"Employee ID: {employee_id}"
 
