@@ -1,8 +1,13 @@
 Use a Generative AI tool for the following prompt:
-“Create a customer complaint response for a banking customer whose refund has been delayed. Use an empathetic, professional and reassuring tone.”
+“Create a customer complaint response for a banking customer 
+whose refund has been delayed. Use an empathetic, professional and reassuring tone.”
 After generating the response, evaluate:
-Was the context sufficiently clear? 
-Was the output factually accurate? 
-Did the response contain any unsupported assumptions? 
+Was the context sufficiently clear?  Yes
+Was the output factually accurate? No
+Did the response contain any unsupported assumptions? Yes
 What additional information would improve the result? 
-What should be reviewed by a human before sending it? 
+  Lots of info: 
+    Policy Details
+    User Review
+    Reasoning
+What should be reviewed by a human before sending it? Everything
