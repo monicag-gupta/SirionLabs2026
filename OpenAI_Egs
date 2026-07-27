@@ -1727,3 +1727,5 @@ def reset_chat(user_id: str) -> dict:
 
 
 
+uvicorn app:app --reload
+
