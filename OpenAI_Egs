@@ -2308,3 +2308,284 @@ Technical support is available from Monday to Friday between
 rag_app.py
 
 
+import os
+from pathlib import Path
+
+import chromadb
+from dotenv import load_dotenv
+from openai import OpenAI
+
+
+# Load environment variables
+load_dotenv()
+
+if not os.getenv("OPENAI_API_KEY"):
+    raise RuntimeError(
+        "OPENAI_API_KEY is missing from the .env file."
+    )
+
+
+# Create OpenAI client
+openai_client = OpenAI()
+
+
+# Create persistent Chroma database
+chroma_client = chromadb.PersistentClient(
+    path="./chroma_data"
+)
+
+
+# Create or open a collection
+collection = chroma_client.get_or_create_collection(
+    name="training_knowledge"
+)
+
+
+def load_document(file_path: str) -> str:
+    """Read text from a local file."""
+
+    path = Path(file_path)
+
+    if not path.exists():
+        raise FileNotFoundError(
+            f"Document not found: {file_path}"
+        )
+
+    return path.read_text(encoding="utf-8")
+
+
+def split_text(
+    text: str,
+    chunk_size: int = 80,
+    overlap: int = 20
+) -> list[str]:
+    """Split text into overlapping word-based chunks."""
+
+    if chunk_size <= 0:
+        raise ValueError(
+            "chunk_size must be greater than zero."
+        )
+
+    if overlap < 0 or overlap >= chunk_size:
+        raise ValueError(
+            "overlap must be between 0 and chunk_size - 1."
+        )
+
+    words = text.split()
+    chunks = []
+
+    start = 0
+    step = chunk_size - overlap
+
+    while start < len(words):
+        end = start + chunk_size
+
+        chunk = " ".join(words[start:end])
+
+        if chunk:
+            chunks.append(chunk)
+
+        start += step
+
+    return chunks
+
+
+def generate_embeddings(
+    texts: list[str]
+) -> list[list[float]]:
+    """Generate embeddings for a list of text chunks."""
+
+    response = openai_client.embeddings.create(
+        model="text-embedding-3-small",
+        input=texts
+    )
+
+    return [
+        item.embedding
+        for item in response.data
+    ]
+
+
+def index_document(file_path: str) -> None:
+    """Load, chunk, embed and store a document."""
+
+    document_text = load_document(file_path) # Loads the source document.
+
+    chunks = split_text(      # Divides the document into smaller sections.
+        text=document_text,
+        chunk_size=80,
+        overlap=20
+    )
+
+    embeddings = generate_embeddings(chunks)  # Converts every chunk into a vector.
+
+    ids = [
+        f"chunk-{index}"
+        for index in range(len(chunks))
+    ]
+
+    metadatas = [
+        {
+            "source": file_path,
+            "chunk_number": index
+        }
+        for index in range(len(chunks))
+    ]
+
+    # Upsert updates existing IDs and inserts new ones
+    collection.upsert(   # Stores the vectors, text, and metadata in ChromaDB.
+        ids=ids,
+        documents=chunks,
+        embeddings=embeddings,
+        metadatas=metadatas
+    )
+
+    print(
+        f"Indexed {len(chunks)} chunks "
+        f"from {file_path}."
+    )
+
+
+def retrieve_context(
+    question: str,
+    top_k: int = 3
+) -> list[dict]:
+    """Retrieve the chunks most related to the question."""
+
+    query_embedding = generate_embeddings(
+        [question]
+    )[0]    #Converts the user’s question into a vector.
+
+    results = collection.query(    #Finds the most similar stored chunks.
+        query_embeddings=[query_embedding],
+        n_results=top_k,
+        include=[
+            "documents",
+            "metadatas",
+            "distances"
+        ]
+    )
+
+    retrieved_chunks = []
+
+    documents = results["documents"][0]
+    metadatas = results["metadatas"][0]
+    distances = results["distances"][0]
+
+    for document, metadata, distance in zip(
+        documents,
+        metadatas,
+        distances
+    ):
+        retrieved_chunks.append(
+            {
+                "text": document,
+                "source": metadata["source"],
+                "chunk_number": metadata["chunk_number"],
+                "distance": distance
+            }
+        )
+
+    return retrieved_chunks
+
+
+def generate_answer(
+    question: str,
+    retrieved_chunks: list[dict]
+) -> str:
+    """Generate an answer using retrieved context."""
+
+    context_sections = []
+
+    for index, chunk in enumerate(
+        retrieved_chunks,
+        start=1
+    ):
+        context_sections.append(  
+            f"""
+Context {index}
+Source: {chunk['source']}
+Chunk: {chunk['chunk_number']}
+
+{chunk['text']}
+"""
+        )
+
+    context = "\n".join(context_sections)  #Combines the retrieved chunks into context.
+
+    prompt = f"""
+Answer the question using only the supplied context.
+
+Instructions:
+- Do not use unsupported information.
+- If the context does not contain the answer, say:
+  "The available documents do not contain that information."
+- Give a concise answer.
+- Mention the source filename.
+
+Context:
+{context}
+
+Question:
+{question}
+"""
+
+    response = openai_client.responses.create(  #Sends the question and context to the language model.
+        model="gpt-4.1-mini",
+        input=prompt,
+        max_output_tokens=300
+    )
+
+    return response.output_text
+
+
+def main() -> None:
+    """Run the RAG application."""
+
+    index_document("knowledge.txt")
+
+    print("\nSimple RAG Assistant")
+    print("Type 'exit' to stop.\n")
+
+    while True:
+        question = input("Question: ").strip()
+
+        if question.lower() == "exit":
+            print("Goodbye!")
+            break
+
+        if not question:
+            print("Please enter a question.\n")
+            continue
+
+        try:
+            retrieved_chunks = retrieve_context(
+                question=question,
+                top_k=3
+            )
+
+            print("\nRetrieved context:")
+
+            for chunk in retrieved_chunks:
+                print(
+                    f"- Chunk {chunk['chunk_number']} "
+                    f"| Distance: {chunk['distance']:.4f}"
+                )
+
+            answer = generate_answer(
+                question=question,
+                retrieved_chunks=retrieved_chunks
+            )
+
+            print("\nAnswer:")
+            print(answer)
+            print()
+
+        except Exception as error:
+            print(f"\nError: {error}\n")
+
+
+if __name__ == "__main__":
+    main()
+
+
