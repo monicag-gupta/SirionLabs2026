@@ -229,6 +229,35 @@ if __name__ == "__main__":
 
 
 
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+def generate_tagline(client: OpenAI, temperature: float) -> str:
+    """Generate a tagline using the selected temperature."""
+    response = client.responses.create(
+        model="gpt-4.1-mini",
+        input=(
+            "Write one short, creative tagline for an "
+            "AI-powered learning platform."
+        ),
+        temperature=temperature,
+        max_output_tokens=50,
+    )
+    return response.output_text
+def main() -> None:
+    if not os.getenv("OPENAI_API_KEY"):
+        raise RuntimeError("OPENAI_API_KEY is not configured.")
+    client = OpenAI()
+    print("Low temperature: 0.2")
+    print(generate_tagline(client, 0.2))
+    print("\nHigh temperature: 1.0")
+    print(generate_tagline(client, 1.0))
+if __name__ == "__main__":
+    main()
+
+
 
 
 
