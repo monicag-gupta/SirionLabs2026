@@ -969,3 +969,124 @@ preferred_time = get_memory(
 
 print("Preferred time:", preferred_time)
 
+
+
+
+
+
+
+
+
+import json
+from pathlib import Path
+
+from dotenv import load_dotenv
+from openai import OpenAI
+
+
+load_dotenv()
+client = OpenAI()
+
+MEMORY_FILE = Path("memory.json")
+USER_ID = "user_101"
+
+
+def load_memory() -> dict:
+    """Load saved memory from the JSON file."""
+    if not MEMORY_FILE.exists():
+        return {}
+    try:
+        with MEMORY_FILE.open("r", encoding="utf-8") as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        print("Warning: memory.json is invalid. Starting with empty memory.")
+        return {}
+
+def save_memory(memory: dict) -> None:
+    """Save memory to the JSON file."""
+    with MEMORY_FILE.open("w", encoding="utf-8") as file:
+        json.dump(memory, file, indent=4)
+
+def remember_fact(memory: dict, user_id: str, fact: str) -> None:
+    """Save one fact for a particular user."""
+    if user_id not in memory:
+        memory[user_id] = []
+    if fact not in memory[user_id]:
+        memory[user_id].append(fact)
+    save_memory(memory)
+
+def get_memory_text(memory: dict, user_id: str) -> str:
+    """Convert stored memories into text for the model."""
+    facts = memory.get(user_id, [])
+    if not facts:
+        return "No saved memories."
+    return "\n".join(f"- {fact}" for fact in facts)
+
+def main() -> None:
+    """Run the chatbot."""
+    memory = load_memory()
+    previous_response_id = None
+    print("Memory Chatbot")
+    print("Commands:")
+    print("/remember <fact>  Save information")
+    print("/memory           Display saved information")
+    print("/forget           Delete all saved information")
+    print("exit              Close the chatbot\n")
+    while True:
+        user_message = input("You: ").strip()
+        if user_message.lower() == "exit":
+            print("Chatbot: Goodbye!")
+            break
+        if not user_message:
+            print("Chatbot: Please enter a message.\n")
+            continue
+        # Save a new memory
+        if user_message.lower().startswith("/remember "):
+            fact = user_message[len("/remember "):].strip()
+            if not fact:
+                print("Chatbot: Please provide something to remember.\n")
+                continue
+            remember_fact(memory, USER_ID, fact)
+            print(f"Chatbot: I saved this memory: {fact}\n")
+            continue
+        # Display current memory
+        if user_message.lower() == "/memory":
+            print("Chatbot: Saved memories:")
+            print(get_memory_text(memory, USER_ID))
+            print()
+            continue
+        # Delete current memory
+        if user_message.lower() == "/forget":
+            memory[USER_ID] = []
+            save_memory(memory)
+            print("Chatbot: All saved memories were deleted.\n")
+            continue
+        memory_text = get_memory_text(memory, USER_ID)
+        instructions = f"""
+You are a helpful training chatbot.
+
+Use the following saved information when it is relevant.
+Do not invent additional user information.
+
+Saved user memory:
+{memory_text}
+"""
+        request = {
+            "model": "gpt-4.1-mini",
+            "instructions": instructions,
+            "input": user_message
+        }
+        # Add conversation history after the first response
+        if previous_response_id is not None:
+            request["previous_response_id"] = previous_response_id
+        try:
+            response = client.responses.create(**request)
+            print(f"Chatbot: {response.output_text}\n")
+            # Remember the current conversation
+            previous_response_id = response.id
+        except Exception as error:
+            print(f"Error: {error}\n")
+
+if __name__ == "__main__":
+    main()
+
