@@ -1789,3 +1789,27 @@ response = client.embeddings.create(
 )
 for index, item in enumerate(response.data):
     print(f"Text {index + 1}: {item.embedding[:5]}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+FAISS
+FAISS is not a complete database. It is primarily a library for efficient similarity search and clustering. Your application must separately manage document storage, metadata, backups and APIs. 
+ChromaDB
+Chroma stores documents, embeddings and metadata inside collections. It supports local, self-hosted and managed-cloud use, making it beginner-friendly for RAG demonstrations. 
+Pinecone
+Pinecone is a fully managed vector database designed for production-scale AI workloads. It manages infrastructure, indexing and scaling for the developer. 
+Weaviate
+Weaviate is an open-source vector database that stores both data objects and their vector embeddings. It supports vector search, metadata filtering and hybrid search. 
+Milvus
+Milvus is an open-source, cloud-native vector database designed for high-performance similarity search across large vector datasets. It supports deployment from a local application to distributed clusters.
+Use ChromaDB for learning, FAISS for custom local search, Pinecone for managed production, Weaviate for feature-rich open-source search and Milvus for large-scale distributed systems.
