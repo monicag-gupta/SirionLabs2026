@@ -1904,3 +1904,24 @@ for text, metadata, distance in zip(
 
 
 
+
+
+
+
+FAISS is a similarity-search library rather than a complete database. It searches dense vectors using measures such as Euclidean distance or dot product. Cosine similarity can be implemented by normalizing the vectors and using an inner-product index. 
+Step 1: Install Conda
+FAISS officially supports installation through Conda. Its CPU package supports Windows x86-64. 
+Step 2: Create an environment
+Open Anaconda Prompt:
+conda create --name faiss-demo python=3.12
+conda activate faiss-demo
+Step 3: Install FAISS and NumPy
+conda install -c pytorch -c conda-forge faiss-cpu numpy
+Step 4: Create faiss_demo.py
+notepad faiss_demo.py
+Code
+python faiss_demo.py
+Step 5: Deactivate
+(faiss-demo) C:\Users\Monica>conda deactivate
+(base) C:\Users\Monica>
+
