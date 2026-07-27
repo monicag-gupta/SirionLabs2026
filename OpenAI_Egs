@@ -5,3 +5,20 @@ OPENAI_API_KEY=sk-proj-6fUJ-O0YCkiaeUmU0ptTR8ztU2iYhEITxGbZWwJ6Q1ZfFPJSaQtK0cfOM
 
 pip install openai
 pip show openai
+
+
+
+Setting the API key on Windows PowerShell
+  setx OPENAI_API_KEY "your_api_key_here"
+Close and reopen the terminal after running the command.
+Setting the API key on macOS or Linux
+  export OPENAI_API_KEY="your_api_key_here"
+Creating the client
+  from openai import OpenAI
+  client = OpenAI()
+Because no API key is written in the code, the SDK reads it securely from the environment variable.
+
+
+
+
+
