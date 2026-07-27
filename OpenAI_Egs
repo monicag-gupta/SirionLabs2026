@@ -1729,3 +1729,38 @@ def reset_chat(user_id: str) -> dict:
 
 uvicorn app:app --reload
 
+
+
+
+Test the /chat route
+
+In Swagger:
+Open POST /chat. 
+Select Try it out. 
+Enter: 
+{
+  "user_id": "user_101",
+  "message": "My name is Rahul."
+}
+Select Execute. 
+Possible response:
+{
+  "user_id": "user_101",
+  "reply": "Nice to meet you, Rahul!",
+  "response_id": "resp_123456"
+}
+
+
+
+Send another request:
+{
+  "user_id": "user_101",
+  "message": "What is my name?"
+}
+Possible response:
+{
+  "user_id": "user_101",
+  "reply": "Your name is Rahul.",
+  "response_id": "resp_789012"
+}
+
