@@ -1115,3 +1115,112 @@ Chatbot: Python is a simple and popular programming language used to write instr
 
 You: exit
 Chatbot: Goodbye!
+
+
+
+
+
+
+
+import os
+
+from dotenv import load_dotenv
+from flask import Flask, jsonify, render_template, request, session
+from openai import OpenAI
+
+
+# Load variables from the .env file
+load_dotenv()
+
+app = Flask(__name__)
+
+# Required for Flask session management
+app.secret_key = os.getenv(
+    "FLASK_SECRET_KEY",
+    "development-secret-key"
+)
+
+# Create the OpenAI client
+client = OpenAI()
+
+
+@app.route("/")
+def index():
+    """Display the chatbot webpage."""
+    return render_template("index.html")
+
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    """Receive a user message and return an AI response."""
+
+    data = request.get_json(silent=True) or {}
+    user_message = data.get("message", "").strip()
+
+    if not user_message:
+        return jsonify(
+            {"error": "Please enter a message."}
+        ), 400
+
+    # Retrieve the previous response ID for this browser session
+    previous_response_id = session.get("previous_response_id")
+
+    request_parameters = {
+        "model": "gpt-4.1-mini",
+        "instructions": (
+            "You are a helpful training assistant. "
+            "Give clear, concise and beginner-friendly answers."
+        ),
+        "input": user_message,
+        "max_output_tokens": 500
+    }
+
+    # Add conversation context after the first message
+    if previous_response_id:
+        request_parameters["previous_response_id"] = (
+            previous_response_id
+        )
+
+    try:
+        response = client.responses.create(
+            **request_parameters
+        )
+
+        # Store the current response ID for the next message
+        session["previous_response_id"] = response.id
+
+        return jsonify(
+            {
+                "reply": response.output_text
+            }
+        )
+
+    except Exception as error:
+        print(f"OpenAI error: {error}")
+
+        return jsonify(
+            {
+                "error": (
+                    "The chatbot could not generate a response. "
+                    "Please try again."
+                )
+            }
+        ), 500
+
+
+@app.route("/reset", methods=["POST"])
+def reset_chat():
+    """Clear the current chatbot conversation."""
+
+    session.pop("previous_response_id", None)
+
+    return jsonify(
+        {
+            "message": "Conversation reset successfully."
+        }
+    )
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
