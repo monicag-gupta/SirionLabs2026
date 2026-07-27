@@ -1090,3 +1090,28 @@ Saved user memory:
 if __name__ == "__main__":
     main()
 
+
+
+
+
+
+
+You: /remember My name is Rahul
+Chatbot: I saved this memory: My name is Rahul
+
+You: /remember I prefer short explanations
+Chatbot: I saved this memory: I prefer short explanations
+
+You: /memory
+Chatbot: Saved memories:
+- My name is Rahul
+- I prefer short explanations
+
+You: What is my name?
+Chatbot: Your name is Rahul.
+
+You: How should you explain Python to me?
+Chatbot: Python is a simple and popular programming language used to write instructions for computers. It's easy to read and good for beginners, used in web development, data analysis, AI, and more.
+
+You: exit
+Chatbot: Goodbye!
