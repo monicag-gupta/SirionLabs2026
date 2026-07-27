@@ -871,3 +871,45 @@ If product price is 100 and profit in percentage is 45, what is the product inco
 
 
 
+
+
+
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv() # Load the API key from the .env file
+client = OpenAI() # Create the OpenAI client
+
+def main() -> None:
+    """Run a simple command-line chatbot."""
+    print("AI Chatbot")
+    print("Type 'exit' to stop.\n")
+    # Stores the ID of the model's previous response
+    previous_response_id = None
+    while True:        
+        user_message = input("You: ").strip() # Read a message from the user        
+        if user_message.lower() == "exit":  # Stop the chatbot
+            print("Chatbot: Goodbye!")
+            break        
+        if not user_message: # Ignore empty messages
+            print("Chatbot: Please enter a message.")
+            continue
+        try:
+            # Send the user's message to the model
+            response = client.responses.create(
+                model="gpt-4.1-mini",
+                input=user_message,
+                previous_response_id=previous_response_id
+            )
+            # Display the model's answer
+            print(f"Chatbot: {response.output_text}\n")
+            # Save this response ID for the next conversation turn
+            previous_response_id = response.id
+        except Exception as error:
+            print(f"Error: {error}")
+
+if __name__ == "__main__":
+    main()
+
+
+
