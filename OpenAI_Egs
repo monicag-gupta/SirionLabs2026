@@ -941,3 +941,31 @@ print(chat("user_101", "What is my name?"))
 print(chat("user_202", "What is my name?"))
 
 
+
+
+
+
+
+memory = {}
+
+def save_memory(user_id: str, key: str, value: str) -> None:
+    if user_id not in memory:
+        memory[user_id] = {}
+    memory[user_id][key] = value
+
+def get_memory(user_id: str, key: str) -> str | None:
+    return memory.get(user_id, {}).get(key)
+
+save_memory(
+    user_id="user_101",
+    key="preferred_time",
+    value="10:00 AM"
+)
+
+preferred_time = get_memory(
+    user_id="user_101",
+    key="preferred_time"
+)
+
+print("Preferred time:", preferred_time)
+
