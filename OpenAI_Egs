@@ -1224,3 +1224,23 @@ def reset_chat():
 if __name__ == "__main__":
     app.run(debug=True)
 
+
+
+
+
+
+
+web-chatbot
+│
+├── app.py
+├── .env
+├── requirements.txt
+│
+├── templates
+│   └── index.html
+│
+└── static
+    └── style.css
+
+
+
