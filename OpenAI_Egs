@@ -30,21 +30,30 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 
+# Load environment variables
 load_dotenv()
+
 api_key = os.getenv("OPENAI_API_KEY")
 
 if not api_key:
     raise ValueError("OPENAI_API_KEY is missing from the .env file.")
 
-client = openai.Client(api_key=api_key)
+# Create OpenAI client
+client = OpenAI(api_key=api_key)
+
 try:
-    response = client.models.generate_content(
+    response = client.responses.create(
         model="gpt-4.1-mini",
-        contents="Tell me about Generative AI."
+        input="Tell me about Generative AI."
     )
-    print(response.text)
+
+    print(response.output_text)
+
 finally:
     client.close()
+
+
+
 
 
 
