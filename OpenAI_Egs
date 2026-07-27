@@ -4,6 +4,7 @@ OPENAI_API_KEY=sk-proj-6fUJ-O0YCkiaeUmU0ptTR8ztU2iYhEITxGbZWwJ6Q1ZfFPJSaQtK0cfOM
 
 
 pip install openai
+pip install dotenv
 pip show openai
 
 
