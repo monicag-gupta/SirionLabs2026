@@ -1599,3 +1599,131 @@ fastapi-chatbot/
 
 
 
+from typing import Optional
+
+from dotenv import load_dotenv
+from fastapi import FastAPI, HTTPException
+from openai import OpenAI
+from pydantic import BaseModel
+
+
+# Load variables from the .env file
+load_dotenv()
+
+# Create FastAPI application
+app = FastAPI(
+    title="AI Chatbot API",
+    description="A simple chatbot built with FastAPI and OpenAI",
+    version="1.0.0",
+)
+
+# Create OpenAI client
+client = OpenAI()
+
+# Temporary session storage
+sessions: dict[str, str] = {}
+
+
+class ChatRequest(BaseModel):
+    """Data received from the user."""
+
+    user_id: str
+    message: str
+
+
+class ChatResponse(BaseModel):
+    """Data returned by the chatbot."""
+
+    user_id: str
+    reply: str
+    response_id: str
+
+
+@app.get("/")
+def home() -> dict:
+    """Display basic application information."""
+
+    return {
+        "application": "AI Chatbot API",
+        "status": "running",
+    }
+
+
+@app.post("/chat", response_model=ChatResponse)
+def chat(chat_request: ChatRequest) -> ChatResponse:
+    """Receive a message and return the chatbot response."""
+
+    user_id = chat_request.user_id.strip()
+    user_message = chat_request.message.strip()
+
+    if not user_id:
+        raise HTTPException(
+            status_code=400,
+            detail="User ID is required.",
+        )
+
+    if not user_message:
+        raise HTTPException(
+            status_code=400,
+            detail="Message cannot be empty.",
+        )
+
+    # Retrieve this user's previous response
+    previous_response_id: Optional[str] = sessions.get(user_id)
+
+    request_parameters = {
+        "model": "gpt-4.1-mini",
+        "instructions": (
+            "You are a helpful training assistant. "
+            "Give clear, concise, and beginner-friendly answers."
+        ),
+        "input": user_message,
+        "max_output_tokens": 500,
+    }
+
+    # Include conversation history after the first message
+    if previous_response_id:
+        request_parameters["previous_response_id"] = (
+            previous_response_id
+        )
+
+    try:
+        response = client.responses.create(
+            **request_parameters
+        )
+
+        # Save the latest response ID for this user
+        sessions[user_id] = response.id
+
+        return ChatResponse(
+            user_id=user_id,
+            reply=response.output_text,
+            response_id=response.id,
+        )
+
+    except Exception as error:
+        print(f"OpenAI error: {error}")
+
+        raise HTTPException(
+            status_code=500,
+            detail="The chatbot could not generate a response.",
+        ) from error
+
+
+@app.delete("/chat/{user_id}")
+def reset_chat(user_id: str) -> dict:
+    """Clear the conversation history for one user."""
+
+    if user_id in sessions:
+        del sessions[user_id]
+
+        return {
+            "message": f"Conversation for {user_id} was reset."
+        }
+
+    return {
+        "message": f"No active conversation found for {user_id}."
+    }
+
+
+
