@@ -1764,3 +1764,28 @@ Possible response:
   "response_id": "resp_789012"
 }
 
+
+
+
+from openai import OpenAI
+from dotenv import load_dotenv
+load_dotenv()
+client = OpenAI()
+response = client.embeddings.create( #Generates the embedding
+    model="text-embedding-3-small",  #Selects the embedding model
+    input="Generative AI helps create new content."  #Provides the text to convert
+)
+embedding = response.data[0].embedding   #Retrieves the numerical vector
+print("Embedding vector:");print(embedding)
+print("\nNumber of dimensions:")
+print(len(embedding)) # Displays the vector dimensions
+response = client.embeddings.create(
+    model="text-embedding-3-small",
+    input=[
+        "Artificial Intelligence",
+        "Machine Intelligence",
+        "Cooking a meal"
+    ]
+)
+for index, item in enumerate(response.data):
+    print(f"Text {index + 1}: {item.embedding[:5]}")
