@@ -760,3 +760,98 @@ print("\n\nStreaming completed.")
 
 
 
+
+from openai import OpenAI
+from dotenv import load_dotenv
+import json
+
+load_dotenv()
+client = OpenAI()
+
+# Actual Python function
+def calculate_course_fee(learners: int, fee_per_learner: float) -> dict:
+    total = learners * fee_per_learner
+    return {
+        "learners": learners,
+        "fee_per_learner": fee_per_learner,
+        "total_fee": total
+    }
+
+# Description of the function given to the model
+tools = [
+    {
+        "type": "function",
+        "name": "calculate_course_fee",
+        "description": "Calculate the total course fee.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "learners": {
+                    "type": "integer",
+                    "description": "Number of learners"
+                },
+                "fee_per_learner": {
+                    "type": "number",
+                    "description": "Fee charged per learner"
+                }
+            },
+            "required": [
+                "learners",
+                "fee_per_learner"
+            ],
+            "additionalProperties": False
+        },
+        "strict": True
+    }
+]
+
+# Store the conversation
+input_list = [
+    {
+        "role": "user",
+        "content": (
+            "Calculate the total fee for 10 learners "
+            "at $150 per learner."
+        )
+    }
+]
+
+# First API request
+response = client.responses.create(
+    model="gpt-4.1-mini",
+    input=input_list,
+    tools=tools
+)
+
+# Preserve the model's function-call request
+input_list += response.output
+
+# Check whether the model requested a function
+for item in response.output:
+    if item.type == "function_call":
+        if item.name == "calculate_course_fee":
+            # Convert arguments from JSON text to Python
+            arguments = json.loads(item.arguments)
+            # Execute the Python function
+            result = calculate_course_fee(
+                learners=arguments["learners"],
+                fee_per_learner=arguments["fee_per_learner"]
+            )
+            # Return the function result to the model
+            input_list.append(
+                {
+                    "type": "function_call_output",
+                    "call_id": item.call_id,
+                    "output": json.dumps(result)
+                }
+            )
+
+# Second API request for the final answer
+final_response = client.responses.create(
+    model="gpt-4.1-mini",
+    input=input_list,
+    tools=tools
+)
+
+print(final_response.output_text)
+
