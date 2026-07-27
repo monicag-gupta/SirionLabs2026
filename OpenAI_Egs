@@ -2015,3 +2015,103 @@ pip install pinecone python-dotenv
 .env
 PINECONE_API_KEY= pcsk_2i4sqq_2U39ccXzH1ZPL6n3uZ3ZsvHPYSUQP2jt6L7XHK8HGKJ248yx4fYdkNX3YvhCrmX
 Create pinecone_demo.py
+
+
+
+
+import os
+import time
+
+from dotenv import load_dotenv
+from pinecone import Pinecone
+
+
+load_dotenv()
+
+api_key = os.getenv("PINECONE_API_KEY")
+
+if not api_key:
+    raise RuntimeError(
+        "PINECONE_API_KEY is missing from the .env file."
+    )
+
+pc = Pinecone(api_key=api_key)
+
+index_name = "training-course-demo"
+
+
+# Create an index with Pinecone integrated embedding
+if not pc.has_index(index_name):
+    pc.create_index_for_model(
+        name=index_name,
+        cloud="aws",
+        region="us-east-1",
+        embed={
+            "model": "llama-text-embed-v2",
+            "field_map": {
+                "text": "chunk_text"
+            },
+        },
+    )
+
+    # Allow time for index creation
+    time.sleep(10)
+
+
+index = pc.Index(index_name)
+
+
+# Insert records
+index.upsert_records(
+    namespace="courses",
+    records=[
+        {
+            "_id": "course-1",
+            "chunk_text": (
+                "Generative AI creates text, images, and code."
+            ),
+            "category": "AI",
+        },
+        {
+            "_id": "course-2",
+            "chunk_text": (
+                "Python is used to build software applications."
+            ),
+            "category": "Programming",
+        },
+        {
+            "_id": "course-3",
+            "chunk_text": (
+                "Cooking requires ingredients and recipes."
+            ),
+            "category": "Cooking",
+        },
+    ],
+)
+
+# Newly inserted records may take a few seconds
+# to become searchable
+time.sleep(5)
+
+
+query = "Which course discusses AI content creation?"
+
+results = index.search(
+    namespace="courses",
+    query={
+        "top_k": 3,
+        "inputs": {
+            "text": query
+        },
+    },
+)
+
+print("Query:", query)
+print("\nSearch results:\n")
+
+for hit in results["result"]["hits"]:
+    print(f"Score    : {hit.score:.4f}")
+    print(f"Document : {hit.fields['chunk_text']}")
+    print(f"Category : {hit.fields['category']}")
+    print()
+
