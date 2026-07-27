@@ -1244,3 +1244,206 @@ web-chatbot
 
 
 
+index.html:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>AI Training Chatbot</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <div class="chat-container">
+
+        <div class="chat-header">
+            <div>
+                <h1>AI Training Chatbot</h1>
+                <p>Ask me a question</p>
+            </div>
+
+            <button
+                id="reset-button"
+                type="button"
+            >
+                New Chat
+            </button>
+        </div>
+
+        <div id="chat-box" class="chat-box">
+
+            <div class="message bot-message">
+                Hello! How can I help you today?
+            </div>
+
+        </div>
+
+        <form id="chat-form" class="chat-form">
+
+            <input
+                id="message-input"
+                type="text"
+                placeholder="Enter your message..."
+                autocomplete="off"
+                required
+            >
+
+            <button type="submit">
+                Send
+            </button>
+
+        </form>
+
+    </div>
+
+    <script>
+        const chatForm =
+            document.getElementById("chat-form");
+
+        const messageInput =
+            document.getElementById("message-input");
+
+        const chatBox =
+            document.getElementById("chat-box");
+
+        const resetButton =
+            document.getElementById("reset-button");
+
+
+        function addMessage(message, className) {
+            const messageElement =
+                document.createElement("div");
+
+            messageElement.classList.add(
+                "message",
+                className
+            );
+
+            messageElement.textContent = message;
+
+            chatBox.appendChild(messageElement);
+
+            chatBox.scrollTop =
+                chatBox.scrollHeight;
+
+            return messageElement;
+        }
+
+
+        chatForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                // Prevent the page from reloading
+                event.preventDefault();
+
+                const message =
+                    messageInput.value.trim();
+
+                if (!message) {
+                    return;
+                }
+
+                addMessage(
+                    message,
+                    "user-message"
+                );
+
+                messageInput.value = "";
+                messageInput.disabled = true;
+
+                const loadingMessage = addMessage(
+                    "Thinking...",
+                    "bot-message"
+                );
+
+                try {
+                    const response = await fetch(
+                        "/chat",
+                        {
+                            method: "POST",
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+                            body: JSON.stringify({
+                                message: message
+                            })
+                        }
+                    );
+
+                    const data =
+                        await response.json();
+
+                    loadingMessage.remove();
+
+                    if (!response.ok) {
+                        addMessage(
+                            data.error ||
+                            "Something went wrong.",
+                            "error-message"
+                        );
+
+                        return;
+                    }
+
+                    addMessage(
+                        data.reply,
+                        "bot-message"
+                    );
+
+                } catch (error) {
+                    loadingMessage.remove();
+
+                    addMessage(
+                        "Unable to connect to the server.",
+                        "error-message"
+                    );
+
+                } finally {
+                    messageInput.disabled = false;
+                    messageInput.focus();
+                }
+            }
+        );
+
+
+        resetButton.addEventListener(
+            "click",
+            async function () {
+
+                await fetch(
+                    "/reset",
+                    {
+                        method: "POST"
+                    }
+                );
+
+                chatBox.innerHTML = "";
+
+                addMessage(
+                    "A new conversation has started.",
+                    "bot-message"
+                );
+
+                messageInput.focus();
+            }
+        );
+    </script>
+
+</body>
+</html>
+
+
