@@ -2198,6 +2198,19 @@ For technical problems, learners should include their registered email address, 
 
 
 
+chunksEg.py
+
+
+from pathlib import Path
+
+document_text = Path("knowledge.txt").read_text(
+    encoding="utf-8"
+)
+
+print(document_text)
+
+
+
 
 
 
