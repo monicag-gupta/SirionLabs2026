@@ -21,4 +21,53 @@ Because no API key is written in the code, the SDK reads it securely from the en
 
 
 
+            model="gpt-4.1-mini",
+
+
+
+import os
+from typing import Literal
+from dotenv import load_dotenv
+from google import genai
+from google.genai import types
+from pydantic import BaseModel
+
+# Load environment variables
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise ValueError("OPENAI_API_KEY is missing from the .env file.")
+# Define the required structured output
+class CustomerRequest(BaseModel):
+    sentiment: Literal["positive", "neutral", "negative"]
+    request_type: str
+    priority: Literal["low", "medium", "high"]
+    summary: str
+
+# Create Gemini client
+client = genai.Client(api_key=api_key)
+try:
+    response = client.models.generate_content(
+        model="gpt-4.1-mini",
+        contents=("I have been waiting for my refund for two weeks. "
+            "Please resolve it immediately."),
+        config=types.GenerateContentConfig(
+            system_instruction=(
+                "Analyse customer messages and return "
+                "the requested structured information."
+            ),
+            response_mime_type="application/json",
+            response_schema=CustomerRequest
+        )
+    )
+    # Validate the JSON response using the Pydantic model
+    data = CustomerRequest.model_validate_json(response.text)
+    print(data.model_dump())
+    print("Sentiment:", data.sentiment)
+    print("Request type:", data.request_type)
+    print("Priority:", data.priority)
+    print("Summary:", data.summary)
+finally:
+    client.close()
+
 
