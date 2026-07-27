@@ -1826,3 +1826,81 @@ pip install chromadb
 
 
 
+import chromadb
+
+
+documents = [
+    {
+        "id": "course-1",
+        "text": "Generative AI creates text, images, and code.",
+        "category": "AI",
+        "vector": [1.0, 0.0, 0.0],
+    },
+    {
+        "id": "course-2",
+        "text": "Python is used to build software applications.",
+        "category": "Programming",
+        "vector": [0.8, 0.2, 0.0],
+    },
+    {
+        "id": "course-3",
+        "text": "Cooking requires ingredients and recipes.",
+        "category": "Cooking",
+        "vector": [0.0, 0.0, 1.0],
+    },
+]
+
+query_vector = [0.95, 0.05, 0.0]
+
+
+# Create a persistent local Chroma database
+client = chromadb.PersistentClient(
+    path="./chroma_data"
+)
+
+# Create or open a collection
+collection = client.get_or_create_collection(
+    name="training_courses"
+)
+
+# Add records only when the collection is empty
+if collection.count() == 0:
+    collection.add(
+        ids=[item["id"] for item in documents],
+        documents=[item["text"] for item in documents],
+        metadatas=[
+            {"category": item["category"]}
+            for item in documents
+        ],
+        embeddings=[
+            item["vector"]
+            for item in documents
+        ],
+    )
+
+# Search using the query vector
+results = collection.query(
+    query_embeddings=[query_vector],
+    n_results=2,
+    include=[
+        "documents",
+        "metadatas",
+        "distances",
+    ],
+)
+
+print("Search results:\n")
+
+for text, metadata, distance in zip(
+    results["documents"][0],
+    results["metadatas"][0],
+    results["distances"][0],
+):
+    print(f"Document : {text}")
+    print(f"Category : {metadata['category']}")
+    print(f"Distance : {distance:.4f}")
+    print()
+
+
+
+
