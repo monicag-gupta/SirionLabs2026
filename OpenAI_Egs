@@ -2115,3 +2115,36 @@ for hit in results["result"]["hits"]:
     print(f"Category : {hit.fields['category']}")
     print()
 
+
+
+
+
+
+
+
+
+
+
+
+
+Prepare: Weaviate
+
+Weaviate’s current Python client uses the v4-style connect_to_local() method. It can generate embeddings through configured integrations or accept vectors supplied by your application. 
+Step 1: Install Docker Desktop
+Start Docker Desktop before continuing.
+Step 2: Create the project
+mkdir weaviate-demo
+cd weaviate-demo
+Step 3: Create docker-compose.yml
+Weaviate’s Python v4 client uses both HTTP and gRPC, which is why ports 8080 and 50051 are exposed.
+Step 4: Start Weaviate
+docker compose up -d
+Check the container:
+docker compose ps
+Step 5: Create the Python environment
+python -m venv venv
+venv\Scripts\activate
+pip install -U weaviate-client
+Step 6: Create weaviate_demo.py
+
+
