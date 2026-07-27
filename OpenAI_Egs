@@ -1813,3 +1813,16 @@ Weaviate is an open-source vector database that stores both data objects and the
 Milvus
 Milvus is an open-source, cloud-native vector database designed for high-performance similarity search across large vector datasets. It supports deployment from a local application to distributed clusters.
 Use ChromaDB for learning, FAISS for custom local search, Pinecone for managed production, Weaviate for feature-rich open-source search and Milvus for large-scale distributed systems.
+
+
+
+
+
+
+Chroma can store documents, metadata, and vectors inside collections. It supports local in-memory and persistent clients. 
+Install ChromaDB
+pip install chromadb
+
+
+
+
