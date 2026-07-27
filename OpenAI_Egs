@@ -2249,3 +2249,25 @@ for index, chunk in enumerate(chunks, start=1):
 
 
 
+
+
+
+
+
+Building a Simple RAG Pipeline
+
+This example uses:
+Python 
+OpenAI embeddings 
+OpenAI Responses API 
+ChromaDB 
+A local text file 
+Project structure
+simple-rag/
+│
+├── rag_app.py
+├── knowledge.txt
+├── .env
+└── requirements.txt
+Simple rule: RAG retrieves the right information first and then asks the language model to answer using that information.
+
