@@ -189,238 +189,29 @@ finally:
 
 
 
-OPENAI_API_KEY= XXXX
 
 
 
 
-pip install openai
-pip install dotenv
-pip show openai
 
 
 
-Setting the API key on Windows PowerShell
-  setx OPENAI_API_KEY "your_api_key_here"
-Close and reopen the terminal after running the command.
-Setting the API key on macOS or Linux
-  export OPENAI_API_KEY="your_api_key_here"
-Creating the client
-  from openai import OpenAI
-  client = OpenAI()
-Because no API key is written in the code, the SDK reads it securely from the environment variable.
 
 
 
 
-            model="gpt-4.1-mini",
 
 
 
-import os
-from dotenv import load_dotenv
-from openai import OpenAI
 
-# Load environment variables
-load_dotenv()
 
-api_key = os.getenv("OPENAI_API_KEY")
 
-if not api_key:
-    raise ValueError("OPENAI_API_KEY is missing from the .env file.")
 
-# Create OpenAI client
-client = OpenAI(api_key=api_key)
 
-try:
-    response = client.responses.create(
-        model="gpt-4.1-mini",
-        input="Tell me about Generative AI."
-    )
 
-    print(response.output_text)
 
-finally:
-    client.close()
 
 
-
-
-
-
-import os
-from dotenv import load_dotenv
-from openai import OpenAI
-
-# Load environment variables
-load_dotenv()
-
-api_key = os.getenv("OPENAI_API_KEY")
-
-if not api_key:
-    raise ValueError("OPENAI_API_KEY was not found in the .env file.")
-
-# Create OpenAI client
-client = OpenAI(api_key=api_key)
-
-try:
-    response = client.responses.create(
-        model="gpt-4.1-mini",
-        input=[
-            {
-                "role": "system",
-                "content": "You are a helpful AI trainer."
-            },
-            {
-                "role": "user",
-                "content": "Explain Generative AI in simple terms."
-            }
-        ]
-    )
-
-    print(response.output_text)
-
-finally:
-    client.close()
-
-
-
-
-
-The API does not automatically remember previous requests. 
-The application must send the relevant previous messages again.
-
-messages = [
-    {"role": "system", "content": "You are a helpful AI trainer." },
-    {"role": "user", "content": "What is Generative AI?" }
-]
-response = client.chat.completions.create(
-    model="gpt-5-mini", messages=messages )
-assistant_reply = response.choices[0].message.content
-
-messages.append({ "role": "assistant", "content": assistant_reply })
-messages.append({ "role": "user", "content": "Give me three business examples." })
-
-second_response = client.chat.completions.create(
-    model="gpt-5-mini",  messages=messages )
-print(second_response.choices[0].message.content)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import os
-from openai import OpenAI
-from openai import APIConnectionError, AuthenticationError, RateLimitError
-from dotenv import load_dotenv
-
-load_dotenv()
-def main() -> None:
-    """Generate a short tagline using the OpenAI Responses API."""
-    if not os.getenv("OPENAI_API_KEY"):
-        print("Error: OPENAI_API_KEY is not configured.")
-        print("Set the API key and restart the terminal.")
-        return
-    client = OpenAI()
-    try:
-        response = client.responses.create(
-            model="gpt-4.1-mini",
-            input="Write one creative tagline for an AI-powered learning platform.",
-            temperature=0.7,
-            max_output_tokens=50,
-        )
-        print("\nGenerated tagline:")
-        print(response.output_text)
-    except AuthenticationError:
-        print("Authentication failed. Check your OPENAI_API_KEY.")
-    except RateLimitError:
-        print("The request could not be processed because of a rate limit "
-              "or insufficient API quota. Check your API billing and usage.")
-    except APIConnectionError:
-        print("Could not connect to OpenAI. Check your internet connection.")
-    except Exception as error:
-        print(f"Unexpected error: {error}")
-
-if __name__ == "__main__":
-    main()
-
-
-
-
-
-
-
-
-import os
-from typing import Literal
-
-from dotenv import load_dotenv
-from openai import OpenAI
-from pydantic import BaseModel
-
-# Load environment variables
-load_dotenv()
-
-api_key = os.getenv("OPENAI_API_KEY")
-
-if not api_key:
-    raise ValueError("OPENAI_API_KEY is missing from the .env file.")
-
-# Define the required structured output
-class CustomerRequest(BaseModel):
-    sentiment: Literal["positive", "neutral", "negative"]
-    request_type: str
-    priority: Literal["low", "medium", "high"]
-    summary: str
-
-# Create OpenAI client
-client = OpenAI(api_key=api_key)
-
-try:
-    response = client.responses.parse(
-        model="gpt-4.1-mini",
-        input=[
-            {
-                "role": "system",
-                "content": (
-                    "Analyse customer messages and return "
-                    "the requested structured information."
-                ),
-            },
-            {
-                "role": "user",
-                "content": (
-                    "I have been waiting for my refund for two weeks. "
-                    "Please resolve it immediately."
-                ),
-            },
-        ],
-        text_format=CustomerRequest,
-    )
-
-    # Get the parsed Pydantic object
-    data = response.output_parsed
-
-    print(data.model_dump())
-
-    print("Sentiment   :", data.sentiment)
-    print("Request Type:", data.request_type)
-    print("Priority    :", data.priority)
-    print("Summary     :", data.summary)
-
-finally:
-    client.close()
 
 
 
