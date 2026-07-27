@@ -1586,3 +1586,16 @@ body {
 
 
 
+
+Project structure
+fastapi-chatbot/
+│
+├── app.py
+├── .env
+└── requirements.txt
+
+
+
+
+
+
