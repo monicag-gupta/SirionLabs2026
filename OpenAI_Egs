@@ -269,6 +269,437 @@ if __name__ == "__main__":
 
 
 
+"""
+Consolidated OpenAI model-parameter demonstration.
+
+Demonstrates:
+1. temperature
+2. top_p
+3. max_completion_tokens
+4. reasoning_effort
+5. verbosity
+6. frequency_penalty
+7. presence_penalty
+8. stop
+9. seed
+10. structured output / response_format
+11. tools / function calling
+12. streaming
+
+Setup:
+    python -m pip install --upgrade openai pydantic
+    Set the OPENAI_API_KEY environment variable.
+    python openai_model_parameters_demo.py
+"""
+
+from __future__ import annotations
+import json
+import os
+from typing import Callable
+from dotenv import load_dotenv
+from openai import (
+    APIConnectionError,
+    AuthenticationError,
+    BadRequestError,
+    OpenAI,
+    RateLimitError,
+)
+from pydantic import BaseModel
+
+load_dotenv()
+# A non-reasoning model is useful for temperature, top_p and penalty demos.
+SAMPLING_MODEL = os.getenv("OPENAI_SAMPLING_MODEL", "gpt-4.1-mini")
+
+# A current reasoning model is used for reasoning_effort and verbosity.
+# Change this environment variable if your project uses another supported model.
+REASONING_MODEL = os.getenv("OPENAI_REASONING_MODEL", "gpt-5.6-luna")
+
+PROMPT = "Write one short tagline for an AI-powered learning platform."
+
+class CourseSummary(BaseModel):
+    """Expected structure for the structured-output demonstration."""
+    course_name: str
+    duration_hours: int
+    level: str
+    topics: list[str]
+
+def heading(title: str) -> None:
+    print("\n" + "=" * 72)
+    print(title)
+    print("=" * 72)
+
+def print_chat_response(response: object) -> None:
+    """Print the first text response from a Chat Completions result."""
+    # The SDK response type is intentionally not hard-coded here so that the
+    # learning example remains easy to read.
+    text = response.choices[0].message.content  # type: ignore[attr-defined]
+    print(text or "[No text returned]")
+
+def demo_temperature(client: OpenAI) -> None:
+    heading("1. TEMPERATURE: controls randomness and creativity")
+    for value in (0.2, 1.0):
+        print(f"\nTemperature = {value}")
+        response = client.chat.completions.create(
+            model=SAMPLING_MODEL,
+            messages=[{"role": "user", "content": PROMPT}],
+            temperature=value,
+            max_completion_tokens=60,
+        )
+        print_chat_response(response)
+
+def demo_top_p(client: OpenAI) -> None:
+    heading("2. TOP_P: controls the probability-mass range considered")
+    for value in (0.2, 0.95):
+        print(f"\nTop P = {value}")
+        response = client.chat.completions.create(
+            model=SAMPLING_MODEL,
+            messages=[{"role": "user", "content": PROMPT}],
+            top_p=value,
+            max_completion_tokens=60,
+        )
+        print_chat_response(response)
+
+def demo_max_tokens(client: OpenAI) -> None:
+    heading("3. MAX_COMPLETION_TOKENS: limits generated tokens")
+    response = client.chat.completions.create(
+        model=SAMPLING_MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": "Explain generative AI to a beginner in one paragraph.",
+            }
+        ],
+        temperature=0.3,
+        max_completion_tokens=40,
+    )
+    print_chat_response(response)
+    print("\nThe response may end early because the token limit is small.")
+
+def demo_reasoning_effort(client: OpenAI) -> None:
+    heading("4. REASONING_EFFORT: controls reasoning depth")
+    prompt = (
+        "A training program costs $18,000. The company receives a 12% discount "
+        "and then pays 8% tax on the discounted price. Calculate the final cost "
+        "and briefly show the calculation."
+    )
+    for effort in ("low", "high"):
+        print(f"\nReasoning effort = {effort}")
+        response = client.chat.completions.create(
+            model=REASONING_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            reasoning_effort=effort,
+            verbosity="low",
+            max_completion_tokens=300,
+        )
+        print_chat_response(response)
+
+def demo_verbosity(client: OpenAI) -> None:
+    heading("5. VERBOSITY: controls response detail")
+    prompt = "Explain why prompt context is important in generative AI."
+    for value in ("low", "high"):
+        print(f"\nVerbosity = {value}")
+        response = client.chat.completions.create(
+            model=REASONING_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            reasoning_effort="none",
+            verbosity=value,
+            max_completion_tokens=500,
+        )
+        print_chat_response(response)
+
+def demo_frequency_penalty(client: OpenAI) -> None:
+    heading("6. FREQUENCY_PENALTY: reduces repeated wording")
+    prompt = (
+        "Write a short promotional paragraph about AI learning. "
+        "Use engaging language, but do not use bullet points."
+    )
+    for value in (0.0, 1.5):
+        print(f"\nFrequency penalty = {value}")
+        response = client.chat.completions.create(
+            model=SAMPLING_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+            frequency_penalty=value,
+            max_completion_tokens=130,
+        )
+        print_chat_response(response)
+
+def demo_presence_penalty(client: OpenAI) -> None:
+    heading("7. PRESENCE_PENALTY: encourages introduction of new ideas")
+    prompt = "Suggest six distinct uses of generative AI in corporate training."
+    for value in (0.0, 1.2):
+        print(f"\nPresence penalty = {value}")
+        response = client.chat.completions.create(
+            model=SAMPLING_MODEL,
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+            presence_penalty=value,
+            max_completion_tokens=180,
+        )
+        print_chat_response(response)
+
+def demo_stop_sequence(client: OpenAI) -> None:
+    heading("8. STOP: stops output when a sequence is reached")
+    response = client.chat.completions.create(
+        model=SAMPLING_MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": (
+                    "Write exactly three learning tips. After the three tips, "
+                    "write END and then write an extra sentence."
+                ),
+            }
+        ],
+        temperature=0.2,
+        stop=["END"],
+        max_completion_tokens=140,
+    )
+    print_chat_response(response)
+    print("\nThe word END and anything after it should not be returned.")
+
+def demo_seed(client: OpenAI) -> None:
+    heading("9. SEED: requests best-effort repeatability")
+    outputs: list[str] = []
+    fingerprints: list[str | None] = []
+    for run_number in (1, 2):
+        response = client.chat.completions.create(
+            model=SAMPLING_MODEL,
+            messages=[{"role": "user", "content": PROMPT}],
+            temperature=0.7,
+            seed=42,
+            max_completion_tokens=60,
+        )
+        text = response.choices[0].message.content or "[No text returned]"
+        outputs.append(text)
+        fingerprints.append(response.system_fingerprint)
+        print(f"\nRun {run_number}: {text}")
+        print(f"System fingerprint: {response.system_fingerprint}")
+    print("\nSame output:", outputs[0] == outputs[1])
+    print("Same fingerprint:", fingerprints[0] == fingerprints[1])
+    print("Seed is best-effort; exact determinism is not guaranteed.")
+
+def demo_structured_output(client: OpenAI) -> None:
+    heading("10. RESPONSE_FORMAT: returns validated structured output")
+    completion = client.chat.completions.parse(
+        model=SAMPLING_MODEL,
+        messages=[
+            {
+                "role": "system",
+                "content": "Extract course information into the required structure.",
+            },
+            {
+                "role": "user",
+                "content": (
+                    "The course is Generative AI Foundations. It is 12 hours long, "
+                    "is designed for beginners, and covers prompts, LLMs, "
+                    "responsible AI, and practical use cases."
+                ),
+            },
+        ],
+        response_format=CourseSummary,
+    )
+    parsed = completion.choices[0].message.parsed
+    if parsed is None:
+        print("The model did not return parsed data.")
+        return
+    print(parsed.model_dump_json(indent=2))
+
+def calculate_course_fee(learners: int, fee_per_learner: float) -> dict[str, float | int]:
+    """Local function made available to the model as a tool."""
+    return {
+        "learners": learners,
+        "fee_per_learner": fee_per_learner,
+        "total_fee": round(learners * fee_per_learner, 2),
+    }
+
+def demo_tools(client: OpenAI) -> None:
+    heading("11. TOOLS: lets the model request a local function")
+    tools = [
+        {
+            "type": "function",
+            "function": {
+                "name": "calculate_course_fee",
+                "description": "Calculate the total course fee for a group of learners.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "learners": {
+                            "type": "integer",
+                            "description": "Number of learners",
+                        },
+                        "fee_per_learner": {
+                            "type": "number",
+                            "description": "Fee charged for each learner in US dollars",
+                        },
+                    },
+                    "required": ["learners", "fee_per_learner"],
+                    "additionalProperties": False,
+                },
+                "strict": True,
+            },
+        }
+    ]
+    messages: list[object] = [
+        {
+            "role": "user",
+            "content": "What is the total fee for 12 learners at $150 per learner?",
+        }
+    ]
+    first_response = client.chat.completions.create(
+        model=SAMPLING_MODEL,
+        messages=messages,  # type: ignore[arg-type]
+        tools=tools,  # type: ignore[arg-type]
+        tool_choice="auto",
+    )
+    assistant_message = first_response.choices[0].message
+    messages.append(assistant_message)
+    tool_calls = assistant_message.tool_calls or []
+    if not tool_calls:
+        print("The model answered without calling the tool:")
+        print(assistant_message.content)
+        return
+    for tool_call in tool_calls:
+        if tool_call.function.name != "calculate_course_fee":
+            continue
+        arguments = json.loads(tool_call.function.arguments)
+        result = calculate_course_fee(
+            learners=arguments["learners"],
+            fee_per_learner=arguments["fee_per_learner"],
+        )
+        print("Tool arguments:", arguments)
+        print("Tool result:", result)
+        messages.append(
+            {
+                "role": "tool",
+                "tool_call_id": tool_call.id,
+                "content": json.dumps(result),
+            }
+        )
+    final_response = client.chat.completions.create(
+        model=SAMPLING_MODEL,
+        messages=messages,  # type: ignore[arg-type]
+        tools=tools,  # type: ignore[arg-type]
+    )
+    print("\nFinal model response:")
+    print_chat_response(final_response)
+
+def demo_streaming(client: OpenAI) -> None:
+    heading("12. STREAM: displays output as it is generated")
+    stream = client.chat.completions.create(
+        model=SAMPLING_MODEL,
+        messages=[
+            {
+                "role": "user",
+                "content": "Give five short benefits of generative AI in training.",
+            }
+        ],
+        temperature=0.4,
+        max_completion_tokens=150,
+        stream=True,
+    )
+    for chunk in stream:
+        delta = chunk.choices[0].delta.content
+        if delta:
+            print(delta, end="", flush=True)
+    print()
+
+def show_parameter_table() -> None:
+    heading("MODEL PARAMETER SUMMARY")
+    rows = [
+        ("temperature", "Controls randomness and creativity"),
+        ("top_p", "Controls the probability-mass range"),
+        ("max_completion_tokens", "Limits generated tokens"),
+        ("reasoning_effort", "Controls reasoning depth"),
+        ("verbosity", "Controls response detail"),
+        ("frequency_penalty", "Discourages repeated wording"),
+        ("presence_penalty", "Encourages new concepts"),
+        ("stop", "Stops at specified sequences"),
+        ("seed", "Requests best-effort repeatability"),
+        ("response_format", "Enforces structured output"),
+        ("tools", "Allows function/tool calls"),
+        ("stream", "Returns output incrementally"),
+    ]
+    print(f"{'Parameter':<25}Feature")
+    print("-" * 72)
+    for parameter, feature in rows:
+        print(f"{parameter:<25}{feature}")
+
+def display_menu() -> None:
+    print(
+        """
+Choose a demonstration:
+  1  Temperature
+  2  Top P
+  3  Maximum completion tokens
+  4  Reasoning effort
+  5  Verbosity
+  6  Frequency penalty
+  7  Presence penalty
+  8  Stop sequence
+  9  Seed
+ 10  Structured output / response format
+ 11  Tools / function calling
+ 12  Streaming
+ 13  Parameter summary
+  0  Exit
+"""
+    )
+
+def main() -> None:
+    """Run the interactive model-parameter demonstration program."""
+    if not os.getenv("OPENAI_API_KEY"):
+        print("ERROR: OPENAI_API_KEY is not configured.")
+        print("Set the environment variable, reopen the terminal, and run again.")
+        return
+    client = OpenAI(timeout=60.0, max_retries=2)
+    demonstrations: dict[str, Callable[[OpenAI], None]] = {
+        "1": demo_temperature,
+        "2": demo_top_p,
+        "3": demo_max_tokens,
+        "4": demo_reasoning_effort,
+        "5": demo_verbosity,
+        "6": demo_frequency_penalty,
+        "7": demo_presence_penalty,
+        "8": demo_stop_sequence,
+        "9": demo_seed,
+        "10": demo_structured_output,
+        "11": demo_tools,
+        "12": demo_streaming,
+    }
+    print("OpenAI Model Parameters Demonstration")
+    print(f"Sampling model : {SAMPLING_MODEL}")
+    print(f"Reasoning model: {REASONING_MODEL}")
+    while True:
+        display_menu()
+        choice = input("Enter your choice: ").strip()
+        if choice == "0":
+            print("Program closed.")
+            break
+        if choice == "13":
+            show_parameter_table()
+            continue
+        demonstration = demonstrations.get(choice)
+        if demonstration is None:
+            print("Invalid choice. Enter a number from 0 to 13.")
+            continue
+        try:
+            demonstration(client)
+        except AuthenticationError:
+            print("Authentication failed. Check OPENAI_API_KEY.")
+        except RateLimitError:
+            print("Rate limit or API quota reached. Check usage and billing.")
+        except APIConnectionError:
+            print("Could not connect to OpenAI. Check the internet connection.")
+        except BadRequestError as error:
+            print("The selected model rejected a parameter.")
+            print("Try updating the OpenAI package or changing the model constants.")
+            print(f"Details: {error}")
+        except Exception as error:  # Keeps the classroom menu running.
+            print(f"Unexpected error: {type(error).__name__}: {error}")
+
+if __name__ == "__main__":
+    main()
 
 
 
