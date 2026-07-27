@@ -732,6 +732,30 @@ print("Total tokens :", response.usage.total_tokens)
 
 
 
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+client = OpenAI()
+
+stream = client.responses.create(
+    model="gpt-4.1-mini",
+    input="Explain Generative AI in five short points.",
+    stream=True  #Enables streaming.
+    #Instead of waiting for the full ans, the server sends multiple events while the answer is being generated.
+)
+print("AI Response:\n")
+for event in stream:  # Reads each event returned by the model: 
+    # Like : Response created, Text received, Response completed, Error events
+    #event.type checks whether the event contains a new piece of generated text.
+    #response.output_text.delta means that an additional text fragment has arrived.
+    if event.type == "response.output_text.delta": 
+        #Displays each piece immediately without starting a new line (end="").
+        #event.delta : The new piece of generated text. flush=True : Displays the text immediately
+        print(event.delta, end="", flush=True)
+print("\n\nStreaming completed.")
+
+
 
 
 
