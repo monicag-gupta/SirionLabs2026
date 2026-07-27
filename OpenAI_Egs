@@ -1925,3 +1925,76 @@ Step 5: Deactivate
 (faiss-demo) C:\Users\Monica>conda deactivate
 (base) C:\Users\Monica>
 
+
+
+
+pip install faiss-cpu
+
+
+import faiss
+import numpy as np
+
+
+documents = [
+    "Generative AI creates text, images, and code.",
+    "Python is used to build software applications.",
+    "Cooking requires ingredients and recipes.",
+]
+
+categories = [
+    "AI",
+    "Programming",
+    "Cooking",
+]
+
+# Convert vectors into a NumPy array
+vectors = np.array(
+    [
+        [1.0, 0.0, 0.0],
+        [0.8, 0.2, 0.0],
+        [0.0, 0.0, 1.0],
+    ],
+    dtype="float32",
+)
+
+# Normalize vectors for cosine similarity
+faiss.normalize_L2(vectors)
+
+dimension = vectors.shape[1]
+
+# Inner product on normalized vectors gives cosine similarity
+index = faiss.IndexFlatIP(dimension)
+
+# Add vectors to the index
+index.add(vectors)
+
+print("Number of indexed vectors:", index.ntotal)
+
+# Prepare the query
+query_vector = np.array(
+    [[0.95, 0.05, 0.0]],
+    dtype="float32",
+)
+
+faiss.normalize_L2(query_vector)
+
+# Search for the two closest vectors
+scores, positions = index.search(
+    query_vector,
+    k=2,
+)
+
+print("\nSearch results:\n")
+
+for score, position in zip(
+    scores[0],
+    positions[0],
+):
+    print(f"Document   : {documents[position]}")
+    print(f"Category   : {categories[position]}")
+    print(f"Similarity : {score:.4f}")
+    print()
+
+
+
+
