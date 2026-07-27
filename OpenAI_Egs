@@ -2271,3 +2271,40 @@ simple-rag/
 └── requirements.txt
 Simple rule: RAG retrieves the right information first and then asks the language model to answer using that information.
 
+
+
+
+
+
+knowledge.txt
+
+Generative AI Program Policy
+
+The Generative AI program contains eight instructor-led sessions.
+
+Learners must attend at least 75 percent of the live sessions to qualify
+for the course completion certificate.
+
+Session recordings are uploaded to the learning platform within
+48 hours after each live session.
+
+Learners can request one batch transfer without an additional charge.
+The transfer request must be submitted at least seven days before the
+next scheduled session.
+
+Approved refunds are processed within seven working days. Refunds are
+normally returned to the original payment method.
+
+Technical support is available from Monday to Friday between
+9:00 AM and 6:00 PM.
+
+
+
+
+
+
+
+
+rag_app.py
+
+
