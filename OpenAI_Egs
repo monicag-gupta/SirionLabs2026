@@ -855,3 +855,19 @@ final_response = client.responses.create(
 
 print(final_response.output_text)
 
+
+
+
+Exercise :
+
+
+WAP which uses 
+prod_income(product_price, profit_percentage):
+Return product_price + (product_price * profit_percentage)/100 
+
+As a tool for the prompt: 
+If product price is 100 and profit in percentage is 45, what is the product income.
+
+
+
+
