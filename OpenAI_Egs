@@ -2004,3 +2004,14 @@ Pincone:
 pcsk_2i4sqq_2U39ccXzH1ZPL6n3uZ3ZsvHPYSUQP2jt6L7XHK8HGKJ248yx4fYdkNX3YvhCrmX
 
 
+
+Pinecone is a managed cloud service. 
+Its current Python quickstart recommends an index with integrated embedding, allowing you to upload text and search with text while Pinecone creates the vectors.
+Create a Pinecone account and API key
+Create a Pinecone project and copy its API key.
+pcsk_2i4sqq_2U39ccXzH1ZPL6n3uZ3ZsvHPYSUQP2jt6L7XHK8HGKJ248yx4fYdkNX3YvhCrmX
+Install the libraries
+pip install pinecone python-dotenv
+.env
+PINECONE_API_KEY= pcsk_2i4sqq_2U39ccXzH1ZPL6n3uZ3ZsvHPYSUQP2jt6L7XHK8HGKJ248yx4fYdkNX3YvhCrmX
+Create pinecone_demo.py
