@@ -58,3 +58,32 @@ response = model.invoke(
 )
 
 print(response.content)
+
+
+
+
+
+
+Embedding_model.py 
+
+
+from langchain_openai import OpenAIEmbeddings
+from dotenv import load_dotenv
+
+load_dotenv()
+embeddings = OpenAIEmbeddings(
+    model="text-embedding-3-small"
+)
+
+vector = embeddings.embed_query(
+    "What is Generative AI?"
+)
+
+print(vector[:5])
+print("Dimensions:", len(vector))
+
+
+
+
+
+
