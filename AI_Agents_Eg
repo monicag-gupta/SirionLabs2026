@@ -452,6 +452,12 @@ python-dotenv
 
 
 
+.env
+
+OPENAI_API_KEY=your-openai-api-key
+OPENAI_CHAT_MODEL=gpt-4.1-mini
+
+
 
 
 
