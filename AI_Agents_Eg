@@ -390,7 +390,7 @@ from dotenv import load_dotenv
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 
-splitter = RecursiveCharacterTextSplitter( chunk_size=500, chunk_overlap=100)
+splitter = RecursiveCharacterTextSplitter( chunk_size=100, chunk_overlap=20)
 loader = TextLoader("knowledge.txt", encoding="utf-8")
 documents = loader.load()
 chunks = splitter.split_documents(documents)
