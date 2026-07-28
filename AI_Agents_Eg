@@ -87,3 +87,31 @@ print("Dimensions:", len(vector))
 
 
 
+
+Prompts.py
+
+from langchain_core.prompts import ChatPromptTemplate
+
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a beginner-friendly AI trainer."
+        ),
+        (
+            "human",
+            "Explain {topic} in {points} short points."
+        )
+    ]
+)
+
+formatted_prompt = prompt.invoke(
+    {
+        "topic": "LangChain",
+        "points": 3
+    }
+)
+
+print(formatted_prompt)
+
+
