@@ -2,6 +2,8 @@ pip install langchain_openai
 
 
 
+requirements.txt:
+
 annotated-doc==0.0.4
 annotated-types==0.8.0
 anyio==4.14.2
@@ -31,4 +33,9 @@ tqdm==4.69.1
 typing-inspection==0.4.2
 typing_extensions==4.16.0
 Werkzeug==3.1.8
+
+
+
+pip install -r requirements.txt
+
 
