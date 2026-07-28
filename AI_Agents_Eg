@@ -1326,4 +1326,137 @@ print(final_response.output_text)
 # The fee for 10 learners at $150 per learner with a 10 percent discount is $1350.
 
 
+Planning and Reasoning
+
+For reliable applications, ask the model to create an explicit action plan. You do not need the model’s private internal reasoning.
+This example uses:
+One planner agent 
+One executor agent 
+Two tools 
+A clear plan-and-execute workflow 
+Create planning_agent.py
+
+
+import asyncio
+import os
+
+from agents import Agent, Runner, function_tool
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+MODEL_NAME = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
+
+
+@function_tool
+def get_available_batch(
+    course_name: str
+) -> dict:
+    """Return the next available batch."""
+
+    batches = {
+        "generative ai": {
+            "date": "August 10, 2026",
+            "time": "10:00 AM",
+            "available_seats": 12,
+        },
+        "python": {
+            "date": "August 15, 2026",
+            "time": "9:00 AM",
+            "available_seats": 8,
+        },
+    }
+
+    return batches.get(
+        course_name.lower(),
+        {
+            "status": "No batch found"
+        },
+    )
+
+
+@function_tool
+def calculate_total_fee(
+    learners: int,
+    fee_per_learner: float
+) -> dict:
+    """Calculate the total training fee."""
+
+    return {
+        "learners": learners,
+        "fee_per_learner": fee_per_learner,
+        "total_fee": learners * fee_per_learner,
+    }
+
+
+planner_agent = Agent(
+    name="Training Planner",
+    instructions=(
+        "Create a short numbered action plan for the goal. "
+        "Do not perform the actions. "
+        "Do not include private chain-of-thought. "
+        "Only provide clear executable steps."
+    ),
+    model=MODEL_NAME,
+)
+
+
+executor_agent = Agent(
+    name="Training Executor",
+    instructions=(
+        "Follow the supplied plan. "
+        "Use the available tools where required. "
+        "Produce a concise final summary."
+    ),
+    model=MODEL_NAME,
+    tools=[
+        get_available_batch,
+        calculate_total_fee,
+    ],
+)
+
+
+async def main() -> None:
+    goal = (
+        "Find the next Generative AI batch and calculate "
+        "the fee for 10 learners at $500 each."
+    )
+
+    plan_result = await Runner.run(
+        planner_agent,
+        goal,
+    )
+
+    plan = plan_result.final_output
+
+    print("Generated plan:")
+    print(plan)
+
+    execution_prompt = f"""
+Goal:
+{goal}
+
+Approved action plan:
+{plan}
+
+Execute this plan now. Use the tools when needed.
+"""
+
+    execution_result = await Runner.run(
+        executor_agent,
+        execution_prompt,
+    )
+
+    print("\nExecution result:")
+    print(execution_result.final_output)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
 
