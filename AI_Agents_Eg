@@ -382,6 +382,34 @@ pip install langchain_chroma
 
 
 
+Vector_StoreEg.py
+
+from langchain_chroma import Chroma
+from langchain_openai import OpenAIEmbeddings
+from dotenv import load_dotenv
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
+
+splitter = RecursiveCharacterTextSplitter( chunk_size=500, chunk_overlap=100)
+loader = TextLoader("knowledge.txt", encoding="utf-8")
+documents = loader.load()
+chunks = splitter.split_documents(documents)
+
+load_dotenv()
+embeddings = OpenAIEmbeddings(
+    model="text-embedding-3-small"
+)
+vector_store = Chroma.from_documents(
+    documents=chunks,
+    embedding=embeddings,
+    collection_name="training_knowledge"
+)
+results = vector_store.similarity_search(
+    "When are recordings uploaded?",
+    k=3
+)
+for result in results:
+    print(result.page_content)
 
 
 
