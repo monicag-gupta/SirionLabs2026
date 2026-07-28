@@ -418,3 +418,28 @@ for result in results:
 
 
 
+
+
+
+
+This application:
+Loads knowledge.txt. 
+Splits it into chunks. 
+Generates embeddings. 
+Stores the chunks in Chroma. 
+Creates a retriever. 
+Injects retrieved context into a prompt. 
+Generates a grounded answer. 
+Project structure
+langchain-rag/
+│
+├── rag_app.py
+├── knowledge.txt
+├── .env
+└── requirements.txt
+
+
+
+
+
+
