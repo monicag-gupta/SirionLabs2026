@@ -300,6 +300,27 @@ pip install langchain_community
 
 
 
+TextLoaderEg.py
+
+from langchain_community.document_loaders import TextLoader
+
+loader = TextLoader(
+    "knowledge.txt",
+    encoding="utf-8"
+)
+documents = loader.load()
+print("Documents loaded:", len(documents))
+print(documents[0].page_content)
+print(documents[0].metadata)
+
+# A Document normally contains:
+# Document(
+#     page_content="The actual text",
+#     metadata={"source": "knowledge.txt"}
+# )
+
+
+
 
 
 
