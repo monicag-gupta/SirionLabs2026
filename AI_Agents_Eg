@@ -845,9 +845,99 @@ The Agents SDK can maintain conversation history through sessions. A SQLiteSessi
 Create agent_architecture.py
 
 
+agent_architecture.py
 
 
+import asyncio
+import os
 
+from agents import (
+    Agent,
+    Runner,
+    SQLiteSession,
+    function_tool,
+)
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+MODEL_NAME = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
+
+
+@function_tool
+def get_course_policy(policy_name: str) -> dict:
+    """Retrieve a training-program policy."""
+
+    policies = {
+        "attendance": (
+            "Learners must attend at least 75 percent "
+            "of the live sessions."
+        ),
+        "recordings": (
+            "Recordings are uploaded within 48 hours "
+            "after each session."
+        ),
+        "refund": (
+            "Approved refunds are processed within "
+            "seven working days."
+        ),
+    }
+
+    result = policies.get(
+        policy_name.lower(),
+        "Policy not found."
+    )
+
+    return {
+        "policy_name": policy_name,
+        "policy": result,
+    }
+
+
+agent = Agent(
+    name="Program Support Agent",
+    instructions=(
+        "Help learners with training-program questions. "
+        "Use get_course_policy when the question is about "
+        "attendance, recordings, or refunds."
+    ),
+    model=MODEL_NAME,
+    tools=[get_course_policy],
+)
+
+
+async def main() -> None:
+    # Persistent memory stored in agent_memory.db
+    session = SQLiteSession(
+        "learner_101",
+        "agent_memory.db"
+    )
+
+    first_result = await Runner.run(
+        agent,
+        "My name is Rahul. What is the attendance policy?",
+        session=session,
+    )
+
+    print("First response:")
+    print(first_result.final_output)
+
+    second_result = await Runner.run(
+        agent,
+        "What is my name?",
+        session=session,
+    )
+
+    print("\nSecond response:")
+    print(second_result.final_output)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 
