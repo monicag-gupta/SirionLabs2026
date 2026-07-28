@@ -242,5 +242,62 @@ pip install langchain langgraph
 
 
 
+Short_term_memory.py
+
+from langchain.agents import create_agent
+from langchain_openai import ChatOpenAI
+from langgraph.checkpoint.memory import InMemorySaver
+from dotenv import load_dotenv
+
+load_dotenv()
+model = ChatOpenAI(model="gpt-4.1-mini")
+
+agent = create_agent(
+    model=model,
+    tools=[],
+    system_prompt="You are a helpful training assistant.",
+    checkpointer=InMemorySaver()
+)
+configuration = {
+    "configurable": {
+        "thread_id": "user-101"
+    }
+}
+
+agent.invoke(
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": "My name is Rahul."
+            }
+        ]
+    },
+    configuration
+)
+
+result = agent.invoke(
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": "What is my name?"
+            }
+        ]
+    },
+    configuration
+)
+
+print(result["messages"][-1].content)
+
+
+
+
+
+
+
+
+
+
 
 
