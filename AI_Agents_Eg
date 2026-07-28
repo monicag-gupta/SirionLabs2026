@@ -115,3 +115,32 @@ formatted_prompt = prompt.invoke(
 print(formatted_prompt)
 
 
+
+
+
+
+
+Output_parserEg.py
+
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+prompt = ChatPromptTemplate.from_template(
+    "Explain {topic} in one sentence."
+)
+
+model = ChatOpenAI(model="gpt-4.1-mini")
+parser = StrOutputParser()
+
+chain = prompt | model | parser
+
+result = chain.invoke(
+    {"topic": "vector databases"}
+)
+
+print(result)
+
+
