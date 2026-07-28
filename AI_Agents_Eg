@@ -646,3 +646,24 @@ Question: When are recordings uploaded?
 
 
 
+
+{
+    "context": retriever | format_documents,
+    "question": RunnablePassthrough()
+}
+This creates two values:
+context: documents retrieved and formatted as text 
+question: the original user question 
+| prompt
+Inserts the context and question into the prompt.
+| chat_model
+Sends the completed prompt to the language model.
+| StrOutputParser()
+Converts the model’s response into a normal Python string.
+LangChain’s retrieval architecture is deliberately modular: 
+loaders, splitters, embeddings, vector stores, retrievers, prompts, and models can be replaced independently.
+
+
+
+
+
