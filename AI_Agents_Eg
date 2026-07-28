@@ -831,6 +831,26 @@ if __name__ == "__main__":
 
 
 
+Agent Architecture
+
+This example includes the major architectural components:
+Model 
+Instructions 
+Tools 
+Memory 
+User input 
+Agent runner 
+The Agents SDK can maintain conversation history through sessions. A SQLiteSession may keep temporary or persistent conversation state. 
+
+Create agent_architecture.py
+
+
+
+
+
+
+
+
 
 
 
