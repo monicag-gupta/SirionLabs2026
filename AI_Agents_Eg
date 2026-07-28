@@ -665,5 +665,39 @@ loaders, splitters, embeddings, vector stores, retrievers, prompts, and models c
 
 
 
+Topic
+LangChain Component
+Model connection
+ChatOpenAI
+Embedding generation
+OpenAIEmbeddings
+Prompt creation
+ChatPromptTemplate
+Plain-text output
+StrOutputParser
+Workflow composition
+| runnable pipeline
+Document loading
+TextLoader
+Text chunking
+RecursiveCharacterTextSplitter
+Vector storage
+Chroma
+Retrieval
+as_retriever()
+Conversation memory
+Checkpointer and thread ID
+RAG
+Retriever → prompt → model → parser
+
+
+
+
+
+
+
+
+
+
 
 
