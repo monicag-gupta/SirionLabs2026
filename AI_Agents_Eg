@@ -350,6 +350,40 @@ for chunk in chunks:
 
 
 
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=100
+)
+loader = TextLoader(
+    "knowledge.txt",
+    encoding="utf-8"
+)
+documents = loader.load()
+chunks = splitter.split_documents(documents)
+
+print("Number of chunks:", len(chunks))
+
+n=1
+for chunk in chunks:
+    print("\n\nChunk#",n)
+    n += 1
+    print(chunk.page_content)
+
+
+
+
+
+
+pip install langchain_chroma
+
+
+
+
+
+
 
 
 
