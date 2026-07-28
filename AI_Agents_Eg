@@ -803,6 +803,28 @@ A user goal
 
 Create basic_agent.py
 
+import asyncio
+import os
+from agents import Agent, Runner
+from dotenv import load_dotenv
+
+load_dotenv()
+MODEL_NAME = os.getenv("OPENAI_MODEL","gpt-4.1-mini")
+agent = Agent(
+    name="Training Assistant",
+    instructions=(
+        "You are a beginner-friendly corporate training assistant. "
+        "Give clear and concise answers."
+    ),
+    model=MODEL_NAME,
+)
+async def main() -> None:
+    result = await Runner.run(agent, "Explain AI agents in three short points.")
+    print("Agent response:")
+    print(result.final_output)
+    
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 
