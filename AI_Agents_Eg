@@ -695,6 +695,51 @@ Retriever → prompt → model → parser
 
 
 
+Agent Lifecycle
+
+An agent normally operates through a repeated decision-and-action loop.
+1. Receive the goal
+Prepare a summary of outstanding learner refund requests.
+2. Understand the task
+The agent identifies:
+Required outcome 
+Available tools 
+Missing information 
+Business rules 
+Restrictions 
+3. Create or update a plan
+1. Retrieve open refund requests
+2. Check eligibility and current stage
+3. Identify overdue cases
+4. Prepare a summary
+4. Select a tool
+The agent may decide to call:
+get_open_refund_requests()
+5. Execute the tool
+The application—not the language model itself—executes the function or API.
+6. Observe the result
+12 open requests retrieved
+3 requests are overdue
+2 require sales approval
+7. Decide the next step
+The agent may:
+Call another tool 
+Ask the user for missing information 
+Request approval 
+Revise the plan 
+Produce the final answer 
+8. Stop
+The lifecycle ends when:
+The goal is completed 
+A maximum-step limit is reached 
+Human intervention is required 
+A safety rule blocks the action 
+The task cannot proceed 
+Termination conditions are important because an uncontrolled agent loop could otherwise continue indefinitely. 
+
+
+
+
 
 
 
