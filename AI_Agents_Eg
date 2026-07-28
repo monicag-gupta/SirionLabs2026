@@ -1588,3 +1588,131 @@ if __name__ == "__main__":
 
 
 
+
+
+
+LangGraph Workflow
+
+LangGraph provides graph-based orchestration using shared state, nodes, and transitions. It is useful when developers need tighter control over which steps run and in what order. 
+Step 1: Install
+pip install -U langgraph langchain-openai python-dotenv
+Step 2: Create langgraph_example.py
+
+
+
+import os
+from typing import TypedDict
+
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
+from langgraph.graph import END, START, StateGraph
+
+
+load_dotenv()
+
+
+class AgentState(TypedDict):
+    goal: str
+    plan: str
+    result: str
+
+
+model = ChatOpenAI(
+    model=os.getenv(
+        "OPENAI_MODEL",
+        "gpt-4.1-mini"
+    ),
+    temperature=0,
+)
+
+
+def planner_node(
+    state: AgentState
+) -> dict:
+    response = model.invoke(
+        f"""
+Create a three-step execution plan for this goal:
+
+{state["goal"]}
+
+Return only the numbered plan.
+"""
+    )
+
+    return {
+        "plan": response.content
+    }
+
+
+def executor_node(
+    state: AgentState
+) -> dict:
+    response = model.invoke(
+        f"""
+Complete the following goal using the supplied plan.
+
+Goal:
+{state["goal"]}
+
+Plan:
+{state["plan"]}
+
+Return a concise final answer.
+"""
+    )
+
+    return {
+        "result": response.content
+    }
+
+
+graph_builder = StateGraph(AgentState)
+
+graph_builder.add_node(
+    "planner",
+    planner_node
+)
+
+graph_builder.add_node(
+    "executor",
+    executor_node
+)
+
+graph_builder.add_edge(
+    START,
+    "planner"
+)
+
+graph_builder.add_edge(
+    "planner",
+    "executor"
+)
+
+graph_builder.add_edge(
+    "executor",
+    END
+)
+
+
+graph = graph_builder.compile()
+
+
+output = graph.invoke(
+    {
+        "goal": (
+            "Prepare a short learning plan "
+            "for understanding RAG."
+        ),
+        "plan": "",
+        "result": "",
+    }
+)
+
+
+print("Plan:")
+print(output["plan"])
+
+print("\nResult:")
+print(output["result"])
+
+
