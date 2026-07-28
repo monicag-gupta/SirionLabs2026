@@ -1,0 +1,45 @@
+Exercise: AI Product Owner for Spring Boot Developers
+Objective
+
+Create a Spring Boot REST API where the AI (using LangChain4j and an OpenAI model) acts as a Product Owner.
+
+The AI should:
+
+Decide a project topic.
+Generate API requirements.
+Suggest database tables.
+List endpoints.
+Generate sample JSON.
+The developer then implements the APIs.
+Example Flow
+Developer
+
+        │
+
+        ▼
+
+Spring Boot
+
+        │
+
+        ▼
+
+LangChain4j
+
+        │
+
+        ▼
+
+OpenAI GPT
+
+        │
+
+        ▼
+
+Project Requirements
+
+        │
+
+        ▼
+
+Developer Builds APIs
