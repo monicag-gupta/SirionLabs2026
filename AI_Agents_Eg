@@ -1068,3 +1068,105 @@ if __name__ == "__main__":
 
 
 
+Tool Calling
+
+Tool calling lets the agent decide whether an external capability is needed. Tools can retrieve data, run calculations, call APIs, or perform approved actions. 
+The agent performs these steps:
+Read question
+    ↓
+Identify that course data is required
+    ↓
+Call get_course_details()
+    ↓
+Receive the tool result
+    ↓
+Convert result into a user-friendly answer
+
+Create tool_calling.py
+
+
+
+
+import asyncio
+import os
+
+from agents import Agent, Runner, function_tool
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+MODEL_NAME = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
+
+
+@function_tool
+def get_course_details(course_name: str) -> dict:
+    """Retrieve information about a training course."""
+
+    courses = {
+        "generative ai": {
+            "duration": "16 hours",
+            "level": "Beginner",
+            "fee": 500,
+        },
+        "python": {
+            "duration": "24 hours",
+            "level": "Beginner",
+            "fee": 400,
+        },
+        "langchain": {
+            "duration": "12 hours",
+            "level": "Intermediate",
+            "fee": 600,
+        },
+    }
+
+    course = courses.get(course_name.lower())
+
+    if course is None:
+        return {
+            "status": "not_found",
+            "message": "Course not found.",
+        }
+
+    return {
+        "status": "success",
+        "course_name": course_name,
+        **course,
+    }
+
+
+agent = Agent(
+    name="Course Advisor",
+    instructions=(
+        "Recommend courses and answer course questions. "
+        "Use get_course_details whenever the user asks "
+        "about duration, level, or fee."
+    ),
+    model=MODEL_NAME,
+    tools=[get_course_details],
+)
+
+
+async def main() -> None:
+    result = await Runner.run(
+        agent,
+        "What is the duration and fee of the LangChain course?"
+    )
+
+    print(result.final_output)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
+
+
+
+
+
+
