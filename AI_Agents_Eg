@@ -462,5 +462,180 @@ OPENAI_CHAT_MODEL=gpt-4.1-mini
 
 
 
+import os
+
+from dotenv import load_dotenv
+from langchain_chroma import Chroma
+from langchain_community.document_loaders import TextLoader
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_text_splitters import (
+    RecursiveCharacterTextSplitter
+)
+
+
+load_dotenv()
+
+
+if not os.getenv("OPENAI_API_KEY"):
+    raise RuntimeError(
+        "OPENAI_API_KEY is missing from the .env file."
+    )
+
+
+def format_documents(documents) -> str:
+    """Combine retrieved document chunks into one context."""
+
+    return "\n\n".join(
+        document.page_content
+        for document in documents
+    )
+
+
+# --------------------------------------------------
+# 1. Load the document
+# --------------------------------------------------
+
+loader = TextLoader(
+    "knowledge.txt",
+    encoding="utf-8"
+)
+
+documents = loader.load()
+
+print("Documents loaded:", len(documents))
+
+
+# --------------------------------------------------
+# 2. Split the document
+# --------------------------------------------------
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=300,
+    chunk_overlap=50
+)
+
+chunks = splitter.split_documents(documents)
+
+print("Chunks created:", len(chunks))
+
+
+# --------------------------------------------------
+# 3. Create embedding model
+# --------------------------------------------------
+
+embedding_model = OpenAIEmbeddings(
+    model="text-embedding-3-small"
+)
+
+
+# --------------------------------------------------
+# 4. Store embeddings in Chroma
+# --------------------------------------------------
+
+vector_store = Chroma.from_documents(
+    documents=chunks,
+    embedding=embedding_model,
+    collection_name="training_knowledge"
+)
+
+
+# --------------------------------------------------
+# 5. Create retriever
+# --------------------------------------------------
+
+retriever = vector_store.as_retriever(
+    search_type="similarity",
+    search_kwargs={
+        "k": 3
+    }
+)
+
+
+# --------------------------------------------------
+# 6. Create language model
+# --------------------------------------------------
+
+chat_model = ChatOpenAI(
+    model=os.getenv(
+        "OPENAI_CHAT_MODEL",
+        "gpt-4.1-mini"
+    ),
+    temperature=0.2
+)
+
+
+# --------------------------------------------------
+# 7. Create prompt
+# --------------------------------------------------
+
+prompt = ChatPromptTemplate.from_template(
+    """
+    You are a training-program support assistant.
+
+    Answer the question using only the supplied context.
+
+    Rules:
+    - Do not invent information.
+    - Give a concise answer.
+    - If the answer is unavailable, say:
+      "The provided document does not contain that information."
+
+    Context:
+    {context}
+
+    Question:
+    {question}
+    """
+)
+
+
+# --------------------------------------------------
+# 8. Build retrieval chain
+# --------------------------------------------------
+
+rag_chain = (
+    {
+        "context": retriever | format_documents,
+        "question": RunnablePassthrough()
+    }
+    | prompt
+    | chat_model
+    | StrOutputParser()
+)
+
+
+# --------------------------------------------------
+# 9. Run the application
+# --------------------------------------------------
+
+print("\nLangChain RAG Assistant")
+print("Enter 'exit' to stop.\n")
+
+while True:
+    question = input("Question: ").strip()
+
+    if question.lower() == "exit":
+        print("Goodbye!")
+        break
+
+    if not question:
+        print("Please enter a question.\n")
+        continue
+
+    try:
+        answer = rag_chain.invoke(question)
+
+        print("\nAnswer:")
+        print(answer)
+        print()
+
+    except Exception as error:
+        print(f"\nError: {error}\n")
+
+
+
 
 
