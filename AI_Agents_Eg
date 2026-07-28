@@ -144,3 +144,29 @@ result = chain.invoke(
 print(result)
 
 
+
+
+
+
+
+Structured_outputEg.py
+
+from pydantic import BaseModel
+from langchain_openai import ChatOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+class CourseInformation(BaseModel):
+    course_name: str
+    duration_hours: int
+    level: str
+
+model = ChatOpenAI(model="gpt-4.1-mini")
+structured_model = model.with_structured_output(
+    CourseInformation
+)
+result = structured_model.invoke(
+    "Create information for a beginner LangChain course."
+)
+print(result)
+
