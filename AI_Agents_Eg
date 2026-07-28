@@ -944,7 +944,123 @@ if __name__ == "__main__":
 
 
 
+Agent Lifecycle
 
+The lifecycle normally includes:
+Start agent
+    ↓
+Call model
+    ↓
+Select tool
+    ↓
+Execute tool
+    ↓
+Observe result
+    ↓
+Call model again
+    ↓
+Return final answer
+The Agents SDK offers lifecycle hooks for events such as agent start, model completion, tool execution, handoffs, and agent completion. 
+Create agent_lifecycle.py
+
+
+
+
+agent_lifecycle.py
+
+import asyncio
+import os
+
+from agents import (
+    Agent,
+    RunHooks,
+    Runner,
+    function_tool,
+)
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+MODEL_NAME = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
+
+
+@function_tool
+def check_certificate_status(
+    learner_id: str
+) -> dict:
+    """Check a learner's certificate status."""
+
+    print(
+        f"[TOOL] Checking certificate for {learner_id}"
+    )
+
+    return {
+        "learner_id": learner_id,
+        "status": "Ready for download",
+    }
+
+
+class LoggingHooks(RunHooks):
+    async def on_agent_start(
+        self,
+        context,
+        agent
+    ) -> None:
+        print(f"[START] Agent: {agent.name}")
+
+    async def on_llm_end(
+        self,
+        context,
+        agent,
+        response
+    ) -> None:
+        print(
+            f"[MODEL] {agent.name} completed "
+            f"a model call."
+        )
+
+    async def on_agent_end(
+        self,
+        context,
+        agent,
+        output
+    ) -> None:
+        print(f"[END] Agent: {agent.name}")
+        print(
+            f"[USAGE] Total tokens: "
+            f"{context.usage.total_tokens}"
+        )
+
+
+agent = Agent(
+    name="Certificate Agent",
+    instructions=(
+        "Help users check certificate status. "
+        "Always use the certificate-status tool "
+        "when a learner ID is supplied."
+    ),
+    model=MODEL_NAME,
+    tools=[check_certificate_status],
+)
+
+
+async def main() -> None:
+    result = await Runner.run(
+        agent,
+        "Check the certificate status for learner LRN-101.",
+        hooks=LoggingHooks(),
+    )
+
+    print("\nFinal response:")
+    print(result.final_output)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
 
 
 
