@@ -761,6 +761,42 @@ Google ADK is an open-source framework for building, evaluating and deploying co
 
 
 
+Simple Agent
+
+Simple Agent Example
+User:
+Find the next available training session and prepare an enrollment summary.
+
+Agent:
+1. Calls the schedule tool
+2. Retrieves available sessions
+3. Calls the course-information tool
+4. Checks eligibility
+5. Prepares the enrollment summary
+6. Returns the result for user approval
+Simple rule: A model generates responses; an agent uses a model, tools, memory and a control loop to complete tasks.
+
+
+Example: Prepare
+
+Step 1: Create a project
+mkdir ai-agent-examples
+cd ai-agent-examples
+Step 2: Create a virtual environment
+python -m venv venv
+venv\Scripts\activate
+Step 3: Install the libraries
+pip install openai-agents openai python-dotenv
+Step 4: Create .env
+OPENAI_API_KEY=your-openai-api-key
+OPENAI_MODEL=gpt-4.1-mini
+
+
+
+
+
+
+
 
 
 
