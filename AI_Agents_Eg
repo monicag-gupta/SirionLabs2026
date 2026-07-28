@@ -1460,3 +1460,131 @@ if __name__ == "__main__":
 
 
 
+
+
+
+
+
+Multi-Agent System
+
+This example contains:
+A triage agent 
+A course specialist 
+A refund specialist 
+Handoffs between agents 
+In the OpenAI Agents SDK, handoffs allow one agent to transfer control to a specialist. The delegated agent receives the conversation and takes over that part of the task. 
+Multi-agent flow
+User
+  ↓
+Triage Agent
+  ├── Course Specialist
+  └── Refund Specialist
+          ↓
+      Final answer
+
+Create multi_agent.py
+
+
+
+import asyncio
+import os
+
+from agents import Agent, Runner, function_tool
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+MODEL_NAME = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
+
+
+@function_tool
+def get_course_information(
+    course_name: str
+) -> dict:
+    """Return course information."""
+
+    return {
+        "course_name": course_name,
+        "duration": "16 hours",
+        "level": "Beginner",
+        "delivery": "Virtual instructor-led",
+    }
+
+
+@function_tool
+def get_refund_policy() -> dict:
+    """Return the refund-processing policy."""
+
+    return {
+        "approval_required": True,
+        "processing_time": "Seven working days",
+        "payment_method": "Original payment method",
+    }
+
+
+course_agent = Agent(
+    name="Course Specialist",
+    instructions=(
+        "Handle questions about courses, course duration, "
+        "course level, schedules, and delivery format. "
+        "Use the course-information tool."
+    ),
+    model=MODEL_NAME,
+    tools=[get_course_information],
+)
+
+
+refund_agent = Agent(
+    name="Refund Specialist",
+    instructions=(
+        "Handle questions about refund eligibility, "
+        "processing, and payment methods. "
+        "Use the refund-policy tool."
+    ),
+    model=MODEL_NAME,
+    tools=[get_refund_policy],
+)
+
+
+triage_agent = Agent(
+    name="Support Triage Agent",
+    instructions=(
+        "Identify the user's request and transfer it "
+        "to the correct specialist. "
+        "Course questions go to Course Specialist. "
+        "Refund questions go to Refund Specialist."
+    ),
+    model=MODEL_NAME,
+    handoffs=[
+        course_agent,
+        refund_agent,
+    ],
+)
+
+
+async def main() -> None:
+    result = await Runner.run(
+        triage_agent,
+        (
+            "How long will an approved refund take, "
+            "and where will the money be sent?"
+        ),
+    )
+
+    print("Final answer:")
+    print(result.final_output)
+
+    print("\nAnswered by:")
+    print(result.last_agent.name)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+
+
+
+
