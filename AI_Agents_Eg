@@ -739,6 +739,31 @@ Termination conditions are important because an uncontrolled agent loop could ot
 
 
 
+AI Agent Frameworks
+
+OpenAI Agents SDK
+Provides a small set of primitives for agents, tools, handoffs, guardrails, sessions and tracing. 
+It can manage the agent loop while the developer defines instructions and capabilities. 
+LangChain and LangGraph
+LangChain provides higher-level abstractions and integrations for models, tools and common agent loops. 
+LangGraph is the lower-level orchestration runtime for stateful, long-running workflows, including persistence, streaming and human-in-the-loop control. 
+CrewAI
+CrewAI focuses on collaborative agents organized into crews, while flows provide structured, event-driven orchestration and state management. 
+AutoGen
+AutoGen AgentChat provides preset agents and teams for interactive agentic applications. 
+Its newer architecture is asynchronous and event-driven, with separate high-level AgentChat and lower-level Core APIs. 
+Microsoft Agent Framework
+As of July 2026, Microsoft describes Agent Framework as the direct successor to both Semantic Kernel’s agent capabilities and AutoGen. 
+It combines agent abstractions, session-based state, middleware, telemetry and graph-based orchestration. 
+Google Agent Development Kit
+Google ADK is an open-source framework for building, evaluating and deploying conversational, workflow and multi-agent applications across several programming languages.
+
+
+
+
+
+
+
 
 
 
