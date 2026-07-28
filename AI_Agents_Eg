@@ -323,6 +323,28 @@ print(documents[0].metadata)
 
 
 
+TextSplittersEg.py
+
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.document_loaders import TextLoader
+
+splitter = RecursiveCharacterTextSplitter(
+    chunk_size=500,
+    chunk_overlap=100
+)
+loader = TextLoader(
+    "knowledge.txt",
+    encoding="utf-8"
+)
+documents = loader.load()
+chunks = splitter.split_documents(documents)
+
+print("Number of chunks:", len(chunks))
+
+for chunk in chunks:
+    print(chunk.page_content)
+
+
 
 
 
