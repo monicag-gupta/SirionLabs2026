@@ -1169,4 +1169,161 @@ if __name__ == "__main__":
 
 
 
+Function Calling
+
+Function calling is a more specific form of tool calling. In the raw Responses API, your application must:
+Describe the function. 
+Send the function definition to the model. 
+Receive the function call. 
+Execute the function. 
+Return the result to the model. 
+Request the final answer. 
+Create function_calling.py
+
+
+
+import json
+import os
+
+from dotenv import load_dotenv
+from openai import OpenAI
+
+
+load_dotenv()
+
+client = OpenAI()
+
+MODEL_NAME = os.getenv(
+    "OPENAI_MODEL",
+    "gpt-4.1-mini"
+)
+
+
+def calculate_course_fee(
+    learners: int,
+    fee_per_learner: float,
+    discount_percentage: float = 0
+) -> dict:
+    """Calculate the final course fee."""
+
+    subtotal = learners * fee_per_learner
+
+    discount_amount = (
+        subtotal * discount_percentage / 100
+    )
+
+    final_total = subtotal - discount_amount
+
+    return {
+        "learners": learners,
+        "fee_per_learner": fee_per_learner,
+        "subtotal": subtotal,
+        "discount_percentage": discount_percentage,
+        "discount_amount": discount_amount,
+        "final_total": final_total,
+    }
+
+
+tools = [
+    {
+        "type": "function",
+        "name": "calculate_course_fee",
+        "description": (
+            "Calculate training fees for multiple learners."
+        ),
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "learners": {
+                    "type": "integer",
+                    "description": "Number of learners",
+                },
+                "fee_per_learner": {
+                    "type": "number",
+                    "description": (
+                        "Training fee for one learner"
+                    ),
+                },
+                "discount_percentage": {
+                    "type": "number",
+                    "description": (
+                        "Percentage discount, if applicable"
+                    ),
+                },
+            },
+            "required": [
+                "learners",
+                "fee_per_learner",
+                "discount_percentage",
+            ],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    }
+]
+
+
+input_items = [
+    {
+        "role": "user",
+        "content": (
+            "Calculate the fee for 10 learners at "
+            "$150 per learner with a 10 percent discount."
+        ),
+    }
+]
+
+
+# First request: model decides whether to call a function
+response = client.responses.create(
+    model=MODEL_NAME,
+    input=input_items,
+    tools=tools,
+)
+
+
+# Preserve the model's output
+input_items += response.output
+
+
+# Execute any requested function
+for item in response.output:
+    if item.type != "function_call":
+        continue
+
+    if item.name == "calculate_course_fee":
+        arguments = json.loads(item.arguments)
+
+        result = calculate_course_fee(
+            learners=arguments["learners"],
+            fee_per_learner=arguments[
+                "fee_per_learner"
+            ],
+            discount_percentage=arguments[
+                "discount_percentage"
+            ],
+        )
+
+        input_items.append(
+            {
+                "type": "function_call_output",
+                "call_id": item.call_id,
+                "output": json.dumps(result),
+            }
+        )
+
+
+# Second request: model explains the function result
+final_response = client.responses.create(
+    model=MODEL_NAME,
+    input=input_items,
+    tools=tools,
+)
+
+
+print(final_response.output_text)
+
+# The fee for 10 learners at $150 per learner with a 10 percent discount is $1350.
+
+
 
