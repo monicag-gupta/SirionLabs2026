@@ -593,3 +593,71 @@ function submitQuiz(){
 </html>
 
 
+
+
+
+
+Create a Worker File:
+worker.js
+
+// Receive message from HTML page
+self.onmessage = function(event)
+{
+    let number = event.data;
+
+    let result = number * number;
+
+    self.postMessage(result);
+};
+
+
+
+Use worker.js: 
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web Worker Example</title>
+</head>
+<body>
+
+<h2>Web Worker Demo</h2>
+
+<input type="number" id="num">
+
+<button onclick="calculate()">Calculate Square</button>
+
+<h3 id="result"></h3>
+
+<script>
+
+let worker = new Worker("worker.js");
+
+worker.onmessage = function(event)
+{
+    document.getElementById("result").innerHTML =
+        "Square = " + event.data;
+}
+
+function calculate()
+{
+    let number = document.getElementById("num").value;
+
+    worker.postMessage(Number(number));
+}
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
