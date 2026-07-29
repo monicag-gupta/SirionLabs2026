@@ -335,6 +335,43 @@ lists Eg:<br>
 
 
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Storage Example</title>
+</head>
+<body>
+	<h2>Session Storage Demo</h2>
+	<label>Enter Name:</label><input type="text" id="txtName">
+	<br><br>
+	<button onclick="saveData()">Save</button>
+	<button onclick="loadData()">Load</button>
+	<button onclick="deleteData()">Delete</button>
+	<h3 id="result"></h3>
+	<script>
+		function saveData(){
+		    let name = document.getElementById("txtName").value;
+		    sessionStorage.setItem("username", name);
+		    alert("Data Saved");
+		}
+		function loadData(){
+		    let name = sessionStorage.getItem("username");
+		    if(name == null)    {
+		        document.getElementById("result").innerHTML = "No Data Found";
+		    }
+		    else
+		    {
+		        document.getElementById("result").innerHTML =  "Welcome " + name;
+		    }
+		}
+		function deleteData() {
+		    sessionStorage.removeItem("username");
+		    document.getElementById("result").innerHTML = "";
+		    alert("Data Deleted");
+		}
+	</script>
+</body>
+</html>
 
 
 
