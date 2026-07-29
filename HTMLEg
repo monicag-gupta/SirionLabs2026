@@ -379,3 +379,217 @@ lists Eg:<br>
 
 
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MCQ Quiz using sessionStorage</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+}
+
+.container{
+    width:700px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+
+.question{
+    margin-bottom:25px;
+}
+
+h2{
+    text-align:center;
+}
+
+button{
+    padding:10px 20px;
+    font-size:16px;
+    background:green;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:darkgreen;
+}
+
+#result{
+    margin-top:20px;
+    font-size:22px;
+    color:blue;
+    font-weight:bold;
+    text-align:center;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h2>HTML Quiz</h2>
+
+<form id="quizForm">
+
+<div class="question">
+<p><b>1. Which HTML tag is used to create a hyperlink?</b></p>
+
+<label><input type="radio" name="q1" value="a"> &lt;link&gt;</label><br>
+<label><input type="radio" name="q1" value="b"> &lt;a&gt;</label><br>
+<label><input type="radio" name="q1" value="c"> &lt;href&gt;</label><br>
+<label><input type="radio" name="q1" value="d"> &lt;url&gt;</label>
+
+</div>
+
+<div class="question">
+<p><b>2. Which tag inserts an image?</b></p>
+
+<label><input type="radio" name="q2" value="a"> &lt;picture&gt;</label><br>
+<label><input type="radio" name="q2" value="b"> &lt;image&gt;</label><br>
+<label><input type="radio" name="q2" value="c"> &lt;img&gt;</label><br>
+<label><input type="radio" name="q2" value="d"> &lt;src&gt;</label>
+
+</div>
+
+<div class="question">
+<p><b>3. Which HTML element creates a line break?</b></p>
+
+<label><input type="radio" name="q3" value="a"> &lt;br&gt;</label><br>
+<label><input type="radio" name="q3" value="b"> &lt;break&gt;</label><br>
+<label><input type="radio" name="q3" value="c"> &lt;lb&gt;</label><br>
+<label><input type="radio" name="q3" value="d"> &lt;newline&gt;</label>
+
+</div>
+
+<div class="question">
+<p><b>4. Which HTML tag creates an unordered list?</b></p>
+
+<label><input type="radio" name="q4" value="a"> &lt;ol&gt;</label><br>
+<label><input type="radio" name="q4" value="b"> &lt;list&gt;</label><br>
+<label><input type="radio" name="q4" value="c"> &lt;ul&gt;</label><br>
+<label><input type="radio" name="q4" value="d"> &lt;li&gt;</label>
+
+</div>
+
+<div class="question">
+<p><b>5. Which tag is used for the largest heading?</b></p>
+
+<label><input type="radio" name="q5" value="a"> &lt;h6&gt;</label><br>
+<label><input type="radio" name="q5" value="b"> &lt;heading&gt;</label><br>
+<label><input type="radio" name="q5" value="c"> &lt;h3&gt;</label><br>
+<label><input type="radio" name="q5" value="d"> &lt;h1&gt;</label>
+
+</div>
+
+<button type="button" onclick="submitQuiz()">Submit</button>
+
+</form>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const answers = {
+    q1:"b",
+    q2:"c",
+    q3:"a",
+    q4:"c",
+    q5:"d"
+};
+marks=0
+
+// Restore answers from sessionStorage
+window.onload = function(){
+
+    for(let i=1;i<=5;i++){
+
+        let saved=sessionStorage.getItem("q"+i);
+
+        if(saved){
+
+            let radio=document.querySelector(
+                `input[name="q${i}"][value="${saved}"]`
+            );
+
+            if(radio)
+                radio.checked=true;
+        }
+    }
+};
+
+// Save every answer immediately
+// document.querySelectorAll('input[type="radio"]').forEach(radio=>{
+
+//     radio.addEventListener("change",function(){
+
+//         sessionStorage.setItem(this.name,this.value);
+
+//     });
+
+// });
+
+document.querySelectorAll('input[type="radio"]').forEach(radio => {
+
+    radio.addEventListener("change", function () {
+
+        let question = this.name;
+        let selected = this.value;
+
+        // Was previously correct?
+        let wasCorrect = status[question];
+
+        // Is the new answer correct?
+        let isCorrect = (selected === answers[question]);
+
+        if (!wasCorrect && isCorrect) {
+            marks++;                // Wrong → Correct
+        }
+        else if (wasCorrect && !isCorrect) {
+            marks--;                // Correct → Wrong
+        }
+
+        status[question] = isCorrect;
+
+        // Update only one sessionStorage key
+        sessionStorage.setItem("marks", marks);
+
+        console.log("Current Marks:", sessionStorage.getItem("marks"));
+    });
+    });
+
+function submitQuiz(){
+
+    let score=0;
+
+    for(let key in answers){
+
+        let selected=sessionStorage.getItem(key);
+
+        if(selected===answers[key])
+            score++;
+    }
+
+    document.getElementById("result").innerHTML=
+    `You scored <b>${score}</b> out of <b>5</b>.`;
+
+}
+
+
+</script>
+
+</body>
+</html>
+
+
