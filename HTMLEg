@@ -1061,6 +1061,18 @@ function fn(d){
 
 
 
+Selectors
+
+The Type Selectors: h1 {    color: #36CFFF; }
+The Universal Selectors: * {   color: #000000; }
+The Descendant Selectors: This style rule will apply to <em> element only when it lies inside <ul> tag.  ul em {   color: #000000;  }
+The Class Selectors: .black {   color: #000000;  }  
+h1.black {   color: #000000;  }
+The ID Selectors: #black {   color: #000000;  }
+h1#black {   color: #000000;  }
+#black h2 {   color: #000000;  } (All level 2 headings will be displayed in black color only when those headings will lie with in tags having id as black)
+The Child Selectors: body > p {   color: #000000;  } (This rule will render all the paragraphs in black if they are direct child of <body> element. Other paragraphs put inside other elements like <div> or <td> etc. would not have any effect of this rule.)
+Grouping Selectors: h1, h2, h3 { color: #36C; font-weight: normal;}
 
 
 
