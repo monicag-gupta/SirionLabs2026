@@ -1427,4 +1427,285 @@ body {
 
 
 
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Complete Flexbox Example</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            background-color: #f2f2f2;
+        }
+
+        /* =========================
+           HEADER
+        ========================== */
+
+        .header {
+
+            background-color: navy;
+            color: white;
+
+            padding: 20px;
+            text-align: center;
+
+            font-size: 30px;
+        }
+
+        /* =========================
+           FLEX CONTAINER
+        ========================== */
+
+        .container {
+
+            display: flex;
+
+            /* Direction of items */
+            flex-direction: row;
+
+            /* Horizontal alignment */
+            justify-content: space-evenly;
+
+            /* Vertical alignment */
+            align-items: center;
+
+            /* Allow items to move next line */
+            flex-wrap: wrap;
+
+            /* Space between items */
+            gap: 20px;
+
+            padding: 30px;
+        }
+
+        /* =========================
+           FLEX ITEMS
+        ========================== */
+
+        .card {
+
+            width: 250px;
+            height: 180px;
+
+            background-color: white;
+
+            border-radius: 10px;
+
+            box-shadow: 0px 0px 10px gray;
+
+            padding: 20px;
+
+            /* Flex inside card */
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+        }
+
+        .card h2 {
+            color: navy;
+        }
+
+        .card p {
+            text-align: center;
+        }
+
+        /* =========================
+           BUTTON
+        ========================== */
+
+        .btn {
+
+            padding: 10px 20px;
+
+            border: none;
+
+            background-color: teal;
+
+            color: white;
+
+            font-size: 16px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: darkcyan;
+        }
+
+        /* =========================
+           SECOND FLEX EXAMPLE
+        ========================== */
+
+        .menu {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 30px;
+
+            background-color: black;
+
+            padding: 15px;
+        }
+
+        .menu a {
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 18px;
+        }
+
+        .menu a:hover {
+            color: yellow;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        .footer {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background-color: navy;
+
+            color: white;
+
+            height: 80px;
+
+            margin-top: 30px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="header">
+        Flexbox Complete Example
+    </div>
+
+    <!-- FLEX MENU -->
+
+    <div class="menu">
+
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Courses</a>
+        <a href="#">Contact</a>
+
+    </div>
+
+    <!-- FLEX CONTAINER -->
+
+    <div class="container">
+
+        <!-- CARD 1 -->
+
+        <div class="card">
+
+            <h2>HTML</h2>
+
+            <p>
+                HTML is used to create webpage structure.
+            </p>
+
+            <button class="btn">
+                Learn More
+            </button>
+
+        </div>
+
+        <!-- CARD 2 -->
+
+        <div class="card">
+
+            <h2>CSS</h2>
+
+            <p>
+                CSS is used to style webpages beautifully.
+            </p>
+
+            <button class="btn">
+                Learn More
+            </button>
+
+        </div>
+
+        <!-- CARD 3 -->
+
+        <div class="card">
+
+            <h2>JavaScript</h2>
+
+            <p>
+                JavaScript adds interactivity to webpages.
+            </p>
+
+            <button class="btn">
+                Learn More
+            </button>
+
+        </div>
+
+        <!-- CARD 4 -->
+
+        <div class="card">
+
+            <h2>React</h2>
+
+            <p>
+                React is used for frontend application development.
+            </p>
+
+            <button class="btn">
+                Learn More
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        Flexbox Footer Layout Example
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
 
