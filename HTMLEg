@@ -1121,3 +1121,52 @@ button:hover {    background-color: black;    color: white;}
 
 
 
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Box Model Example</title>
+    <style>
+body {
+    font-family: Arial;
+    background-color: lightgray;
+}
+
+/* Box Model Example */
+.box {
+
+    /* CONTENT AREA */
+    width: 300px;
+    height: 150px;
+    background-color: lightblue;
+
+    /* PADDING */
+    padding: 20px;
+
+    /* BORDER */
+    border: 5px solid black;
+
+    /* MARGIN */
+    margin: 30px;
+
+    font-size: 20px;
+}
+    </style>
+</head>
+
+<body>
+
+<h1>CSS Box Model Demo</h1>
+
+<div class="box">
+    This is the CONTENT area.
+</div>
+
+</body>
+</html>
+
+
