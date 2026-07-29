@@ -667,7 +667,87 @@ npm install ws
 
 server.js
 
+const WebSocket = require("ws");
 
+// Create WebSocket Server
+const server = new WebSocket.Server({ port: 8080 });
+
+console.log("WebSocket Server Started...");
+console.log("Listening on ws://localhost:8080");
+
+server.on("connection", function(socket)
+{
+    console.log("Client Connected");
+
+    socket.send("Welcome Client!");
+
+    socket.on("message", function(message)
+    {
+        console.log("Received:", message.toString());
+
+        socket.send("Server Received : " + message);
+    });
+
+    socket.on("close", function()
+    {
+        console.log("Client Disconnected");
+    });
+});
+
+
+
+
+
+
+
+client.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>WebSocket Demo</title>
+</head>
+
+<body>
+
+<h2>WebSocket Example</h2>
+
+<input id="txtMessage">
+
+<button onclick="sendMessage()">
+Send
+</button>
+
+<div id="chat"></div>
+
+<script>
+
+let socket = new WebSocket("ws://localhost:8080");
+
+socket.onopen = function()
+{
+    document.getElementById("chat").innerHTML +=
+    "<p>Connected</p>";
+};
+
+socket.onmessage = function(event)
+{
+    document.getElementById("chat").innerHTML +=
+    "<p>"+event.data+"</p>";
+};
+
+function sendMessage()
+{
+    let msg =
+    document.getElementById("txtMessage").value;
+
+    socket.send(msg);
+}
+
+</script>
+
+</body>
+</html>
 
 
 
