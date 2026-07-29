@@ -758,3 +758,27 @@ function sendMessage()
 
 
 
+Start the Server
+
+
+Open Command Prompt.
+Navigate to the project folder.
+Run:
+
+node server.js
+
+
+Output:
+WebSocket Server Started...
+Listening on ws://localhost:8080
+Do not close this terminal while testing.
+Now run or open the HTML Page
+
+
+
+
+
+
+
+
+
