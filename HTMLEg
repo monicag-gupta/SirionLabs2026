@@ -982,13 +982,13 @@ _______________
 function fn(d){
     var s="<br>Id: " + d.id + "<br>userId: " + d.userId;
     s += "<br>title: " + d.title + "<br>body: " + d.body;
+    s += "<hr>" + JSON.stringify(d);
     return s;
 }
     </script>
 </body>
 
 </html>
-
 
 
 
