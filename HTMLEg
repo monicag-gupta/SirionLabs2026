@@ -302,6 +302,42 @@ lists Eg:<br>
 
 
 
+<!DOCTYPE html>
+<html>
+    <body>
+       
+        Enter x: <input type="text" name="x" id="x"><br>
+        Enter y: <input type="text" name="y" id="y"><br>
+        <input type="button" value="Add" onclick="add();">
+        <br>
+        <br>
+        <div id="res"></div>
+        <div>Function Used: </div>
+        <script>
+            function add(){
+                a=parseInt(document.getElementById("x").value)
+                b=parseInt(document.getElementById("y").value)
+                document.getElementById("res").innerHTML = "Result: "+ a +" + " + b + " = " + (a+b)
+                document.getElementsByTagName("div")[1].innerHTML += add
+            }
+            function a(){
+                
+            }
+
+        </script>            
+        
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
 
 
 
