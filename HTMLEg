@@ -1707,5 +1707,19 @@ body {
 
 
 
+<html>
+    <body>
+        <form action="first.html">
+            <button 
+                onclick="return confirm('Are you going to leave the page')">
+            Leave</button>
+        </form>
+    </body>
+</html>
+
+
+
+
+
 
 
