@@ -778,6 +778,36 @@ Now run or open the HTML Page
 
 
 
+_______________
+
+
+<!DOCTYPE html><html>
+<body>
+	<h2>JavaScript Promise</h2>
+	<p id="demo"></p>
+	<script>
+		function myDisplayer(some) {
+			document.getElementById("demo").innerHTML = some;
+		}
+		let myPromise = new Promise(function(myResolve, myReject) {
+  			let x = 0;
+			//x = 5;
+			if (x == 0) {
+				myResolve("OK as x=0");
+			} else {
+				myReject("Error as x=5");
+			}
+		});
+		myPromise.then(
+			function(value) {myDisplayer(value);},
+			function(error) {myDisplayer(error);}
+		);
+	</script>
+</body></html>
+
+
+
+
 
 
 
