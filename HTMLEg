@@ -1084,3 +1084,38 @@ There are following rules applied to attribute selector.
 
 
 
+
+
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			h1.c1{
+				color:blue;
+			}
+			
+		</style>
+	</head>
+	<body>
+		* is the selector which represents all tags.<br>
+		more than one tag is selected together separated by ,<br>
+		Child tags are separated by parent tag by space.<br>
+		tags with id or class are not separated.
+		<div class="c1">Division 1</div>
+		<p class="c1"> Paragraph 1</p>
+		<h1 class="c1">heading 1</h1>
+		<div>
+			<p>
+				para under div
+			</p>
+			<p>
+				para2 under div
+			</p>
+		</div>
+	</body>
+</html>
+
+
+
+
