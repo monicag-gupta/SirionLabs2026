@@ -11,3 +11,35 @@
 </audio>
 </body>
 </html>
+
+
+
+
+
+
+
+Audio with Sources
+MP4 Video
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Audio with Sources</title>
+</head>
+<body>
+    <h1>Audio with Sources</h1>
+    <audio controls="controls" autoplay>
+        <source src="Piano.mp3" type="audio/mp3">
+    </audio>
+    <hr>
+    <hr>
+    <figure>
+        <figcaption>MP4 Video</figcaption>
+        <video src="myVideo.mp4" autoplay controls width="200" height="200"></video>
+    </figure>
+
+</body>
+
+</html>
