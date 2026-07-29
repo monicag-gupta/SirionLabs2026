@@ -1027,4 +1027,41 @@ function fn(d){
 
 
 
+<!DOCTYPE html>
+<html>
+
+<body>
+    <h2>JavaScript codes</h2>
+    <h1 id="demo"></h1>
+    <script>
+        function divide(a, b) {
+            if (b == 0) {
+                throw new Error("Cannot divide by zero");
+            }
+
+            return a / b;
+        }
+
+        try {
+            console.log(divide(10, 0));
+        }
+        catch (error) {
+            console.log(error.message);
+        }
+        // Output
+        // Cannot divide by zero
+
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
 
