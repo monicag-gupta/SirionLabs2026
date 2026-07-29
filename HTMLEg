@@ -272,4 +272,37 @@ lists Eg:<br>
 
 
 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Local Storage Example</title>
+</head>
+<body>
+<input type="text" id="name" placeholder="Enter your name">
+<button onclick="saveData()">Save</button>
+<button onclick="showData()">Show</button>
+<p id="result"></p>
+<script>
+	function saveData() {
+	    let name = document.getElementById("name").value;
+	    localStorage.setItem("username", name);
+	    alert("Data Saved");
+	}
+	function showData() {
+	    let name = localStorage.getItem("username");
+	    document.getElementById("result").innerHTML = "Welcome " + name;
+	}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
 
