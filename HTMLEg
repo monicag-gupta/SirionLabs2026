@@ -1079,6 +1079,8 @@ There are following rules applied to attribute selector.
 •p[lang="fr"] - Selects all paragraph elements whose lang attribute has a value of exactly "fr".
 •p[lang~="fr"] - Selects all paragraph elements whose lang attribute contains the word "fr".
 •p[lang|="en"] - Selects all paragraph elements whose lang attribute contains values that are exactly "en", or begin with "en-".
+Applies style when mouse hovers.
+button:hover {    background-color: black;    color: white;}
 
 
 
