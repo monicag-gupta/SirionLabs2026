@@ -113,4 +113,22 @@ export default App
 
 
 
+Exercise:
+Four files with four Components:
+Wheels, Seats, Engine
+Car Component:
+I am a CAR!
+Parts: (Table using the other components)
+
+Parts
+NoOfParts
+Wheels: Titanium Alloy
+4
+Seats : 2 Single Seats, 1 three Seater Seat
+3
+Engine : Strong, super fast
+1
+
+
+
 
