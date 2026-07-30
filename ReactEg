@@ -221,3 +221,40 @@ function Cars(props) {
   );
 }
 export default Cars;
+
+
+
+
+
+
+
+
+
+
+import "./App.css"
+import Cars from "./components/Cars";
+import { useState } from "react";
+
+
+function App() {
+  var [count,setCount]=useState(0);
+  var [show,setShow]=useState(false);
+  return (
+    <>
+    <button onClick={()=>{setCount(count+1);setShow(!show)}}>click4Cars</button>
+    {show && <Cars no={count}/>}
+    <hr></hr>
+    </>
+  );
+}
+
+
+export default App
+
+
+
+
+
+
+
+
