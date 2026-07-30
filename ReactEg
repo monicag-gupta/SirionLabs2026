@@ -47,3 +47,30 @@ http://localhost:5173
 
 
 
+
+
+
+JSX allows us to write HTML elements in JavaScript and place them in the DOM without any createElement()  and/or appendChild() methods.
+JSX converts HTML tags into react elements.
+You are not required to use JSX, but JSX makes it easier to write React applications.
+Here are two examples. The first uses JSX and the second does not:
+Example 1 : JSX: index.js : 
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+  const myElement = <h1>JSX is cool!</h1>;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(myElement);
+Example 2 : Without JSX:
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+  const myElement = React.createElement('h1', {}, 'I do not use JSX!');
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(myElement);
+As you can see in the first example, JSX allows us to write HTML directly within the JavaScript code.
+JSX is an extension of the JavaScript language based on ES6, and is translated into regular JavaScript at runtime.
+
+
+
+
+
+
