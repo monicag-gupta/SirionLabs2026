@@ -74,3 +74,17 @@ JSX is an extension of the JavaScript language based on ES6, and is translated i
 
 
 
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+// import App from './App.jsx'
+
+const MyElement = React.createElement('h1', {}, 'I do not use JSX!');
+
+createRoot(document.getElementById('root')).render(MyElement)
+
+
+
+
+
+
