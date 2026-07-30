@@ -154,3 +154,70 @@ function Cars() {
 export default Cars;
 
 
+
+
+
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+function Cars() {
+  const [colr, setColor] = useState("red");
+  var clor={color:colr};
+  return ( 
+    <>
+      <h1 style={clor}>My Car color is {colr}!</h1>
+      <button type="button" onClick={() => setColor("blue")}>Blue</button>
+      <button type="button" onClick={() => setColor("red")}>Red</button>
+      <button type="button" onClick={() => setColor("pink")}>Pink</button>
+      <button type="button" onClick={() => setColor("green")}>Green</button>
+    </>
+  );
+}
+export default Cars;
+
+
+
+
+
+
+
+
+
+import "./App.css"
+import Cars from "./components/Cars";
+import { useState } from "react";
+
+function App() {
+  var [count,setCount]=useState(0);
+  var [show,setShow]=useState(false);
+  return (
+    <>
+    <button onClick={()=>{setCount(count++);setShow(!show)}}>click4Cars</button>
+    {show && <Cars no={count}/>}
+    <hr></hr>
+    </>
+  );
+}
+
+
+export default App
+
+
+
+
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+function Cars(props) {
+  const [colr, setColor] = useState("red");
+  var clor={color:colr};
+  return ( 
+    <>
+      <h1 style={clor}>My Car color is {colr}!</h1>
+      <button type="button" onClick={() => setColor("blue")}>Blue</button>
+      <button type="button" onClick={() => setColor("red")}>Red</button>
+      <button type="button" onClick={() => setColor("pink")}>Pink</button>
+      <button type="button" onClick={() => setColor("green")}>Green</button>
+      <h1>I am rendered : {props.no} times </h1>
+    </>
+  );
+}
+export default Cars;
