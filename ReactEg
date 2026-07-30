@@ -432,3 +432,29 @@ function Cars() {
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Cars />);
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+function Car(props) {
+  return <li>I am a {props.brand}</li>;
+}
+function Cars() {
+  var i=0;
+  const myList = ['Ford', 'Suzuki', 'Creta', 'BMW', 'Mercedes'];
+  return (
+    <>
+      <ul>
+        {myList.map((myListEle) => <Car key={myListEle+(++i)} brand={myListEle} />)}
+      </ul>
+    </>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Cars />);
+
+
+
