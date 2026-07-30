@@ -139,7 +139,7 @@ Engine : Strong, super fast
 
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-function Car() {
+function Cars() {
   const [color, setColor] = useState("red");
   return (
     <>
@@ -151,7 +151,6 @@ function Car() {
     </>
   );
 }
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Car />);
+export default Cars;
 
 
