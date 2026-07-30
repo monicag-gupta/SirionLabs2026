@@ -705,6 +705,52 @@ index.html:
 
 
 
+App.jsx
+
+import ReactDOM from 'react-dom'
+
+function PortalDemo(){  
+    return ReactDOM.createPortal(  
+      <h1>Portal Demo rendered in myportal div</h1>,  
+      document.getElementById('myportal')  
+    )  
+}  
+
+
+
+function App() { 
+  
+  // Creating a portal 
+  return (
+
+    <>
+    <h1>
+      Hello This is rendered in Root div
+    </h1>
+    <PortalDemo/>
+    </>
+  )
+} 
+  
+export default App; 
+
+
+
+
+
+
+main.jsx:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App/>);
+
+
+
+
 
 
 
