@@ -1,1 +1,24 @@
+npm create vite@latest
+
+
+npm create vite@latest
+(first time): install the software: Y
+Project name: my-react-app
+Choose framework: React
+Choose variant: JavaScript
+Navigate to the Project
+cd my-react-app
+Install Dependencies
+npm install
+Start Development Server
+npm run dev
+Output:
+VITE v7.x.x
+Local:
+http://localhost:5173/
+Open:
+http://localhost:5173
+
+
+
 
