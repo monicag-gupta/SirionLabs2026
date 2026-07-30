@@ -518,3 +518,40 @@ class Car extends React.Component {
 }  
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Car/>);
+
+
+
+
+
+
+
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+class Car extends React.Component {  
+  constructor(props) {  
+     super(props);  
+     this.state = {brand: "Ford"};  
+     this.changeState = this.changeState.bind(this)  
+     console.log("Constructor called")
+  }    
+  render() {  
+     return (    <div>  
+            <h1>ReactJS component's Lifecycle</h1>  
+            <h3>My Car is a {this.state.brand}</h3>  
+            <button onClick = {this.changeState}>Click Here!</button>          
+        </div>    );  
+  }  
+  componentWillMount() {  console.log('Component Will MOUNT!');   }  
+  componentDidMount() {   console.log('Component Did MOUNT!');  }  
+  changeState(){  this.setState({brand:this.state.brand=="Ford"?"Mustang!!- Its a great Car Brand.":"Ford"});   }  
+  componentWillReceiveProps(newProps) {   console.log('Component Will Recieve Props!');  }  
+  shouldComponentUpdate(newProps, newState) {   return true;    }  
+  componentWillUpdate(nextProps, nextState) {  console.log('Component Will UPDATE!');  }  
+  componentDidUpdate(prevProps, prevState) {  console.log('Component Did UPDATE!');  }  
+  componentWillUnmount() {  console.log('Component Will UNMOUNT!');  }  
+}  
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<Car/>);
+
