@@ -257,4 +257,51 @@ export default App
 
 
 
+setCount=> count = count++ ; state count is prev value of count 
+then count++ 
+if count=0
+state count=0, count=1
+
+setcount=>count=++count
+state count = 1, count =1
+
+setShow=> component var changed => reload the component (retain only state vars) so only state count with 0 value was retained
+
+if setShow => show=true => no reload of Component happens =>
+count and state count were retained
+state count = count++
+state count=1, count= 2
+
+
+
+
+
+
+import "./App.css"
+import Cars from "./components/Cars";
+import { useState } from "react";
+
+
+function App() {
+  var [count,setCount]=useState(0);
+  var [show,setShow]=useState(false);
+  return (
+    <>
+    <button onClick={()=>{setCount(++count);setShow(!show)}}>click4Cars</button>
+    {show && <Cars no={count}/>}
+    <hr></hr>
+    </>
+  );
+}
+
+
+export default App
+
+
+
+
+
+
+
+
 
