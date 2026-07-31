@@ -1743,6 +1743,9 @@ export default PrivateRoutes
 
 
 
+
+
+
 Layout.jsx
 
 
@@ -1819,6 +1822,42 @@ const Login = () => {
     );
   };
     export default Login;
+
+
+
+
+
+
+
+
+main.jsx:
+
+
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout"; import Home from "./pages/Home";
+import Blogs from "./pages/Blogs"; import Contact from "./pages/Contact";
+import NoPage from "./pages/NoPage"; import Login from "./pages/Login";
+import PrivateRoutes from "./pages/PrivateRoutes"; import { useState } from "react";
+function App() {
+  const [isLoggedIn, setisLoggedIn] = useState(null);
+  const logIn = () => { setisLoggedIn(true); };
+  const logOut = () => { setisLoggedIn(false); };
+  return (
+    <Router>
+      {isLoggedIn ? (<button onClick={logOut}>Logout</button> ) : (
+        <> <Login /> <button onClick={logIn}>Login</button> </> )}
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="authblogs" element={ <PrivateRoutes isLoggedIn={isLoggedIn}>
+                <Blogs />  </PrivateRoutes>       } />
+          <Route path="contact" element={<Contact />} /> <Route path="blogs" element={<Blogs />} /> 
+           <Route path="login" element={<Login />} /> <Route path="*" element={<NoPage />} />
+        </Route>   </Routes>  </Router>
+  ); }
+const root = ReactDOM.createRoot(document.getElementById('root')); root.render(<App />);
+
 
 
 
