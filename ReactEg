@@ -934,3 +934,37 @@ function Timer() {
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+
+
+
+
+
+
+
+
+Ways to mimic lifecycle methods using useEffect hook
+
+
+We know that the useEffect() is used for causing side effects in functional components and it is also capable of handling componentDidMount(), componentDidUpdate(), and componentWillUnmount() life-cycle methods of class-based components into the functional components.
+For componentDidMount
+useEffect(()=>{
+    //You can add your code here for mounting phase of component
+    console.log("Mounting in Functional Component")
+},[])
+// adding an empty array ensures that the useEffect is only triggered once (when the component mounts)
+For componentDidUpdate
+useEffect(()=>{
+    //You can add your code for updating phase of component
+    console.log("Updating in Functional Component")
+},[values])
+//values triggers re render whenever they are updated in your program, you can add multiple values by separating them by commas
+For componentWillUnmount
+useEffect(()=>{
+    return()=>{
+    //You can add your code for unmounting phase of component
+    console.log("Functional Component Removed ")
+    }
+},[])
+//Write all the code of unmounting phase only inside the callback function
+
+
