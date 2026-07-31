@@ -1799,3 +1799,28 @@ function App() {
 }
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
+
+
+
+
+Login.jsx
+
+const Login = () => {
+    return (
+        <table>
+            <tr>
+                <td>LoginID: </td>
+                <td><input type="text"></input></td>
+            </tr><tr>
+                <td>Password: </td>
+                <td><input type="text"></input></td>
+            </tr>
+        </table>
+    );
+  };
+    export default Login;
+
+
+
+
+
