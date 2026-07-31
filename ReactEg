@@ -1171,3 +1171,24 @@ export default HelloWorld
 
 
 
+
+main.jsx
+
+import './App.css';
+import ReactDOM from "react-dom/client";
+import HelloWorld from './HelloWorld';
+import ThemeContext from './ThemeContext';
+function App() {
+   return (
+      <ThemeContext.Provider value={{
+         color: 'white',
+         backgroundColor: 'green'
+      }}>
+      <HelloWorld />
+      </ThemeContext.Provider>
+   );
+}
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+
+
