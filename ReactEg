@@ -1056,3 +1056,32 @@ class SimplePortal extends React.Component {
 }
 export default SimplePortal;
 
+
+
+App.jsx:
+
+import './App.css'
+import React from 'react';
+import SimplePortal from './components/SimplePortal';
+class App extends React.Component {
+   constructor(props) {
+      super(props);
+      this.state = { modal: false }
+   }
+   handleOpenModal = () => this.setState({ modal: true })
+   handleCloseModal = () => this.setState({ modal: false })
+   render() {
+      return (
+         <div className="container">
+            <div style={{ padding: "10px" }}>
+               <div> <div><p>Main App</p></div>  <div>
+                     <button onClick={this.handleOpenModal}> Show Modal </button>
+                     { this.state.modal ? (
+                        <SimplePortal onClose={this.handleCloseModal}>
+                           Hi, I am the modal dialog created using portal.
+                        </SimplePortal>
+                     ) : null}
+                  </div>  </div>
+            </div> </div>
+      );  } }
+export default App;
