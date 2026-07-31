@@ -1030,3 +1030,29 @@ App.css
   justify-self: center;
 }
 
+
+
+SimplePortal.jsx
+
+
+import React from "react";
+import PortalReactDOM from 'react-dom'
+const modalPortal = document.getElementById('modalPortal')
+class SimplePortal extends React.Component {
+//    constructor(props) { 
+//       super(props);
+//    }
+   render() {
+      return PortalReactDOM.createPortal(
+         <div className="modal" onClick={this.props.onClose} >
+            <div className="modalContent">
+               {this.props.children} <hr />
+               <button onClick={this.props.onClose}>Close</button>
+            </div>
+         </div>,
+         modalPortal,
+      )
+   }
+}
+export default SimplePortal;
+
