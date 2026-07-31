@@ -1565,3 +1565,33 @@ button{
 
 
 
+
+
+____________________________________________
+
+npm install react-router-dom --save   
+
+
+
+Components in React Router
+
+There are four router components:
+<BrowserRouter>: It is used for handling the dynamic URL.
+	BrowserRouter: BrowserRouter is a router implementation that uses the HTML5 history API(pushState, replaceState, and the popstate event) to keep your UI in sync with the URL. It is the parent component that is used to store all of the other components.
+<HashRouter>: It is used for handling the static request.
+
+Router − Router is the top level component. It encloses the entire application.
+Routes: It’s a new component introduced in the v6 and an upgrade of the component. The main advantages of Routes over Switch are Routes are chosen based on the best match instead of being traversed in order.
+Link − Similar to anchor tag in html. It sets the target URL along with reference text.
+Link: The link component is used to create links to different routes and implement navigation around the application. It works like an HTML anchor tag.
+<Link to="/">Home</Link>
+Here, to attribute is used to set the target URL.
+Route − Maps the target URL to the component.
+Route: Route is the conditionally shown component that renders some UI when its path matches the current URL.
+
+
+
+
+
+
+
