@@ -1433,3 +1433,110 @@ todo_list.json
 [{"id":1,"title":"Learn JavaScript","is_done":true},
 {"id":2,"title":"Learn React","is_done":true},
 {"id":3,"title":"Learn Typescript","is_done":false}]
+
+
+
+
+
+
+
+useLocalStorage.jsx
+
+import { useState } from "react";
+function useLocalStorage(key, initialValue) {
+    const [storedValue, setStoredValue] = useState(() => {
+        const item = localStorage.getItem(key);
+        if (item) {
+            return JSON.parse(item);
+        }
+        return initialValue;
+    });
+    const saveValue = (value) => {
+        setStoredValue(value);
+        localStorage.setItem(key, JSON.stringify(value));
+    };
+    const removeValue = () => {
+        localStorage.removeItem(key);
+        setStoredValue(initialValue);
+    };
+    return [storedValue, saveValue, removeValue];
+}
+export default useLocalStorage;
+
+
+
+
+
+
+
+UserForm.jsx
+
+import { useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
+function UserForm() {
+    const [user, setUser, removeUser] = useLocalStorage("user", "");
+    const [name, setName] = useState(user);
+    const saveUser = () => {
+        setUser(name);
+        alert("Saved Successfully");
+    };
+    const deleteUser = () => {
+        removeUser();
+        setName("");
+    };
+    return (
+        <div>
+            <h2>User Form</h2>
+            <input type="text" value={name} placeholder="Enter Name" onChange={(e)=>setName(e.target.value)} />
+            <br /><br />
+            <button onClick={saveUser}> Save </button>
+            <button onClick={deleteUser}> Remove </button>
+        </div>
+    );
+}
+export default UserForm;
+
+
+
+
+
+
+UserDisplay.jsx
+
+import useLocalStorage from "../hooks/useLocalStorage";
+function UserDisplay() {
+    const [user] = useLocalStorage("user", "");
+    return (
+        <div>
+            <h2>Stored User</h2>
+            <h3>{user || "No Data Found"}</h3>
+        </div>
+    );
+}
+export default UserDisplay;
+
+
+
+
+App.jsx
+
+import "./App.css";
+import UserForm from "./components/UserForm";
+import UserDisplay from "./components/UserDisplay";
+function App() {
+    return (
+        <div>
+            <h1>Local Storage Demo</h1>
+            <UserForm />
+            <hr />
+            <UserDisplay />
+        </div>
+    );
+}
+export default App;
+
+
+
+
+
+
