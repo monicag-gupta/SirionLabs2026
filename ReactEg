@@ -1213,3 +1213,28 @@ function HelloWorld() {
    </h3>) }
 export default HelloWorld
 
+
+
+
+
+main.jsx
+
+import './App.css';
+import ReactDOM from "react-dom/client";
+import HelloWorld from './HelloWorld';
+import ThemeContext from './ThemeContext';
+import { useState } from 'react'
+function App() {
+    let initialTheme = {
+       color: 'white',
+       backgroundColor: 'green'
+    }
+    const [theme, setTheme] = useState(initialTheme)
+    return (
+       <ThemeContext.Provider value={{ theme, setTheme }}>
+          <HelloWorld />
+       </ThemeContext.Provider>
+    );
+ }
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
