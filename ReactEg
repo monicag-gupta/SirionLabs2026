@@ -1192,3 +1192,24 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
 
 
+
+
+
+import React, { useContext } from "react"
+import ThemeContext from './ThemeContext'
+function HelloWorld() {
+   let { theme, setTheme } = useContext(ThemeContext)
+   return (<h3 style={{
+      color: theme.color, backgroundColor: theme.backgroundColor }}>
+      <div>
+         <select value={theme.backgroundColor}
+            onChange= {(e) => {
+               setTheme({...theme, backgroundColor: e.target.value})
+         } } >
+         <option value="green">Green</option>
+         <option value="red">Red</option>
+      </select><br/><br/>
+   </div> <div>Hello World</div>
+   </h3>) }
+export default HelloWorld
+
