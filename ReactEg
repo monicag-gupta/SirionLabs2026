@@ -1134,3 +1134,40 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Component1 />);
 
 
+
+
+
+
+
+ThemeContext.jsx
+
+import React from 'react'
+const ThemeContext = React.createContext({
+   color: 'black',
+   backgroundColor: 'white'
+})
+export default ThemeContext
+
+
+
+
+
+HelloWorld.jsx
+
+import React, { useContext } from "react"
+import ThemeContext from './ThemeContext'
+function HelloWorld() {
+   let theme = useContext(ThemeContext)
+   return (
+      <div style={{
+         color: theme.color,
+         backgroundColor: theme.backgroundColor }}>
+            Hello World
+      </div>
+   )
+}
+export default HelloWorld
+
+
+
+
