@@ -246,3 +246,22 @@ function App() {
 }
 const root = ReactDOM.createRoot(document.getElementById('root')); root.render(<App />);
 
+
+
+
+
+Contact.jsx:
+
+function Contact() {
+  throw new Error("Testing Error Boundary");
+
+  return (
+    <h1>Contact Me</h1>
+  );
+}
+
+export default Home;
+
+
+
+
