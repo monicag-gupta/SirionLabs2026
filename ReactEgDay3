@@ -41,3 +41,25 @@ export default function Math(){
 
 
 
+main.jsx
+
+//main.jsx
+import ReactDOM from "react-dom/client";
+//import Math from "./math";
+import React from "react";
+//import {lazy} from "react";
+const Math = React.lazy(() => import('./math'));
+//const Math = lazy(() => import('./math'));
+function App(){
+  return(
+    <h1>Add Called from math.js: <br/>
+     <Math/>
+    </h1>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
+
+
