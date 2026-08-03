@@ -1,0 +1,11 @@
+Table in database
+
+create database javadb;
+
+use javadb;
+
+CREATE TABLE EmpTbl (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(100),
+    Department VARCHAR(100)
+);
