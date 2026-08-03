@@ -10,9 +10,9 @@ export function add(a, b) {
 
 
 
-Code Splitting : index.js
+Code Splitting : main.jsx
 
-//index.js
+//main.jsx
 import ReactDOM from "react-dom/client";
 function App(){
   return(
