@@ -146,3 +146,118 @@ public interface EmpRepository extends JpaRepository<EmpTbl, Integer> {
 
 
 
+
+package com.example.demo.controller;
+class EmpController:
+
+
+
+
+package com.example.demo.controller;
+
+
+import com.example.demo.model.EmpTbl;
+import com.example.demo.repository.EmpRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@CrossOrigin(origins = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/employees")
+public class EmpController {
+
+    @Autowired
+    private EmpRepository empRepository;
+
+    @GetMapping
+    public List<EmpTbl> getAll() {
+        return empRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public EmpTbl getById(@PathVariable int id) {
+        return empRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping
+    public EmpTbl create(@RequestBody EmpTbl emp) {
+        return empRepository.save(emp);
+    }
+
+    @PutMapping("/{id}")
+    public EmpTbl update(@PathVariable int id, @RequestBody EmpTbl updatedEmp) {
+        Optional<EmpTbl> optionalEmp = empRepository.findById(id);
+        if (optionalEmp.isPresent()) {
+            EmpTbl emp = optionalEmp.get();
+            emp.setName(updatedEmp.getName());
+            emp.setDepartment(updatedEmp.getDepartment());
+            return empRepository.save(emp);
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable int id) {
+        empRepository.deleteById(id);
+    }
+}
+
+
+
+
+
+
+
+Run as Maven clean, install, Spring boot run  : spring-boot:run
+
+Check in Postman:
+GET/POST/PUT/DELETE on http://localhost:8080/api/employees
+
+
+
+
+
+
+
+
+
+
+
+
+ReactJS Frontend (Calling Spring Boot API)
+
+npm create vite@latest
+(first time): install the software: Y
+
+Project name: emp-crud-react
+
+Choose framework: React
+
+Choose variant: JavaScript
+
+Navigate to the Project
+cd emp-crud-react
+
+Install Dependencies
+npm install
+npm install axios
+
+Start Development Server
+npm run dev
+
+
+Output:
+VITE v7.x.x
+Local:
+http://localhost:5173/
+Open:
+http://localhost:5173
+
+
+cd emp-crud-react
+npm install axios
+
+
