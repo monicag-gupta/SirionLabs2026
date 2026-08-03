@@ -28,3 +28,16 @@ root.render(<App />);
 
 
 
+
+math.js
+
+function add(a, b) {
+    return a + b;
+  }
+export default function Math(){
+  return (<h1>{add(16, 26)}</h1>);
+}
+
+
+
+
