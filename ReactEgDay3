@@ -131,3 +131,29 @@ root.render(<App />);
 
 
 
+Num.jsx
+
+import React from "react";
+
+export const Num = ({ resource }) => {
+  const n = resource.num.read();
+  return <div>your random number is: {n}</div>;
+};
+
+
+
+
+Person.jsx
+
+import React from "react";
+
+export const Person = ({ resource }) => {
+  const person = resource.person.read();
+
+  return <div>{person.name.first}</div>;
+};
+
+
+
+
+
