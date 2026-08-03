@@ -26,3 +26,14 @@ INSERT INTO EmpTbl (Name, Department) VALUES ('Hannah', 'Sales');
 INSERT INTO EmpTbl (Name, Department) VALUES ('Ian', 'IT');
 INSERT INTO EmpTbl (Name, Department) VALUES ('Jenny', 'Marketing');
 
+
+
+
+
+
+
+
+select * from Emptbl;
+
+
+
