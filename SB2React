@@ -82,7 +82,7 @@ class EmpTbl:
 
 
 
-package com.sbprj.model;
+package com.example.demo.model;
 
 import jakarta.persistence.*;
 
@@ -126,6 +126,22 @@ this.department = department;
     // ...
 }
 
+
+
+
+
+package com.example.demo.repository;
+interface EmpRepository:
+
+
+package com.example.demo.repository;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.model.EmpTbl;
+
+public interface EmpRepository extends JpaRepository<EmpTbl, Integer> {
+}
 
 
 
