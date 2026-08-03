@@ -215,3 +215,34 @@ export default class MyErrorBoundary extends React.Component {
 
 
 
+
+
+
+
+
+main.jsx
+
+
+import ReactDOM from "react-dom/client"; import MyErrorBoundary from "./MyErrorBoundary";
+import { Routes, BrowserRouter, Route} from 'react-router-dom';  import React, { Suspense, lazy } from 'react';  
+function App() {
+  const Home = lazy(() => import('./pages/Home'));
+  const Layout = lazy(() => import('./pages/Layout'));
+  const Blogs = lazy(()=>import('./pages/Blogs'));
+  const Contact = lazy(()=>import('./pages/Contact'));
+  const NoPage = lazy(()=>import('./pages/NoPage'));
+  return (
+    <BrowserRouter>
+    <MyErrorBoundary>  
+    <Suspense fallback={<div>Loading...</div>}>    <Routes>  
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />   <Route path="blogs" element={<Blogs />} />
+          <Route path="contact" element={<Contact />} />  <Route path="*" element={<NoPage />} />
+        </Route>
+    </Routes> </Suspense>
+    </MyErrorBoundary>
+    </BrowserRouter>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); root.render(<App />);
+
