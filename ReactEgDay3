@@ -104,5 +104,30 @@ const wrapPromise = promise => {
 
 
 
+main.jsx
+
+import ReactDOM from "react-dom/client";
+import React, { Suspense } from "react";
+import { createResource } from "./ResourceAPI";
+import { Person } from "./Person";
+import { Num } from "./Num";
+
+const resource = createResource();
+function App() {
+  return (
+    <div>
+      <Suspense fallback={<h1>loading num...</h1>}>
+        <Num resource={resource} />
+      </Suspense>
+      <Suspense fallback={<h1>loading person...</h1>}>
+        <Person resource={resource} />
+      </Suspense>
+    </div>
+  );
+}
+const root = ReactDOM.createRoot(document.getElementById('root')); 
+root.render(<App />);
+
+
 
 
