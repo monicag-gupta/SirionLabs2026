@@ -157,3 +157,35 @@ export const Person = ({ resource }) => {
 
 
 
+
+
+
+
+
+
+
+
+_________________________
+
+Create a pages folder : pages
+Put all the required pages there
+Layout.js
+Home.js
+Blogs.js
+Contact.js
+NoPage.js
+Link it to main App, Edit: index.js
+Have the route-based code splitting into the app using React Router with React.lazy.
+Have the MyErrorBoundary.jsx file with Error Boundary defined.
+Use MyErrorBoundary in the Main App.
+
+
+
+
+Error Boundaries:
+
+MyErrorBoundary.jsx
+
+
+
+
