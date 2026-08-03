@@ -265,3 +265,119 @@ export default Home;
 
 
 
+
+
+_______________________________________________________
+
+IndexedDB
+
+IndexedDB is a browser-based NoSQL database that allows web applications to store large amounts of structured data locally on the user's device. 
+It supports transactions, indexes, and asynchronous operations.
+Unlike localStorage and sessionStorage, IndexedDB can store complex JavaScript objects, large files (such as Blobs), and much more data.
+IndexedDB is the preferred client-side storage solution for applications that need to store large datasets, work offline, or efficiently query structured data.
+
+
+
+
+IndexedDB Workflow
+
+Open Database
+       │
+       ▼
+Create Object Store (only first time)
+       │
+       ▼
+Add Records
+       │
+       ▼
+Read Records
+       │
+       ▼
+Update Records
+       │
+       ▼
+Delete Records
+
+
+
+
+
+
+
+
+index.html:
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>IndexedDB CRUD</title>
+</head>
+
+<body>
+
+    <h2>IndexedDB CRUD</h2>
+    <input type="number" id="id" placeholder="ID"><br><br>
+    <input type="text" id="sname" placeholder="Name"><br><br>
+    <input type="text" id="course" placeholder="Course"><br><br>
+
+    <button onclick="addStudent()">Add</button>
+    <button onclick="viewStudents()">View</button>
+    <button onclick="updateStudent()">Update</button>
+    <button onclick="deleteStudent()">Delete</button>
+
+    <pre id="output"></pre>
+
+    <script>
+
+        let db;
+        let request = indexedDB.open("StudentDB", 1);
+        request.onupgradeneeded = function (e) {
+            db = e.target.result;
+            db.createObjectStore("students", {
+                keyPath: "id"
+            });
+        };
+        request.onsuccess = function (e) {
+            db = e.target.result;
+        };
+        function addStudent() {
+            let transaction = db.transaction("students", "readwrite");
+            let store = transaction.objectStore("students");
+            store.add({
+                id: Number(id.value),
+                sname: sname.value,
+                course: course.value
+            });
+            alert("Added");
+        }
+        function viewStudents() {
+            let transaction = db.transaction("students", "readonly");
+            let store = transaction.objectStore("students");
+            let req = store.getAll();
+            req.onsuccess = function () {
+                output.textContent = JSON.stringify(req.result, null, 2);
+            }
+        }
+        function updateStudent() {
+            let transaction = db.transaction("students", "readwrite");
+            let store = transaction.objectStore("students");
+            store.put({
+                id: Number(id.value),
+                sname: sname.value,
+                course: course.value
+            });
+            alert("Updated");
+        }
+        function deleteStudent() {
+            let transaction = db.transaction("students", "readwrite");
+            let store = transaction.objectStore("students");
+            store.delete(Number(id.value));
+            alert("Deleted");
+        }
+    </script>
+</body>
+
+</html>
+
+
