@@ -1,0 +1,552 @@
+## What is Javadoc?
+
+**Javadoc** is a documentation generation tool provided with the Java Development Kit (JDK). It reads specially formatted comments in Java source code and automatically generates professional HTML documentation for classes, methods, constructors, interfaces, packages, and fields.
+
+It helps developers understand how to use Java classes and APIs without reading the source code.
+
+---
+
+## Why Use Javadoc?
+
+* Creates API documentation automatically.
+* Improves code readability and maintainability.
+* Makes collaboration easier among developers.
+* Helps IDEs (Eclipse, IntelliJ IDEA, VS Code) display method descriptions.
+* Essential for libraries and frameworks.
+
+---
+
+## Javadoc Comment Syntax
+
+Javadoc comments begin with `/**` and end with `*/`.
+
+```java
+/**
+ * This is a Javadoc comment.
+ */
+```
+
+Example:
+
+```java
+/**
+ * This class performs basic mathematical operations.
+ */
+public class Calculator {
+
+}
+```
+
+---
+
+## Example of Javadoc
+
+```java
+/**
+ * Represents a simple calculator.
+ *
+ * @author John
+ * @version 1.0
+ */
+public class Calculator {
+
+    /**
+     * Adds two integers.
+     *
+     * @param a First number
+     * @param b Second number
+     * @return Sum of a and b
+     */
+    public int add(int a, int b) {
+        return a + b;
+    }
+}
+```
+
+---
+
+## Output
+
+The generated documentation contains:
+
+* Class Description
+* Constructors
+* Methods
+* Parameters
+* Return values
+* Exceptions
+* Author
+* Version
+
+---
+
+# Common Javadoc Tags
+
+| Tag                      | Description                             |
+| ------------------------ | --------------------------------------- |
+| `@author`                | Specifies the author                    |
+| `@version`               | Version of the class                    |
+| `@param`                 | Describes a method parameter            |
+| `@return`                | Describes the return value              |
+| `@throws` / `@exception` | Describes exceptions thrown             |
+| `@see`                   | Reference to related classes or methods |
+| `@since`                 | Version when introduced                 |
+| `@deprecated`            | Marks obsolete code                     |
+| `{@link}`                | Creates clickable links                 |
+| `{@code}`                | Displays code formatting                |
+| `{@literal}`             | Displays text without interpreting HTML |
+
+---
+
+## Example Using Most Tags
+
+```java
+/**
+ * Utility class for arithmetic operations.
+ *
+ * @author John
+ * @version 2.0
+ * @since Java 21
+ */
+public class Calculator {
+
+    /**
+     * Divides two integers.
+     *
+     * @param a Dividend
+     * @param b Divisor
+     * @return Quotient
+     * @throws ArithmeticException if divisor is zero
+     * @see Math
+     */
+    public int divide(int a, int b) {
+        if (b == 0)
+            throw new ArithmeticException("Cannot divide by zero");
+        return a / b;
+    }
+}
+```
+
+---
+
+## `@param`
+
+Used to describe each parameter.
+
+```java
+/**
+ * Calculates area.
+ *
+ * @param length Length of rectangle
+ * @param width Width of rectangle
+ * @return Area
+ */
+public int area(int length, int width) {
+    return length * width;
+}
+```
+
+---
+
+## `@return`
+
+```java
+/**
+ * Returns square of a number.
+ *
+ * @param n Number
+ * @return Square of n
+ */
+public int square(int n) {
+    return n * n;
+}
+```
+
+---
+
+## `@throws`
+
+```java
+/**
+ * Reads a file.
+ *
+ * @param fileName Name of file
+ * @throws IOException if file is missing
+ */
+public void read(String fileName) throws IOException {
+
+}
+```
+
+---
+
+## `@see`
+
+```java
+/**
+ * @see Math#sqrt(double)
+ */
+```
+
+---
+
+## `{@link}`
+
+Creates clickable hyperlinks.
+
+```java
+/**
+ * See {@link Math#pow(double,double)}
+ */
+```
+
+---
+
+## `{@code}`
+
+Displays code exactly as written.
+
+```java
+/**
+ * Use {@code list.add(item)} to insert elements.
+ */
+```
+
+---
+
+## `@deprecated`
+
+```java
+/**
+ * @deprecated Use calculateTotal() instead.
+ */
+public void total() {
+
+}
+```
+
+---
+
+## Class-Level Javadoc
+
+```java
+/**
+ * Represents an Employee.
+ *
+ * Stores employee information including ID and salary.
+ *
+ * @author John
+ * @version 1.2
+ */
+public class Employee {
+
+}
+```
+
+---
+
+## Method-Level Javadoc
+
+```java
+/**
+ * Calculates annual salary.
+ *
+ * @param monthlySalary Monthly salary
+ * @return Annual salary
+ */
+public double annualSalary(double monthlySalary) {
+    return monthlySalary * 12;
+}
+```
+
+---
+
+## Constructor Javadoc
+
+```java
+/**
+ * Creates an employee.
+ *
+ * @param id Employee ID
+ * @param name Employee Name
+ */
+public Employee(int id, String name) {
+
+}
+```
+
+---
+
+## Field Javadoc
+
+```java
+/**
+ * Employee identifier.
+ */
+private int id;
+```
+
+---
+
+## Generating Javadoc
+
+### Using the Command Line
+
+```bash
+javadoc Calculator.java
+```
+
+For an entire project:
+
+```bash
+javadoc -d docs *.java
+```
+
+* `-d docs` specifies the output directory.
+* HTML files are generated in the `docs` folder.
+
+---
+
+## Generating Javadoc in Eclipse
+
+1. Right-click the project.
+2. Select **Export**.
+3. Choose **Java → Javadoc**.
+4. Click **Next**.
+5. Select the classes/packages.
+6. Specify the destination folder.
+7. Finish the wizard.
+
+---
+
+## Best Practices
+
+* Write Javadoc for all public classes and methods.
+* Explain **what** a method does, not how it is implemented.
+* Document every parameter, return value, and exception.
+* Keep descriptions concise and accurate.
+* Update Javadoc whenever the code changes.
+* Use `{@link}` to connect related APIs.
+* Use `@deprecated` with a recommendation for the replacement.
+
+---
+
+## Example: Complete Javadoc
+
+```java
+/**
+ * A simple banking account.
+ *
+ * Provides deposit and withdrawal operations.
+ *
+ * @author Jay
+ * @version 1.0
+ * @since Java 21
+ */
+public class BankAccount {
+
+    private double balance;
+
+    /**
+     * Creates an account with an initial balance.
+     *
+     * @param balance Initial account balance
+     */
+    public BankAccount(double balance) {
+        this.balance = balance;
+    }
+
+    /**
+     * Deposits money into the account.
+     *
+     * @param amount Amount to deposit
+     */
+    public void deposit(double amount) {
+        balance += amount;
+    }
+
+    /**
+     * Withdraws money from the account.
+     *
+     * @param amount Amount to withdraw
+     * @throws IllegalArgumentException if amount exceeds balance
+     */
+    public void withdraw(double amount) {
+        if (amount > balance)
+            throw new IllegalArgumentException("Insufficient balance");
+
+        balance -= amount;
+    }
+
+    /**
+     * Returns the current account balance.
+     *
+     * @return Current balance
+     */
+    public double getBalance() {
+        return balance;
+    }
+}
+```
+
+This class demonstrates Javadoc for a class, constructor, fields, methods, parameters, return values, and exceptions, and can be used to generate clear HTML API documentation.
+
+
+
+
+
+
+
+  If you have **only a compiled JAR file**, you **cannot generate meaningful Javadoc** from it because Javadoc is created from **Java source code (`.java` files)**, not from compiled bytecode (`.class` files). The compiled JAR does not contain the comments (`/** ... */`) that Javadoc uses.
+
+## Scenario 1: You have the source code (Recommended)
+
+If you have the project's source code, generate Javadoc using the `javadoc` tool.
+
+### Command Line
+
+```bash
+javadoc -d docs -sourcepath src -subpackages com.example
+```
+
+* `-d docs` → Output directory for the HTML files.
+* `-sourcepath src` → Location of the source code.
+* `-subpackages com.example` → Generate documentation for all packages under `com.example`.
+
+### Using Maven
+
+Add the Maven Javadoc Plugin to your `pom.xml`:
+
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>3.11.2</version>
+        </plugin>
+    </plugins>
+</build>
+```
+
+Generate HTML documentation:
+
+```bash
+mvn javadoc:javadoc
+```
+
+Generate a Javadoc JAR:
+
+```bash
+mvn javadoc:jar
+```
+
+The generated files are typically found in:
+
+```
+target/site/apidocs/
+```
+
+or
+
+```
+target/myproject-1.0-javadoc.jar
+```
+
+---
+
+## Scenario 2: You only have a JAR file
+
+If you only have:
+
+```
+library.jar
+```
+
+you **cannot recreate the original Javadoc comments**, because they are not stored in the compiled classes.
+
+You have these options:
+
+1. **Look for an existing Javadoc JAR** published with the library:
+
+   ```
+   library-1.0-javadoc.jar
+   ```
+
+2. **Download the source JAR** (if available):
+
+   ```
+   library-1.0-sources.jar
+   ```
+
+   Then generate Javadoc from those sources.
+
+3. **Decompile the JAR** using tools such as CFR, JD-GUI, or FernFlower to recover Java code. You can then run the `javadoc` tool on the decompiled source, but:
+
+   * Original Javadoc comments will be missing.
+   * Method and parameter names may not always match the originals.
+   * The generated documentation will only include signatures and any comments you add yourself.
+
+---
+
+## Scenario 3: Generate Javadoc from Decompiled Source
+
+1. Decompile the JAR:
+
+```bash
+java -jar cfr.jar library.jar --outputdir src
+```
+
+2. Generate Javadoc:
+
+```bash
+javadoc -d docs -sourcepath src -subpackages com.example
+```
+
+This produces HTML documentation based on the decompiled code, but it will not contain the original documentation comments.
+
+---
+
+## Example Workflow
+
+Suppose you have:
+
+```
+EmployeeManagement.jar
+```
+
+If you also have:
+
+```
+EmployeeManagement-sources.jar
+```
+
+1. Extract the source JAR.
+2. Run:
+
+```bash
+javadoc -d apidocs -sourcepath extracted-source -subpackages com.company
+```
+
+3. Open:
+
+```
+apidocs/index.html
+```
+
+in your browser to view the generated API documentation.
+
+### Summary
+
+| Available Files       | Can you generate Javadoc?            | Result                                              |
+| --------------------- | ------------------------------------ | --------------------------------------------------- |
+| `project.jar` only    | ❌ No (original comments unavailable) | Use existing Javadoc or decompile                   |
+| `project-sources.jar` | ✅ Yes                                | Full API documentation (based on source)            |
+| Project source code   | ✅ Yes                                | Complete Javadoc with comments                      |
+| Decompiled source     | ⚠️ Yes                               | Documentation without the original Javadoc comments |
+
+
+
+
+
+  
