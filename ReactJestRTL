@@ -40,3 +40,9 @@ test('test scenario 1', () => {
 
 
 jest
+
+
+  "scripts": {  
+   "test": "jest",  
+   }  
+
