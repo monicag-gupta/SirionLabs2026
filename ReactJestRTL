@@ -101,3 +101,26 @@ module.exports = 'test-file-stub';
 
 
 npm install --save-dev @testing-library/react @testing-library/jest-dom enzyme enzyme-adapter-react-18
+
+
+
+
+
+
+
+
+This module is distributed via npm which is bundled with node and should be installed as one of your project's dev Dependencies.
+With another Jest-compatible expect
+If you are using a different test runner that is compatible with Jest's expect interface, it might be possible to use it with this library:
+expect.extend(matchers)
+Custom matchers
+@testing-library/jest-dom can work with any library or framework that returns DOM elements from queries. The custom matcher examples below are written using matchers from @testing-library's suite of libraries (e.g. getByTestId, queryByTestId, getByText, etc.)
+Custom matchers
+toBeDisabled, toBeEnabled, toBeEmptyDOMElement, toBeInTheDocument, toBeInvalid, toBeRequired, toBeValid, toBeVisible, toContainElement, toContainHTML, toHaveAccessibleDescription, toHaveAccessibleErrorMessage, toHaveAccessibleName, toHaveAttribute, toHaveClass, toHaveFocus, toHaveFormValues, toHaveStyle, toHaveTextContent, toHaveValue, toHaveDisplayValue, toBeChecked, toBePartiallyChecked,toHaveRole, toHaveErrorMessage
+
+
+
+
+
+
+
