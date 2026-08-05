@@ -122,6 +122,69 @@ toBeDisabled, toBeEnabled, toBeEmptyDOMElement, toBeInTheDocument, toBeInvalid, 
 
 
 
+____________________
+
+For Vite:
+
+Vite test
+
+npm install -D vitest jsdom @testing-library/react @testing-library/jest-dom @testing-library/user-event
+npm install -D @vitejs/plugin-react
+
+
+
+Configure vite.config.js
+
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/setupTests.js',
+  },
+});
+
+
+
+
+Create src/setupTests.js
+
+import '@testing-library/jest-dom';
+
+
+
+Update package.json
+
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage"
+  }
+}
+
+
+
+
+Run tests
+
+Run once:
+npm test
+
+
+
+
+
+__________________________________
+
+
 
 Hello.jsx
 
