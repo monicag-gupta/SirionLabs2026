@@ -2,7 +2,7 @@ npm install --save-dev jest @types/jest jest-environment-jsdom babel-jest
 
 
 
-HelloWorld.js
+HelloWorld.jsx
 
 
 import React from "react";
@@ -21,7 +21,7 @@ export default HelloWorld;
 
 
 
-HelloWorld.test.js
+HelloWorld.test.jsx
 
 
 import React from 'react';
@@ -45,4 +45,34 @@ jest
   "scripts": {  
    "test": "jest",  
    }  
+
+
+
+
+jest.config.json
+
+
+"babel":{
+    "presets": [
+      "@babel/preset-env",
+      ["@babel/preset-react", {"runtime": "automatic"}]
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(gif|ttf|eot|svg)$": "<rootDir>/src/fileMock.js",
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "^@/(.*)$": "<rootDir>/$1",
+      "^~/(.*)$": "<rootDir>/$1"
+    },
+    "testEnvironment": "jsdom",
+    "testEnvironmentOptions": {
+      "browsers": ["chrome", "firefox", "safari"]
+    },
+    "moduleFileExtensions": [ "js", "json"],
+    "transformIgnorePatterns": ["/node_modules/(?!crypto-random-string)"],
+    "transform": {"^.+\\.js$": "<rootDir>/node_modules/babel-jest"},
+    "collectCoverage": true,
+    "collectCoverageFrom": ["<rootDir>/src/**/*.js"]
+  }
 
