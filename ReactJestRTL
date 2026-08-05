@@ -451,9 +451,9 @@ test('resets the counter when Reset button is clicked', () => {
 
  Testing Summary:
 
-✅ Initial Render — ensures the counter starts at 0
-✅ Click Behavior — simulates user clicking "Increment" and "Reset"
-✅ Assertions — uses toHaveTextContent to check the result
+Initial Render — ensures the counter starts at 0
+Click Behavior — simulates user clicking "Increment" and "Reset"
+Assertions — uses toHaveTextContent to check the result
 
 
 
