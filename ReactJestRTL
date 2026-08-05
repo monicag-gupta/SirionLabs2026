@@ -1,3 +1,2 @@
-npm install --save-dev jest@27.5.1 babel-jest @babel/preset-env @babel/preset-react react-test-renderer jest-environment-jsdom@27.5.1 identity-obj-proxy
-
+npm install --save-dev jest @types/jest jest-environment-jsdom babel-jest
 
