@@ -146,3 +146,20 @@ function Hello() {
 
 export default Hello;
 
+
+
+
+Hello.test.jsx
+
+
+import { render, screen } from '@testing-library/react';
+import Hello from './Hello';
+import '@testing-library/jest-dom';
+
+test('renders learn react link', () => {
+  render(<Hello />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+
