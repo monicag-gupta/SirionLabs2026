@@ -97,3 +97,7 @@ Create /src/ fileMock.js
 
 module.exports = 'test-file-stub';
 
+
+
+
+npm install --save-dev @testing-library/react @testing-library/jest-dom enzyme enzyme-adapter-react-18
