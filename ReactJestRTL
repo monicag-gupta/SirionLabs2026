@@ -69,10 +69,10 @@ jest.config.json
     "testEnvironmentOptions": {
       "browsers": ["chrome", "firefox", "safari"]
     },
-    "moduleFileExtensions": [ "js", "json"],
+    "moduleFileExtensions": [ "js", "json","jsx"],
     "transformIgnorePatterns": ["/node_modules/(?!crypto-random-string)"],
     "transform": {"^.+\\.js$": "<rootDir>/node_modules/babel-jest"},
     "collectCoverage": true,
-    "collectCoverageFrom": ["<rootDir>/src/**/*.js"]
+    "collectCoverageFrom": ["<rootDir>/src/**/*.js*"]
   }
 
